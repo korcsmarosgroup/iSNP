@@ -1,0 +1,5 @@
+.vagrant
+variable-storage
+testStorage
+omix-db
+deploy/logs/*

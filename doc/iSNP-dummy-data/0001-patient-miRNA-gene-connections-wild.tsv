@@ -1,0 +1,3 @@
+mirbase:mi0022705	ensembl:ensg00000010401								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:micro rna;mirbase;mi0022705	end:gene;ensembl;ensg00000010401	origin:snp;dbsnp;rs000004
+mirbase:mi2266012	ensembl:ensg00000010403								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:micro rna;mirbase;mi2266012	end:gene;ensembl;ensg00000010403	origin:snp;dbsnp;rs000008
+mirbase:mi5489752	ensembl:ensg00000010406								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:micro rna;mirbase;mi5489752	end:gene;ensembl;ensg00000010406	origin:snp;dbsnp;rs000015

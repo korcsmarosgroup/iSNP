@@ -1,0 +1,17 @@
+mirbase:mi0022705	uniprotac:g00001								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:micro rna;mirbase;mi0022705	end:protein;uniprotac;g00001	origin:snp;dbsnp;rs000004														
+mirbase:mi2266012	uniprotac:g00003								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:micro rna;mirbase;mi2266012	end:protein;uniprotac;g00003	origin:snp;dbsnp;rs000008														
+mirbase:mi5489752	uniprotac:g00006								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:micro rna;mirbase;mi5489752	end:protein;uniprotac;g00006	origin:snp;dbsnp;rs000015														
+uniprotac:q23004	uniprotac:g00003								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;q23004	end:protein;uniprotac:g00003	origin:snp;dbsnp;rs000007														
+uniprotac:p98451	uniprotac:g00008								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;p98451	end:protein;uniprotac;g00008	origin:snp;dbsnp;rs000017														
+uniprotac:p00001	uniprotac:g00003								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;g00001	end:protein;uniprotac;g00003															
+uniprotac:g00003	uniprotac:t23451								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;g00003	end:protein;uniprotac;t23451															
+uniprotac:q23004	uniprotac:q29999								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;q23004	end:protein;uniprotac;q29999															
+uniprotac:q23004	uniprotac:q98700								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;q23004	end:protein;uniprotac;q98700															
+uniprotac:g00006	uniprotac:q98700								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;g00006	end:protein;uniprotac;q98700															
+uniprotac:g00006	uniprotac:tq4444								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;g00006	end:protein;uniprotac;tq4444
+uniprotac:b26830	uniprotac:tq4444								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;b26830	end:protein;uniprotac;tq4444
+uniprotac:g00008	uniprotac:b26830								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;g00008	end:protein;uniprotac;b26830															
+uniprotac:g00008	uniprotac:c26543								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;g00008	end:protein;uniprotac;c26543															
+uniprotac:p98451	uniprotac:g12345								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;p98451	end:protein;uniprotac;g12345															
+uniprotac:p98451	uniprotac:g98765								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;p98451	end:protein;uniprotac;g98765															
+uniprotac:p98451	uniprotac:tf2200								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;p98451	end:protein;uniprotac;tf2200															

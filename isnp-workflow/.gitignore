@@ -1,0 +1,6 @@
+!input-data/**/*.fasta
+!input-data/**/*.bed
+!input-data/**/*.tsv
+output-data/
+input-data/
+demo-data/

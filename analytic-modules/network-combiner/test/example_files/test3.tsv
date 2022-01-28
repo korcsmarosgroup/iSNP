@@ -1,0 +1,3 @@
+uniprotac:p00002	uniprotac:p00001								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;p00002	end:protein;uniprotac;p00001	origin:snp;dbsnp;rs00001
+uniprotac:p00001	uniprotac:p00003								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;p00001	end:protein;uniprotac;p00003	origin:snp;dbsnp;rs00004
+uniprotac:p00003	uniprotac:p00006								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;p00003	end:protein;uniprotac;p00006	origin:snp;dbsnp;rs00013

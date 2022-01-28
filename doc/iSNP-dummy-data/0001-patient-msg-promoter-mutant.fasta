@@ -1,0 +1,10 @@
+>entity:gene;ensembl;ensg00000010401 | origin:snp;dbsnp;rs000003 | mutated:True
+CCCTACTTAGT
+>entity:gene;ensembl;ensg00000010403 | origin:snp;dbsnp;rs000007 | mutated:True
+GCAGGACGGAG
+>entity:gene;ensembl;ensg00000010405 | origin:snp;dbsnp;rs000011 | mutated:True
+ATTCTCCTCGG
+>entity:gene;ensembl;ensg00000010407 | origin:snp;dbsnp;rs000016 | mutated:True
+TTTTGTCTAAC
+>entity:gene;ensembl;ensg00000010408 | origin:snp;dbsnp;rs000017 | mutated:True
+CCTACCAAAAA

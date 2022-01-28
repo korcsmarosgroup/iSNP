@@ -1,0 +1,34 @@
+>origin:snp1;AC=2;AN=2;DB;DP=182;H2;NS=65 | mutated:False
+AAGACTGAAAT
+>origin:snp2;AC=2;AN=2;DB;DP=182;H2;NS=65 | mutated:False
+TGAAATACAAC
+>origin:snp3;AC=2;AN=2;DB;DP=182;H2;NS=65 | mutated:False
+CCCTATTTAGT
+>origin:snp4;AC=1;AN=2;DP=196;NS=63 | mutated:False
+AGAGCGAACGG
+>origin:snp5;AC=1;AN=2;DP=275;NS=66 | mutated:False
+GTTCTCCCTTC
+>origin:snp6;AC=1;AN=2;DP=225;NS=67 | mutated:False
+GATCATCGTTC
+>origin:snp7;AC=1;AN=2;DP=225;NS=67 | mutated:False
+GCAGGTCGGAG
+>origin:snp8;AC=1;AN=2;DP=217;NS=67 | mutated:False
+GCCAGGGGCCA
+>origin:snp9;AC=1;AN=2;DP=205;NS=64 | mutated:False
+AACACTGCTGC
+>origin:snp10;AC=1;AN=2;DB;DP=173;NS=60 | mutated:False
+TTAGTAAAACC
+>origin:snp11;AC=1;AN=2;DP=205;NS=64 | mutated:False
+ATTCTTCTCGG
+>origin:snp12;AC=1;AN=2;DP=176;NS=61 | mutated:False
+CCGCATACCAT
+>origin:snp13;AC=1;AN=2;DP=176;NS=61 | mutated:False
+GACGATATGTG
+>origin:snp14;AC=1;AN=2;DP=176;NS=61 | mutated:False
+GAGTATCTTGA
+>origin:snp15;AC=1;AN=2;DB;DP=212;NS=64 | mutated:False
+GAACTTACTCC
+>origin:snp16;AC=1;AN=2;DP=206;NS=68 | mutated:False
+TTTTGCCTAAC
+>origin:snp17;AC=1;AN=2;DP=244;NS=61 | mutated:False
+CCTACTAAAAA

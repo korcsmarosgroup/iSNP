@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="16cm" height="24cm" viewBox="4 1 302 476" xmlns="http://www.w3.org/2000/svg">
+    <g>
+        <rect style="fill: #fdf2c6" x="10" y="20" width="294.707" height="404.175"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #cb6e1a" x="10" y="20" width="294.707" height="404.175"/>
+        <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="157.353" y="226.937">
+            <tspan x="157.353" y="226.937"></tspan>
+        </text>
+    </g>
+    <g>
+        <rect style="fill: #ffffff" x="26" y="124" width="106.1" height="15.4667"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="26" y="124" width="106.1" height="15.4667"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="79.05" y="134.3">
+            <tspan x="79.05" y="134.3">mutated sequence generator</tspan>
+        </text>
+    </g>
+    <g>
+        <rect style="fill: #ffffff" x="175.5" y="80" width="86" height="24.9333"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="175.5" y="80" width="86" height="24.9333"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="218.5" y="90.8">
+            <tspan x="218.5" y="90.8">filter mutations in</tspan>
+            <tspan x="218.5" y="99.2667">promoter regions</tspan>
+        </text>
+    </g>
+    <g>
+        <rect style="fill: #ffffff" x="20.7588" y="80" width="111.4" height="23.9333"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="20.7588" y="80" width="111.4" height="23.9333"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="76.4588" y="90.3">
+            <tspan x="76.4588" y="90.3">filter mutations in</tspan>
+            <tspan x="76.4588" y="98.7667">protein coding regions</tspan>
+        </text>
+    </g>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="76" y1="59.9334" x2="62.6807" y2="76.6379"/>
+        <polygon style="fill: #000000" points="61.117,75.3911 60.187,79.7654 64.2445,77.8848 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="61.117,75.3911 60.187,79.7654 64.2445,77.8848 "/>
+    </g>
+    <g>
+        <rect style="fill: #ffffff" x="20" y="176" width="60.325" height="32.4"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #ff0000" x="20" y="176" width="60.325" height="32.4"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="50.1625" y="186.3">
+            <tspan x="50.1625" y="186.3">generate</tspan>
+            <tspan x="50.1625" y="194.767">miRNA - gene</tspan>
+            <tspan x="50.1625" y="203.233">connections</tspan>
+        </text>
+    </g>
+    <g>
+        <rect style="fill: #ffffff" x="56" y="384" width="188" height="15.4667"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="56" y="384" width="188" height="15.4667"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="150" y="394.3">
+            <tspan x="150" y="394.3">enrich molecular networks with first neighbours</tspan>
+        </text>
+    </g>
+    <g>
+        <rect style="fill: #ffffff" x="56" y="288" width="188" height="15.4667"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="56" y="288" width="188" height="15.4667"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="150" y="298.3">
+            <tspan x="150" y="298.3">calculate difference between networks</tspan>
+        </text>
+    </g>
+    <g>
+        <rect style="fill: #ffffff" x="68" y="416" width="164" height="16.4667"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #cb6e1a" x="68" y="416" width="164" height="16.4667"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="150" y="426.8">
+            <tspan x="150" y="426.8">collect molecular networks for all patients</tspan>
+        </text>
+    </g>
+    <g>
+        <rect style="fill: #ffffff" x="110" y="450" width="90.25" height="26"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="110" y="450" width="90.25" height="26"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="155.125" y="461.333">
+            <tspan x="155.125" y="461.333">clustering / classification</tspan>
+            <tspan x="155.125" y="469.8">of networks</tspan>
+        </text>
+    </g>
+    <g>
+        <rect style="fill: #ffffff" x="230" y="450" width="68" height="20"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="230" y="450" width="68" height="20"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="264" y="462.567">
+            <tspan x="264" y="462.567">report generation</tspan>
+        </text>
+    </g>
+    <g>
+        <rect style="fill: #ffffff" x="182" y="124" width="106.1" height="15.4667"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="182" y="124" width="106.1" height="15.4667"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="235.05" y="134.3">
+            <tspan x="235.05" y="134.3">mutated sequence generator</tspan>
+        </text>
+    </g>
+    <g>
+        <rect style="fill: #ffffff" x="165.675" y="176" width="62.05" height="32.4"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #ff0000" x="165.675" y="176" width="62.05" height="32.4"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="196.7" y="186.3">
+            <tspan x="196.7" y="186.3">generate</tspan>
+            <tspan x="196.7" y="194.767">TF - target gene</tspan>
+            <tspan x="196.7" y="203.233">connections</tspan>
+        </text>
+    </g>
+    <g>
+        <rect style="fill: #ffffff" x="87.85" y="176" width="60.7" height="32.4"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #0000ff" x="87.85" y="176" width="60.7" height="32.4"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="118.2" y="186.3">
+            <tspan x="118.2" y="186.3">generate</tspan>
+            <tspan x="118.2" y="194.767">miRNA - gene</tspan>
+            <tspan x="118.2" y="203.233">connections</tspan>
+        </text>
+    </g>
+    <g>
+        <rect style="fill: #ffffff" x="233.674" y="176" width="62.05" height="32.4"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #0000ff" x="233.674" y="176" width="62.05" height="32.4"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="264.699" y="186.3">
+            <tspan x="264.699" y="186.3">generate</tspan>
+            <tspan x="264.699" y="194.767">TF - target gene</tspan>
+            <tspan x="264.699" y="203.233">connections</tspan>
+        </text>
+    </g>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="176" y1="8" x2="191.7" y2="8"/>
+        <polygon style="fill: #000000" points="191.7,10 195.7,8 191.7,6 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="191.7,10 195.7,8 191.7,6 "/>
+    </g>
+    <text font-size="6.77333" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="60" y="8">
+        <tspan x="60" y="8">set of VCFs (one for each patient)</tspan>
+    </text>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="182.142" y1="59.9334" x2="194.441" y2="76.5442"/>
+        <polygon style="fill: #000000" points="192.834,77.7343 196.821,79.7589 196.049,75.3541 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="192.834,77.7343 196.821,79.7589 196.049,75.3541 "/>
+    </g>
+    <text font-size="6.77333" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="72" y="72">
+        <tspan x="72" y="72">single VCF (with multiple SNPs)</tspan>
+    </text>
+    <g>
+        <rect style="fill: #ffffff" x="196" y="4" width="82.7241" height="24.9333"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #cb6e1a" x="196" y="4" width="82.7241" height="24.9333"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="237.362" y="14.8">
+            <tspan x="237.362" y="14.8">iterate on</tspan>
+            <tspan x="237.362" y="23.2667">patients (VCFs)</tspan>
+        </text>
+    </g>
+    <text font-size="6.77333" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="78" y="116">
+        <tspan x="78" y="116">VCF (with multiple SNPs)</tspan>
+    </text>
+    <text font-size="6.77333" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="206" y="116">
+        <tspan x="206" y="116">VCF (with multiple SNPs)</tspan>
+    </text>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="66" y1="104" x2="66" y2="119.7"/>
+        <polygon style="fill: #000000" points="64,119.7 66,123.7 68,119.7 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="64,119.7 66,123.7 68,119.7 "/>
+    </g>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="198" y1="104" x2="198" y2="119.7"/>
+        <polygon style="fill: #000000" points="196,119.7 198,123.7 200,119.7 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="196,119.7 198,123.7 200,119.7 "/>
+    </g>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #ff0000" x1="66" y1="140" x2="62.4749" y2="171.726"/>
+        <polygon style="fill: #ff0000" points="60.4871,171.505 62.0331,175.702 64.4626,171.947 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #ff0000" points="60.4871,171.505 62.0331,175.702 64.4626,171.947 "/>
+    </g>
+    <text font-size="6.77333" style="fill: #ff0000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="14" y="152">
+        <tspan x="14" y="152">FASTA with</tspan>
+        <tspan x="14" y="160.467">multiple seq.</tspan>
+        <tspan x="14" y="168.933">(mutated)</tspan>
+    </text>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #ff0000" x1="214" y1="140" x2="206.933" y2="171.802"/>
+        <polygon style="fill: #ff0000" points="204.98,171.369 206.065,175.707 208.885,172.236 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #ff0000" points="204.98,171.369 206.065,175.707 208.885,172.236 "/>
+    </g>
+    <text font-size="6.77333" style="fill: #ff0000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="162" y="152">
+        <tspan x="162" y="152">FASTA with</tspan>
+        <tspan x="162" y="160.467">multiple seq.</tspan>
+        <tspan x="162" y="168.933">(mutated)</tspan>
+    </text>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #0000ff" x1="90" y1="140" x2="97.0672" y2="171.802"/>
+        <polygon style="fill: #0000ff" points="95.1148,172.236 97.9349,175.707 99.0196,171.369 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #0000ff" points="95.1148,172.236 97.9349,175.707 99.0196,171.369 "/>
+    </g>
+    <text font-size="6.77333" style="fill: #0000ff;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="102" y="152">
+        <tspan x="102" y="152">FASTA with</tspan>
+        <tspan x="102" y="160.467">multiple seq.</tspan>
+        <tspan x="102" y="168.933">(wild type)</tspan>
+    </text>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #0000ff" x1="238" y1="140" x2="244.49" y2="171.787"/>
+        <polygon style="fill: #0000ff" points="242.53,172.187 245.29,175.706 246.449,171.387 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #0000ff" points="242.53,172.187 245.29,175.706 246.449,171.387 "/>
+    </g>
+    <text font-size="6.77333" style="fill: #0000ff;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="246" y="152">
+        <tspan x="246" y="152">FASTA with</tspan>
+        <tspan x="246" y="160.467">multiple seq.</tspan>
+        <tspan x="246" y="168.933">(wild type)</tspan>
+    </text>
+    <text font-size="6.77333" style="fill: #ff0000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="80" y="230">
+        <tspan x="80" y="230">MITAB networks</tspan>
+        <tspan x="80" y="238.467">(mutated)</tspan>
+    </text>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #ff0000" x1="35.0812" y1="208.4" x2="45.9272" y2="235.998"/>
+        <polygon style="fill: #ff0000" points="44.0658,236.729 47.3903,239.721 47.7886,235.266 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #ff0000" points="44.0658,236.729 47.3903,239.721 47.7886,235.266 "/>
+    </g>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #ff0000" x1="165.675" y1="208.4" x2="106.346" y2="238.076"/>
+        <polygon style="fill: #ff0000" points="105.451,236.288 102.768,239.866 107.24,239.865 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #ff0000" points="105.451,236.288 102.768,239.866 107.24,239.865 "/>
+    </g>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #0000ff" x1="148.55" y1="208.4" x2="193.887" y2="237.668"/>
+        <polygon style="fill: #0000ff" points="192.803,239.348 197.248,239.837 194.972,235.988 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #0000ff" points="192.803,239.348 197.248,239.837 194.972,235.988 "/>
+    </g>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #0000ff" x1="264.7" y1="208.4" x2="254.049" y2="235.989"/>
+        <polygon style="fill: #0000ff" points="252.183,235.268 252.608,239.72 255.914,236.709 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #0000ff" points="252.183,235.268 252.608,239.72 255.914,236.709 "/>
+    </g>
+    <text font-size="6.77333" style="fill: #ff0000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="40" y="272.7">
+        <tspan x="40" y="272.7">MITAB (mutated)</tspan>
+    </text>
+    <g>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke-dasharray: 6; stroke: #cb6e1a" x="10" y="20" width="131.05" height="12.4667"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="75.525" y="28.8">
+            <tspan x="75.525" y="28.8">sub-workflow handling single patient</tspan>
+        </text>
+    </g>
+    <text font-size="6.77333" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="164" y="378.7">
+        <tspan x="164" y="378.7">MITAB network</tspan>
+    </text>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="150" y1="399.467" x2="150" y2="411.7"/>
+        <polygon style="fill: #000000" points="148,411.7 150,415.7 152,411.7 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="148,411.7 150,415.7 152,411.7 "/>
+    </g>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #ff0000" x1="102.5" y1="263.934" x2="121.135" y2="284.793"/>
+        <polygon style="fill: #ff0000" points="119.644,286.126 123.8,287.776 122.627,283.461 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #ff0000" points="119.644,286.126 123.8,287.776 122.627,283.461 "/>
+    </g>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="150" y1="432.467" x2="150" y2="445.7"/>
+        <polygon style="fill: #000000" points="148,445.7 150,449.7 152,445.7 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="148,445.7 150,449.7 152,445.7 "/>
+    </g>
+    <text font-size="6.77333" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="160" y="444">
+        <tspan x="160" y="444">MITAB networks (one for each patient)</tspan>
+    </text>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="40" y1="460" x2="105.7" y2="460"/>
+        <polygon style="fill: #000000" points="105.7,462 109.7,460 105.7,458 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="105.7,462 109.7,460 105.7,458 "/>
+    </g>
+    <text font-size="6.77333" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="4" y="444">
+        <tspan x="4" y="444">Extra patient info</tspan>
+        <tspan x="4" y="452.467">(age, disease, treatment, ...)</tspan>
+    </text>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="200" y1="460" x2="225.7" y2="460"/>
+        <polygon style="fill: #000000" points="225.7,462 229.7,460 225.7,458 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="225.7,462 229.7,460 225.7,458 "/>
+    </g>
+    <g>
+        <rect style="fill: #ffffff" x="76" y="36" width="106.142" height="23.9333"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="76" y="36" width="106.142" height="23.9333"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="129.071" y="46.3">
+            <tspan x="129.071" y="46.3">keep only UC (disease)</tspan>
+            <tspan x="129.071" y="54.7667">specific SNPs from the VCF</tspan>
+        </text>
+    </g>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="196" y1="22.7" x2="185.244" y2="33.0225"/>
+        <polygon style="fill: #000000" points="183.86,31.5796 182.358,35.7923 186.629,34.4655 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="183.86,31.5796 182.358,35.7923 186.629,34.4655 "/>
+    </g>
+    <g>
+        <rect style="fill: #ffffff" x="56" y="352" width="188" height="15.4667"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="56" y="352" width="188" height="15.4667"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="150" y="362.3">
+            <tspan x="150" y="362.3">mapping all gene / protein ids to uniprot protein id</tspan>
+        </text>
+    </g>
+    <g>
+        <rect style="fill: #ffffff" x="20" y="240" width="110" height="23.9333"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #ff0000" x="20" y="240" width="110" height="23.9333"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="75" y="250.3">
+            <tspan x="75" y="250.3">merge networks</tspan>
+            <tspan x="75" y="258.767">&lt;network combiner module&gt;</tspan>
+        </text>
+    </g>
+    <text font-size="6.77333" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="164" y="314.7">
+        <tspan x="164" y="314.7">MITAB network</tspan>
+    </text>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="150" y1="303.467" x2="150" y2="315.7"/>
+        <polygon style="fill: #000000" points="148,315.7 150,319.7 152,315.7 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="148,315.7 150,319.7 152,315.7 "/>
+    </g>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="150" y1="367.467" x2="150" y2="379.7"/>
+        <polygon style="fill: #000000" points="148,379.7 150,383.7 152,379.7 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="148,379.7 150,383.7 152,379.7 "/>
+    </g>
+    <text font-size="6.77333" style="fill: #0000ff;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="220" y="230">
+        <tspan x="220" y="230">MITAB networks</tspan>
+        <tspan x="220" y="238.467">(wild type)</tspan>
+    </text>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #0000ff" x1="197.5" y1="263.934" x2="175.127" y2="285.049"/>
+        <polygon style="fill: #0000ff" points="173.754,283.594 172.218,287.794 176.5,286.503 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #0000ff" points="173.754,283.594 172.218,287.794 176.5,286.503 "/>
+    </g>
+    <g>
+        <rect style="fill: #ffffff" x="170" y="240" width="110" height="23.9333"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #0000ff" x="170" y="240" width="110" height="23.9333"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="225" y="250.3">
+            <tspan x="225" y="250.3">merge networks</tspan>
+            <tspan x="225" y="258.767">&lt;network combiner module&gt;</tspan>
+        </text>
+    </g>
+    <text font-size="6.77333" style="fill: #0000ff;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="200" y="272.7">
+        <tspan x="200" y="272.7">MITAB (wild type)</tspan>
+    </text>
+    <text font-size="6.77333" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="164" y="410.7">
+        <tspan x="164" y="410.7">MITAB network</tspan>
+    </text>
+    <g>
+        <rect style="fill: #ffffff" x="56" y="320" width="188" height="15.4667"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x="56" y="320" width="188" height="15.4667"/>
+        <text font-size="6.77333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="150" y="330.3">
+            <tspan x="150" y="330.3">remove izoform suffix from uniprot protein ids</tspan>
+        </text>
+    </g>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="150" y1="335.467" x2="150" y2="347.7"/>
+        <polygon style="fill: #000000" points="148,347.7 150,351.7 152,347.7 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="148,347.7 150,351.7 152,347.7 "/>
+    </g>
+    <text font-size="6.77333" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="164" y="346.7">
+        <tspan x="164" y="346.7">MITAB network</tspan>
+    </text>
+</svg>

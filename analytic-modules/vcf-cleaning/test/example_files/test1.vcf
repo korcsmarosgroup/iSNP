@@ -1,0 +1,33 @@
+##fileformat=VCFv4.3
+##fileDate=20181211
+##source=PLINKv2.00
+##contig=<ID=1,length=247177331>
+##contig=<ID=2,length=242626207>
+##contig=<ID=3,length=199071699>
+##contig=<ID=4,length=190980781>
+##contig=<ID=5,length=180512666>
+##contig=<ID=6,length=170723976>
+##contig=<ID=7,length=158710966>
+##contig=<ID=8,length=146264219>
+##contig=<ID=9,length=140111181>
+##contig=<ID=10,length=135040420>
+##contig=<ID=11,length=134268352>
+##contig=<ID=12,length=132228484>
+##contig=<ID=13,length=114106016>
+##contig=<ID=14,length=106296207>
+##contig=<ID=15,length=100194179>
+##contig=<ID=16,length=88655878>
+##contig=<ID=17,length=78634367>
+##contig=<ID=18,length=76115294>
+##contig=<ID=19,length=63556292>
+##contig=<ID=20,length=62322843>
+##contig=<ID=21,length=46840115>
+##contig=<ID=22,length=49503533>
+##INFO=<ID=PR,Number=0,Type=Flag,Description="Provisional reference allele, may not be based on real reference genome">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	IW3134268_IW3134268
+chr21	41265988	rs2837891	G	A	.	.	PR	GT	1/1
+chr21	41312891	rs8127758	A	C	.	.	PR	GT	1/1
+chr21	41426226	rs1571731	G	A	.	.	PR	GT	1/1
+chr21	39373482	ccc-21-39373482-G-A	G	A	.	.	PR	GT	0/1
+chr21	39373657	ccc-21-39373657-C-T	G	A	.	.	PR	GT	0/0

@@ -1,0 +1,20 @@
+>entity:gene;ensembl;ensg00000010401 | origin:snp;dbsnp;rs000004 | mutated:False
+AGAGCGAACGG
+>entity:gene;ensembl;ensg00000010402 | origin:snp;dbsnp;rs000005 | mutated:False
+GTTCTCCCTTC
+>entity:gene;ensembl;ensg00000010402 | origin:snp;dbsnp;rs000006 | mutated:False
+GATCATCGTTC
+>entity:gene;ensembl;ensg00000010403 | origin:snp;dbsnp;rs000008 | mutated:False
+GCCAGGGGCCA
+>entity:gene;ensembl;ensg00000010404 | origin:snp;dbsnp;rs000010 | mutated:False
+TTAGTAAAACC
+>entity:gene;ensembl;ensg00000010405 | origin:snp;dbsnp;rs000012 | mutated:False
+CCGCATACCAT
+>entity:gene;ensembl;ensg00000010406 | origin:snp;dbsnp;rs000014 | mutated:False
+GAGTATCTTGA
+>entity:gene;ensembl;ensg00000010406 | origin:snp;dbsnp;rs000015 | mutated:False
+GAACTTACTCC
+>entity:gene;ensembl;ensg00000010406 | origin:snp;dbsnp;rs000016 | mutated:False
+TTTTGCCTAAC
+>entity:gene;ensembl;ensg00000010408 | origin:snp;dbsnp;rs000018 | mutated:False
+ACAACATGGAC

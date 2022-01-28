@@ -1,0 +1,1 @@
+this is a shared folder used to maintain build cachea between compilations using docker environments

@@ -1,0 +1,10 @@
+ensembl:ensg00000010401	mirbase:mi0000002								taxid:9606("Homo sapiens")	taxid:9606("Homo sapiens")															start:gene;ensembl;ensg00000010401	end:micro rna;mirna;mi0000002
+mirbase:MI0000004	ensembl:ensg00000010402								taxid:9606("Homo sapiens")	taxid:9606("Homo sapiens")															start:micro rna;mirna;mi0000004	end:gene;ensembl;ensg00000010402
+mirbase:mi0000005	ensembl:ensg00000010403								taxid:9606("Homo sapiens")	taxid:9606("Homo sapiens")															start:micro rna;mirna;mi0000005	end:gene;ensembl;ensg00000010403
+uniprotac:q23004	ensembl:ensg00000010404								taxid:9606("Homo sapiens")	taxid:9606("Homo sapiens")															start:protein;uniprotac;q23004	end:gene;ensembl;ensg00000010404
+uniprotac:p98451	ensembl:ensg00000010405								taxid:9606("Homo sapiens")	taxid:9606("Homo sapiens")															start:protein;uniprotac;p98451	end:gene;ensembl;ensg00000010405
+ensembl:ensg00000010406	uniprotac:g00001								taxid:9606("Homo sapiens")	taxid:9606("Homo sapiens")															start:gene;ensembl;ensg00000010406	end:protein;uniprotac;g00001
+ensembl:ensg00000010407	ensembl:ensg00000010408								taxid:9606("Homo sapiens")	taxid:9606("Homo sapiens")															start:gene;ensembl;ensg00000010407	end:gene;ensembl;ensg00000010408
+ensembl:ensg00000010409	uniprotac:o29999								taxid:9606("Homo sapiens")	taxid:9606("Homo sapiens")															start:gene;ensembl;ensg00000010409	end:protein;uniprotac;q29999
+name:gair	uniprotac:q29999								taxid:9606("Homo sapiens")	taxid:9606("Homo sapiens")															start:gene;genename;GAIR	end:protein;uniprotac;q29999
+uniprotac:gair29999	name:gair								taxid:9606("Homo sapiens")	taxid:9606("Homo sapiens")															start:protein;uniprotac;gair29999	end:gene;genename;GAIR

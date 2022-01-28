@@ -1,0 +1,9 @@
+track name="HumanAnnotaion" description="just protein coding regions"
+1	41	141	gene_id:gene;ensembl;ensg00000010401
+1	158	258	gene_id:gene;ensembl;ensg00000010402
+1	294	394	gene_id:gene;ensembl;ensg00000010403
+1	409	509	gene_id:gene;ensembl;ensg00000010404
+1	524	624	gene_id:gene;ensembl;ensg00000010405
+1	658	758	gene_id:gene;ensembl;ensg00000010406
+1	761	861	gene_id:gene;ensembl;ensg00000010407
+1	890	990	gene_id:gene;ensembl;ensg00000010408

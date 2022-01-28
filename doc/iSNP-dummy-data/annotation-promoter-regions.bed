@@ -1,0 +1,9 @@
+track name="HumanAnnotaion" description="just promoter regions"
+1	31	41	gene_id:gene;ensembl;ensg00000010401
+1	148	158	gene_id:gene;ensembl;ensg00000010402
+1	284	294	gene_id:gene;ensembl;ensg00000010403
+1	399	409	gene_id:gene;ensembl;ensg00000010404
+1	514	524	gene_id:gene;ensembl;ensg00000010405
+1	648	658	gene_id:gene;ensembl;ensg00000010406
+1	751	761	gene_id:gene;ensembl;ensg00000010407
+1	880	890	gene_id:gene;ensembl;ensg00000010408

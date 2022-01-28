@@ -1,0 +1,3 @@
+uniprotac:q230045	ensembl:ensg00000010403								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;q230045	end:gene;ensembl;ensg00000010403	origin:snp;dbsnp;rs000007
+uniprotac:p005207	ensembl:ensg00000010407								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;p005207	end:gene;ensembl;ensg00000010407	origin:snp;dbsnp;rs000016
+uniprotac:p984510	ensembl:ensg00000010408								taxid:9606('Homo sapiens')	taxid:9606('Homo sapiens')															start:protein;uniprotac;p984510	end:gene;ensembl;ensg00000010408	origin:snp;dbsnp;rs000017

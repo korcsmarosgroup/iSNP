@@ -1,0 +1,21 @@
+##fileformat=VCFv4.0
+##fileDate=20100610
+##source=glfTools v3
+##reference=1000GenomesPilot-NCBI36
+##phasing=NA
+##INFO=<ID=NS,Number=1,Type=Integer,Description="Number of Samples With Mapped Reads">
+##INFO=<ID=DP,Number=1,Type=Integer,Description="Total Depth">
+##INFO=<ID=DB,Number=0,Type=Flag,Description="dbsnp membership, build 129">
+##INFO=<ID=H2,Number=0,Type=Flag,Description="HapMap2 membership">
+##FILTER=<ID=NUYR,Description="Variant in non-unique Y region">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##FORMAT=<ID=GQ,Number=1,Type=Integer,Description="Genotype	Quality">
+##FORMAT=<ID=DP,Number=1,Type=Integer,Description="Depth">
+##INFO=<ID=AC,Number=.,Type=Integer,Description="Allele count in genotypes">
+##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+1	35	rs000003	T	C	32	.	AC=2;AN=2;DB;DP=182;H2;NS=65    # entity:gene;ensembl;ensg00000010401 | origin:snp;dbsnp;rs000003
+1	292	rs000007	T	A	67	.	AC=1;AN=2;DP=225;NS=67  # entity:gene;ensembl;ensg00000010403 | origin:snp;dbsnp;rs000007
+1	521	rs000011	T	C	30	.	AC=1;AN=2;DP=205;NS=64  # entity:gene;ensembl;ensg00000010405 | origin:snp;dbsnp;rs000011
+1	753	rs000016	C	T	51	.	AC=1;AN=2;DP=206;NS=68  # entity:gene;ensembl;ensg00000010407 | origin:snp;dbsnp;rs000016
+1	885	rs000017	T	C	35	.	AC=1;AN=2;DP=244;NS=61  # entity:gene;ensembl;ensg00000010408 | origin:snp;dbsnp;rs000017

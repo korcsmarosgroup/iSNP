@@ -1,0 +1,33 @@
+##fileformat=VCFv4.0
+##fileDate=20100610
+##source=glfTools v3
+##reference=1000GenomesPilot-NCBI36
+##phasing=NA
+##INFO=<ID=NS,Number=1,Type=Integer,Description="Number of Samples With Mapped Reads">
+##INFO=<ID=DP,Number=1,Type=Integer,Description="Total Depth">
+##INFO=<ID=DB,Number=0,Type=Flag,Description="dbSNP membership, build 129">
+##INFO=<ID=H2,Number=0,Type=Flag,Description="HapMap2 membership">
+##FILTER=<ID=NUYR,Description="Variant in non-unique Y region">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##FORMAT=<ID=GQ,Number=1,Type=Integer,Description="Genotype	Quality">
+##FORMAT=<ID=DP,Number=1,Type=Integer,Description="Depth">
+##INFO=<ID=AC,Number=.,Type=Integer,Description="Allele count in genotypes">
+##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+1	7	snp1	T	C	32	.	AC=2;AN=2;DB;DP=182;H2;NS=65
+1	12	snp2	T	C	32	.	AC=2;AN=2;DB;DP=182;H2;NS=65
+1	35	snp3	T	C	32	.	AC=2;AN=2;DB;DP=182;H2;NS=65
+1	53	snp4	G	A	31	.	AC=1;AN=2;DP=196;NS=63
+1	182	snp5	C	T	25	.	AC=1;AN=2;DP=275;NS=66
+1	198	snp6	T	A	67	.	AC=1;AN=2;DP=225;NS=67
+1	292	snp7	T	A	67	.	AC=1;AN=2;DP=225;NS=67
+1	302	snp8	G	A	51	.	AC=1;AN=2;DP=217;NS=67
+1	397	snp9	T	C	30	.	AC=1;AN=2;DP=205;NS=64
+1	500	snp10	A	G	38	.	AC=1;AN=2;DB;DP=173;NS=60
+1	521	snp11	T	C	30	.	AC=1;AN=2;DP=205;NS=64
+1	621	snp12	T	C	29	.	AC=1;AN=2;DP=176;NS=61
+1	633	snp13	T	C	29	.	AC=1;AN=2;DP=176;NS=61
+1	681	snp14	T	C	29	.	AC=1;AN=2;DP=176;NS=61
+1	740	snp15	T	A	40	.	AC=1;AN=2;DB;DP=212;NS=64
+1	753	snp16	C	T	51	.	AC=1;AN=2;DP=206;NS=68
+1	885	snp17	T	C	35	.	AC=1;AN=2;DP=244;NS=61

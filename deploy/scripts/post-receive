@@ -1,0 +1,4 @@
+#!/bin/sh
+
+curl http://istadur.no-ip.org:8081/git/notifyCommit?url=ssh://gitosis@netbioldev.geobio.elte.hu:22/mnn.git
+

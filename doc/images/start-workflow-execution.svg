@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="22cm" height="15cm" viewBox="20 12 429 293" xmlns="http://www.w3.org/2000/svg">
+    <rect style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke-dasharray: 2; stroke: #000000" x="40" y="140" width="390" height="160"/>
+    <text font-size="6.20889" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:700" x="80" y="50">
+        <tspan x="80" y="50">WorkflowScheduler</tspan>
+    </text>
+    <text font-size="6.20889" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:700" x="320" y="50">
+        <tspan x="320" y="50">JobExecutor</tspan>
+    </text>
+    <text font-size="6.20889" style="fill: #0000ff;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:700" x="390" y="50">
+        <tspan x="390" y="50">Executor Service</tspan>
+    </text>
+    <g>
+        <path style="fill: #ffffff"
+              d="M 205.15 43.587 C 223.93,40.8968 233.32,40 252.1,40 C 270.88,40 280.27,40.8968 299.05,43.587 L 299.05,57.9352 C 280.27,60.6255 270.88,61.5222 252.1,61.5222 C 233.32,61.5222 223.93,60.6255 205.15,57.9352 L 205.15,43.587z"/>
+        <path style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000"
+              d="M 205.15 43.587 C 223.93,40.8968 233.32,40 252.1,40 C 270.88,40 280.27,40.8968 299.05,43.587 L 299.05,57.9352 C 280.27,60.6255 270.88,61.5222 252.1,61.5222 C 233.32,61.5222 223.93,60.6255 205.15,57.9352 L 205.15,43.587"/>
+        <path style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" d="M 205.15 43.587 C 223.93,46.2773 233.32,47.1741 252.1,47.1741 C 270.88,47.1741 280.27,46.2773 299.05,43.587"/>
+        <text font-size="6.20889" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="252.1" y="54.4949">
+            <tspan x="252.1" y="54.4949">Registries, Catches, DAOs</tspan>
+        </text>
+    </g>
+    <text font-size="6.20889" style="fill: #0000ff;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:700" x="20" y="50">
+        <tspan x="20" y="50">PublicApi</tspan>
+    </text>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #0000ff" x1="30" y1="60" x2="30" y2="300"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="110" y1="60" x2="110" y2="300"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="250" y1="70" x2="250" y2="300"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" x1="340" y1="60" x2="340" y2="304"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #0000ff" x1="420" y1="60" x2="420" y2="304"/>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="30" y1="70" x2="106.329" y2="70"/>
+        <polygon style="fill: #000000" points="109.329,70 105.329,72 106.329,70 105.329,68 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="109.329,70 105.329,72 106.329,70 105.329,68 "/>
+    </g>
+    <text font-size="5.08" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="60" y="70">
+        <tspan x="60" y="70">Run workflow</tspan>
+    </text>
+    <g>
+        <rect style="fill: #ffffff" x="50" y="80" width="123.805" height="10.4778"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x="50" y="80" width="123.805" height="10.4778"/>
+        <text font-size="5.08" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="111.902" y="86.8139">
+            <tspan x="111.902" y="86.8139">collect modules to execute, calculate order</tspan>
+        </text>
+    </g>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="110" y1="110" x2="246.329" y2="110"/>
+        <polygon style="fill: #000000" points="249.329,110 245.329,112 246.329,110 245.329,108 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="249.329,110 245.329,112 246.329,110 245.329,108 "/>
+    </g>
+    <text font-size="5.08" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="120" y="100">
+        <tspan x="120" y="100">IterationKeyRegistry :: registerModules</tspan>
+        <tspan x="120" y="106.35">WorkflowRegistry :: markModulesScheduled</tspan>
+    </text>
+    <text font-size="5.08" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="120" y="148">
+        <tspan x="120" y="148">IterationKeyRegistry :: getFullyDefinedModules</tspan>
+    </text>
+    <g>
+        <rect style="fill: #ffffff" x="50" y="160" width="120" height="13.3"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x="50" y="160" width="120" height="13.3"/>
+        <text font-size="5.08" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="110" y="165.05">
+            <tspan x="110" y="165.05">filter modules where all parents executed,</tspan>
+            <tspan x="110" y="171.4">check if workflow is finished</tspan>
+        </text>
+    </g>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="235" y="220">
+        <tspan x="235" y="220"></tspan>
+    </text>
+    <text font-size="5.08" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:700" x="40" y="140">
+        <tspan x="40" y="140">execute all ready jobs</tspan>
+    </text>
+    <text font-size="5.08" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="116" y="186.1">
+        <tspan x="116" y="186.1">IterationKeyRegistry :: markModulesStarted</tspan>
+        <tspan x="116" y="192.45">WorkflowRegistry ::</tspan>
+        <tspan x="116" y="198.8">registerExpectedExecutionNumbersForModule</tspan>
+    </text>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="110" y1="220" x2="336.329" y2="220"/>
+        <polygon style="fill: #000000" points="339.329,220 335.329,222 336.329,220 335.329,218 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="339.329,220 335.329,222 336.329,220 335.329,218 "/>
+    </g>
+    <text font-size="5.08" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="120" y="216">
+        <tspan x="120" y="216">for each module configuration: Run Job</tspan>
+    </text>
+    <g>
+        <rect style="fill: #ffffff" x="280" y="230" width="120" height="16.4778"/>
+        <rect style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x="280" y="230" width="120" height="16.4778"/>
+        <text font-size="5.08" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="340" y="236.639">
+            <tspan x="340" y="236.639">Build parameters, fetch variables from</tspan>
+            <tspan x="340" y="242.989">WorkflowVariableRegistry if needed</tspan>
+        </text>
+    </g>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="340" y1="280" x2="416.329" y2="280"/>
+        <polygon style="fill: #000000" points="419.329,280 415.329,282 416.329,280 415.329,278 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="419.329,280 415.329,282 416.329,280 415.329,278 "/>
+    </g>
+    <text font-size="5.08" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="348" y="276">
+        <tspan x="348" y="276">Send execution request</tspan>
+    </text>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="157.04" y="24">
+        <tspan x="157.04" y="24">Start Workflow Execution</tspan>
+    </text>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="110" y1="150" x2="246.329" y2="150"/>
+        <polygon style="fill: #000000" points="249.329,150 245.329,152 246.329,150 245.329,148 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="249.329,150 245.329,152 246.329,150 245.329,148 "/>
+    </g>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="110" y1="200" x2="246.329" y2="200"/>
+        <polygon style="fill: #000000" points="249.329,200 245.329,202 246.329,200 245.329,198 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="249.329,200 245.329,202 246.329,200 245.329,198 "/>
+    </g>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="253.671" y1="270" x2="340" y2="270"/>
+        <polygon style="fill: #000000" points="250.671,270 254.671,268 253.671,270 254.671,272 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="250.671,270 254.671,268 253.671,270 254.671,272 "/>
+    </g>
+    <text font-size="5.08" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="250" y="260">
+        <tspan x="250" y="260">ExecutionRegistry ::</tspan>
+        <tspan x="250" y="266.35">register execution id and config</tspan>
+    </text>
+    <g>
+        <line style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" x1="110" y1="120" x2="33.6708" y2="120"/>
+        <polygon style="fill: #000000" points="30.6708,120 34.6708,118 33.6708,120 34.6708,122 "/>
+        <polygon style="fill: none; fill-opacity:0; stroke-width: 0.6; stroke: #000000" points="30.6708,120 34.6708,118 33.6708,120 34.6708,122 "/>
+    </g>
+    <text font-size="5.07992" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="44" y="108">
+        <tspan x="44" y="108">Workflow Execution</tspan>
+        <tspan x="44" y="114.35">Notification</tspan>
+    </text>
+</svg>

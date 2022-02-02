@@ -7,7 +7,7 @@
 [Overview](#overview)  
 [Setting up execution environment](#setup)  
 [Executing the iSNP workflow (single patient)](#singlepatient)  
-[Executing the iSNP workflow (multiple patients)](#multipatient)
+[Executing the iSNP workflow (multiple patients)](#multipatient)   
 [Citation](#citation)
 
 

@@ -8,7 +8,7 @@
 [Setting up execution environment](#setup)  
 [Executing the iSNP workflow (single patient)](#singlepatient)  
 [Executing the iSNP workflow (multiple patients)](#multipatient)
-
+[Citation](#citation)
 
 
 <a name="overview"/>
@@ -151,3 +151,18 @@ options:
 
 ```
 
+<a name="citation"/>
+
+## Citation
+
+To cite this work please use the following reference (the paper can be found here: https://doi.org/10.1101/692269):
+
+```
+A systems genomics approach to uncover patient-specific pathogenic pathways and proteins in a complex disease
+
+Johanne Brooks, Dezso Modos, Padhmanand Sudhakar, David Fazekas, Azedine Zoufir, Orsolya Kapuy, Mate Szalay-Beko, 
+Matthew Madgwick, Bram Verstockt, Lindsay Hall, Alastair Watson, Mark Tremelling, Miles Parkes, Severine Vermeire, 
+Andreas Bender, Simon R. Carding, Tamas Korcsmaros
+
+bioRxiv 692269; doi: https://doi.org/10.1101/692269
+```

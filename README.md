@@ -155,14 +155,8 @@ options:
 
 ## Citation
 
-To cite this work please use the following reference (the paper can be found here: https://doi.org/10.1101/692269):
+To cite this work please use the following reference (the paper can be found here: https://www.nature.com/articles/s41467-022-29998-8):
 
 ```
-A systems genomics approach to uncover patient-specific pathogenic pathways and proteins in a complex disease
-
-Johanne Brooks, Dezso Modos, Padhmanand Sudhakar, David Fazekas, Azedine Zoufir, Orsolya Kapuy, Mate Szalay-Beko, 
-Matthew Madgwick, Bram Verstockt, Lindsay Hall, Alastair Watson, Mark Tremelling, Miles Parkes, Severine Vermeire, 
-Andreas Bender, Simon R. Carding, Tamas Korcsmaros
-
-bioRxiv 692269; doi: https://doi.org/10.1101/692269
+Brooks-Warburton, J., Modos, D., Sudhakar, P. et al. A systems genomics approach to uncover patient-specific pathogenic pathways and proteins in ulcerative colitis. Nat Commun 13, 2299 (2022). https://doi.org/10.1038/s41467-022-29998-8
 ```

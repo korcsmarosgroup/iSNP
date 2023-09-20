@@ -153,7 +153,7 @@ The output files of this script are the follows:
 
 Example of what the output would look like for each file:
 
-* *`affected_proteins_TFs_mirs.tsv`*  
+#### *`affected_proteins_TFs_mirs.tsv`*  
 * -- `Source`: is always either the mirna or the TF  
 * -- `Target`: gene it interacts with or tf  
 * -- `SNP`: rs SNP identifier extracted from the vcf file of the patient  
@@ -169,7 +169,7 @@ HSA-MIR-3972	Q5TA45	RS12103	WT	MIRANDA	0	0	0
 Q9UBR4	P15036	RS4817986	MUT	RSAT	1	0	0
 ```
 
-* *`affected_proteins.tsv`*  
+#### *`affected_proteins.tsv`*  
 * -- `ID`: identifier of the target gene  
 * -- `the rest of the columns`: patient identifiers; 1 represents that the SNP is in the patient's genome, 0 represents that the SNP is not there
 
@@ -181,7 +181,7 @@ P13798	1	0	0	1
 P01920	0	0	0	1
 ```
 
-* *`SNPs.tsv`*  
+#### *`SNPs.tsv`*  
 * -- `ID`: rs SNP identifier    
 * -- `the rest of the columns`: patient identifiers; 1 represents that the SNP is in the patient's genome, 0 represents that the SNP is not there
 

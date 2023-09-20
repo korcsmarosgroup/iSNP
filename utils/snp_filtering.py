@@ -1,7 +1,5 @@
 from typing import List
-
 import pandas as pd
-import re
 import argparse
 import sys
 

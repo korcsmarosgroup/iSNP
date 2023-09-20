@@ -122,7 +122,7 @@ def read_in_folder(patient_folder):
     rs_df.index = rs_df.index.str.upper()
 
     # Set the names of the axises
-    proteins_df = proteins_df.rename_axis("id")
+    proteins_df = proteins_df.rename_axis("ID")
     outline_df = outline_df.rename_axis("Source\tTarget\tSNP\tMutated\tInteraction_source")
     rs_df = rs_df.rename_axis("SNP")
 

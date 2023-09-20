@@ -122,7 +122,7 @@ source	target	score	region	snp	file	mutated    tool
 * `target`: gene it interacts with
 * `score`: prediction score from tool
 * `region`: where annotation came from
-* `snp`: rs snp id extracted from the vcf file of the patient 
+* `snp`: rs SNP id extracted from the vcf file of the patient 
 * `file`: which file it came from i.e. if it was from the wt or mut patient (which genotype the interaction originated from)
 * `mutated`: if the snp was mutated as per the vcf file saying is the snp is mutated or not (if there SNP is present or not)
 * `tool`: tool which the prediction came from
@@ -152,13 +152,14 @@ The output files of this script are the follows:
 * `SNPs.tsv`: This file contains the information, that which SNP can be found in the patients, separately.
 
 Example of what the output would look like for each file:
-* *`affected_proteins.tsv`*
--- `Source`: is always either the mirna
--- `Target`: gene it interacts with or tf
--- `SNP`: rs snp identifier extracted from the vcf file of the patient
--- `Mutated`: if the snp was mutated as per the vcf file saying is the snp is mutated or not (if there SNP is present or not)
--- `Interaction_source`: the source of the tool, where the interaction was found with
--- `the rest of the columns`: patient identifiers; 1 represents that the SNP is in the patient's genome (if `Mutated` is MUT, then the interaction exists; if `Mutated` is WT, then the interaction does not exist), 0 represents that the SNP is not there (if `Mutated` is WT, then the interaction exists; if `Mutated` is MUT, then the interaction does not exist)
+
+* *`affected_proteins_TFs_mirs.tsv`*  
+* -- `Source`: is always either the mirna or the TF  
+* -- `Target`: gene it interacts with or tf  
+* -- `SNP`: rs SNP identifier extracted from the vcf file of the patient  
+* -- `Mutated`: if the SNP was mutated as per the vcf file saying is the SNP is mutated or not (if there SNP is present or not)  
+* -- `Interaction_source`: the source of the tool, where the interaction was found with  
+* -- `the rest of the columns`: patient identifiers; 1 represents that the SNP is in the patient's genome (if `Mutated` is MUT, then the interaction exists; if `Mutated` is WT, then the interaction does not exist), 0 represents that the SNP is not there (if `Mutated` is WT, then the interaction exists; if `Mutated` is MUT, then the interaction does not exist)  
 
 ```
 Source	Target	SNP	Mutated	Interaction_source	patientID	patientID	patientID...
@@ -166,4 +167,28 @@ O60548	Q9HAV4	RS943072	WT	RSAT 	0	0	0
 HSA-MIR-7843-5P	Q3MIT2	RS4560096	WT	MIRANDA	1	0	1
 HSA-MIR-3972	Q5TA45	RS12103	WT	MIRANDA	0	0	0
 Q9UBR4	P15036	RS4817986	MUT	RSAT	1	0	0
+```
+
+* *`affected_proteins.tsv`*  
+* -- `ID`: identifier of the target gene  
+* -- `the rest of the columns`: patient identifiers; 1 represents that the SNP is in the patient's genome, 0 represents that the SNP is not there
+
+```
+ID	patientID	patientID	patientID...
+Q9NVS2	0	0	0	0
+Q8N323	1	0	1	1
+P13798	1	0	0	1
+P01920	0	0	0	1
+```
+
+* *`SNPs.tsv`*  
+* -- `ID`: rs SNP identifier    
+* -- `the rest of the columns`: patient identifiers; 1 represents that the SNP is in the patient's genome, 0 represents that the SNP is not there
+
+```
+SNP	patientID	patientID	patientID...
+RS2836878	1	0	0	0
+RS12131796	0	1	0	1
+RS1182188	1	0	0	1
+RS6451494	1	0	0	1
 ```

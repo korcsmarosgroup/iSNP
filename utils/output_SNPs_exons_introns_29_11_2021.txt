@@ -1,0 +1,18 @@
+snp	type
+	
+rs10781499	first_intron
+rs10781499	exon
+rs7404095	first_intron
+rs11879191	first_intron
+rs17780256	exon
+rs3749171	first_intron
+rs3749171	exon
+rs3742130	exon
+rs1598859	first_intron
+rs10891692	exon
+rs11041476	first_intron
+rs8005161	first_intron
+rs9822268	first_intron
+rs3766606	first_intron
+rs12131796	first_intron
+rs12132298	first_intron

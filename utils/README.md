@@ -135,9 +135,10 @@ Q14938	Q92665	fimo-p-value:9.06122;fimo-q-value:9.06122	enhancer	rs941823	wt	Fal
 O00570	Q86TN4	rsat_pvalue:0.0000220000000000	enhancer	rs559928	wt	False	rsat
 Q13887	P33241	rsat_pvalue:0.0001000000000000	promoter	rs907611	wt	False	rsat
 ```
-
+===============================================================================================================
 ### iSNP Master Table Creator
-This script generates a table, which contains all of the TF-target gene and miRNA-target gene interactions per patients.
+This script generates a table, which contains all of the TF-target gene and miRNA-target gene interactions per patients.  
+Input: a folder, which contains all of the patient specific folder from the *iSNP Wrangler script*
 
 The argument(s) for this script are as follows:
 ```
@@ -148,7 +149,7 @@ optional arguments:
 
 The output files of this script are the follows:
 * `affected_proteins_TFs_mirs.tsv`: The master table, which contains all of the TF-target gene and miRNA-target gene interactions for the patients.
-* `affected_proteins.tsv`: .
+* `affected_proteins.tsv`: This file contains the information, that which protein can be found in the patients, separately.
 * `SNPs.tsv`: This file contains the information, that which SNP can be found in the patients, separately.
 
 Example of what the output would look like for each file:
@@ -191,4 +192,143 @@ RS2836878	1	0	0	0
 RS12131796	0	1	0	1
 RS1182188	1	0	0	1
 RS6451494	1	0	0	1
+```
+===============================================================================================================
+### Get SNP Position Types
+This script generates a file, which contains the position types (intron or exon) of the given SNPs.  
+Input: the *iSNP.tsv* file from the *iSNP Master Table Creator* script
+
+The argument(s) for this script are as follows:
+```
+mandatory argument:
+  SNP_FILE, --snp_file SNP_FILE
+```
+
+The output files of this script are the follows:
+* `output_SNPs_exons_introns.tsv`: This file contains the position type of the given SNPs (intron or exon).
+
+Example of what the output would look like for this file:  
+
+#### *`output_SNPs_exons_introns.tsv`*  
+* -- `snp`: rs SNP identifier of the given SNP  
+* -- `type`: position of the SNP (exon or intron)  
+
+```
+snp	type  
+rs10781499	first_intron  
+rs7404095	exon  
+rs11879191	exon  
+rs17780256	first_intron  
+```
+===============================================================================================================
+### SNP Filtering
+This script filters only the relevant SNPs from the output files of the *iSNP Master Table Creator* script.  
+Input: the *affected_proteins_TFs_mirs.tsv* file from the *iSNP Master Table Creator* script; the *output_SNPs_exons_introns.tsv* file from the *Get SNP Position Types* script  
+
+This script can run with 3 different scenarios (the default analysis type is the TF only):  
+* `ga`: gene annotation file, searching only in exons  
+* `tf`: TFs only  
+* `snp`: SNP list as input for miRNAs  
+
+The argument(s) for this script are as follows:
+```
+optional arguments:
+  -h --help            show this help message and exit
+  -i INPUTFILE, --inputfile INPUTFILE
+  -a SNP_ANNOTATION_FILE, --snp_annotation_file SNP_ANNOTATION_FILE
+  -o OUTFILE, --outfile OUTFILE
+  -t TYPE, --type TYPE
+  -log DOUBLE_SNP_OUT_FILE, --double_snp_out_file DOUBLE_SNP_OUT_FILE
+```
+
+The output files of this script are the follows:
+* `affected_proteins_TFs_mirs_filtered.tsv`: The master table, which contains all of the TF-target gene and miRNA-target gene interactions for the patients.
+* `affected_proteins_filtered.tsv`: This file contains the information, that which protein can be found in the patients, separately.
+* `SNPs_filtered.tsv`: This file contains the information, that which SNP can be found in the patients, separately.
+
+Example of what the output would look like for each file:
+
+#### *`affected_proteins_TFs_mirs_filtered.tsv`*  
+* -- `Source`: is always either the mirna or the TF  
+* -- `Target`: gene it interacts with or tf  
+* -- `SNP`: rs SNP identifier extracted from the vcf file of the patient  
+* -- `Mutated`: if the SNP was mutated as per the vcf file saying is the SNP is mutated or not (if there SNP is present or not)  
+* -- `Interaction_source`: the source of the tool, where the interaction was found with  
+* -- `the rest of the columns`: patient identifiers; 1 represents that the SNP is in the patient's genome (if `Mutated` is MUT, then the interaction exists; if `Mutated` is WT, then the interaction does not exist), 0 represents that the SNP is not there (if `Mutated` is WT, then the interaction exists; if `Mutated` is MUT, then the interaction does not exist)  
+
+```
+Source	Target	SNP	Mutated	Interaction_source	patientID	patientID	patientID...
+O60548	Q9HAV4	RS943072	WT	RSAT 	0	0	0
+HSA-MIR-7843-5P	Q3MIT2	RS4560096	WT	MIRANDA	1	0	1
+HSA-MIR-3972	Q5TA45	RS12103	WT	MIRANDA	0	0	0
+Q9UBR4	P15036	RS4817986	MUT	RSAT	1	0	0
+```
+
+#### *`affected_proteins_filtered.tsv`*  
+* -- `ID`: identifier of the target gene  
+* -- `the rest of the columns`: patient identifiers; 1 represents that the SNP is in the patient's genome, 0 represents that the SNP is not there
+
+```
+ID	patientID	patientID	patientID...
+Q9NVS2	0	0	0	0
+Q8N323	1	0	1	1
+P13798	1	0	0	1
+P01920	0	0	0	1
+```
+
+#### *`SNPs_filtered.tsv`*  
+* -- `ID`: rs SNP identifier    
+* -- `the rest of the columns`: patient identifiers; 1 represents that the SNP is in the patient's genome, 0 represents that the SNP is not there
+
+```
+SNP	patientID	patientID	patientID...
+RS2836878	1	0	0	0
+RS12131796	0	1	0	1
+RS1182188	1	0	0	1
+RS6451494	1	0	0	1
+```
+===============================================================================================================
+### Network Propagation
+This script calculates the propagation of the network.  
+Input: the 3 (filtered) output files from the *SNP Filtering* script and signaling and regulatory networks from dorothea  
+
+The argument(s) for this script are as follows:
+```
+optional arguments:
+  -h --help            show this help message and exit
+  -g GRAPH, --graph GRAPH
+  -pf PATIENT_FILE, --patient_file PATIENT_FILE
+  -of OUTPUT_FILE, --output_file OUTPUT_FILE
+  -tf TF_TARGET_NETWORK, --tf_target_network TF_TARGET_NETWORK
+  -rr RANDOM_RUNS, --random_runs RANDOM_RUNS
+```
+
+The output files of this script are the follows:
+* `PPI_Z_value.tsv`: .
+* `PPI_heat_value.tsv`: .
+* `TF_TG_Z_value.tsv`: .
+* `TF_TG_heat_value.tsv`: .
+
+#### *`PPI_Z_value.tsv`*  
+* --   
+
+```
+```
+
+#### *`PPI_heat_value.tsv`*  
+* -- 
+
+```
+```
+
+#### *`TF_TG_Z_value.tsv`*  
+* -- 
+
+```
+```
+
+#### *`TF_TG_heat_value.tsv`*  
+* -- 
+
+```
 ```

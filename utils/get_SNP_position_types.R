@@ -3,9 +3,9 @@ library('dplyr')
 library(biomaRt)
 library('stringr')
 
-log <- file("filtering_miRNA_target_sites.log", open = "a")
+log <- file("get_SNP_positions_types.log", open = "a")
 sink(log, type = "message", append = TRUE)
-message("\nStarting filtering_miRNA_target_sites.R script\n")
+message("\nStarting get_SNP_positions_types.R script\n")
 
 args <- commandArgs(trailingOnly = TRUE)
 

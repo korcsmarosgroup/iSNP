@@ -5,8 +5,8 @@ import pandas as pd
 import numpy as np
 import argparse
 import random
-import re
 import sys
+import re
 
 
 def parse_args(argv):
@@ -318,7 +318,6 @@ def main(argv):
     input_df = pd.read_csv(args.patient_file, index_col = 0, sep = "\t", header = 0)
     graph = nx.read_edgelist(args.ncol_file, delimiter = " ", create_using = nx.DiGraph)
 
-    # Creating giant component Every work is happening only on this graph.
     number_of_nodes = len(set(graph.nodes))
     print("The number of nodes in the graph are:", number_of_nodes)
     number_of_edges = len(graph.edges)

@@ -36,7 +36,7 @@ def parse_args(argv):
                         action="store",
                         required=False)
 
-    parser.add_argument("-log1", "--double_snp_out_file",
+    parser.add_argument("-log", "--double_snp_out_file",
                         help="<Log file for the double store RNAs> [optional]",
                         dest="double_snp_out_file",
                         action="store",

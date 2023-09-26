@@ -304,31 +304,53 @@ optional arguments:
 ```
 
 The output files of this script are the follows:
-* `PPI_Z_value.tsv`: .
-* `PPI_heat_value.tsv`: .
-* `TF_TG_Z_value.tsv`: .
-* `TF_TG_heat_value.tsv`: .
+* `PPI_Z_value.tsv`: Contains the Z normalised heat values for each node of the patients in the signaling networks.
+* `PPI_heat_value.tsv`: Contains the heat values for each node of the patients in the signaling networks.
+* `TF_TG_Z_value.tsv`: Contains the Z normalised heat values for each node of the patients in the regulatory networks.
+* `TF_TG_heat_value.tsv`: Contains the heat values for each node of the patients in the regulatory networks.
 
 #### *`PPI_Z_value.tsv`*  
 * --   
 
 ```
+#	patient1	patient2
+a	2.4157351410827212	0.9451526533388325
+b	0.2785043332267776	-0.3822639175566198
+c	0.3176568566017356	-0.37924932432179675
 ```
 
 #### *`PPI_heat_value.tsv`*  
 * -- 
 
 ```
+#	patient1	patient2
+a	0.0011705057280000002	0.006047612928000001
+k	0.0024385535999999998	0.0408231936
+c	0.0011705057280000002	0.006047612928000001
+e	0.0024385535999999998	0.006047612928000001
+z	0.0024385535999999998	0.0408231936
 ```
 
 #### *`TF_TG_Z_value.tsv`*  
 * -- 
 
 ```
+#	patient1	patient2
+a	-0.5846969559161787	-1.0430422498451788
+b	-0.5846969559161787	-1.0430422498451788
+c	-0.5846969559161787	-1.0430422498451788
+k	-0.4146198331543805	0.8515522776371193
+d	-0.4146198331543805	0.8515522776371193
 ```
 
 #### *`TF_TG_heat_value.tsv`*  
 * -- 
 
 ```
+#	patient1	patient2
+a	0.0011705057280000002	0.006047612928000001
+b	0.0011705057280000002	0.006047612928000001
+c	0.0011705057280000002	0.006047612928000001
+k	0.0024385535999999998	0.0408231936
+d	0.0024385535999999998	0.0408231936
 ```

@@ -27,12 +27,12 @@ tar -xzvf v0.1.16.tar.gz
 cp vcftools-0.1.16/src/cpp/vcftools /usr/bin/vcftools
 
 # SNPEFF
-curl -L -k https://kent.dl.sourceforge.net/project/snpeff/snpEff_v4_3t_core.zip --output snpEff_v4_3t_core.zip
-unzip snpEff_v4_3t_core.zip
-cp snpEff/snpEff.jar /usr/bin/snpEff.jar
+wget https://korcsmaroslab.org/rsat_installation/snpEff.jar
+cp snpEff.jar /usr/bin/snpEff.jar
 echo "#!/bin/bash\njava -jar snpEff.jar\n" > /usr/bin/snpEff
 chmod +x /usr/bin/snpEff
-cp snpEff/SnpSift.jar /usr/bin/SnpSift.jar
+wget https://korcsmaroslab.org/rsat_installation/SnpSift.jar
+cp SnpSift.jar /usr/bin/SnpSift.jar
 echo "#!/bin/bash\njava -jar SnpSift.jar\n" > /usr/bin/SnpSift
 chmod +x /usr/bin/SnpSift
 

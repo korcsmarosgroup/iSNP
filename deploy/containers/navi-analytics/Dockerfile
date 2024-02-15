@@ -2,7 +2,7 @@
 FROM navi-base:1.0.0
 MAINTAINER NavigOmix project "szalay.beko.mate@gmail.com"
 
-ADD install_tools_matt.sh /
+ADD install_tools_extra.sh /
 RUN /bin/bash /install_tools_extra.sh
 
 ADD install-python.sh /

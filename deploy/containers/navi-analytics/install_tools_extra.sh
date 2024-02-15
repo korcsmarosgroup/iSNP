@@ -11,21 +11,8 @@ mkdir /build
 cd /build
 
 # RSAT
-curl http://pedagogix-tagc.univ-mrs.fr/download_rsat/previous_versions/rsat_2018-08-01.tar.gz | tar xvz
-( cd rsat/contrib/compare-matrices-quick && make clean && make )
-( cd rsat/contrib/count-words && make clean && make )
-( cd rsat/contrib/info-gibbs && make clean && make )
-( cd rsat/contrib/matrix-scan-quick && make clean && make )
-( cd rsat/contrib/retrieve-variation-seq && make clean && make )
-cp /build/rsat/contrib/compare-matrices-quick/compare-matrices-quick /usr/bin/compare-matrices-quick
-cp /build/rsat/contrib/count-words/count-words /usr/bin/count-words
-cp /build/rsat/contrib/info-gibbs/info-gibbs /usr/bin/info-gibbs
-cp /build/rsat/contrib/matrix-scan-quick/matrix-scan-quick /usr/bin/matrix-scan-quick
-cp /build/rsat/contrib/retrieve-variation-seq/retrieve-variation-seq /usr/bin/retrieve-variation-seq
-mkdir /rsat
-mkdir /rsat/perl-scripts
-mkdir /rsat/build
-cp -r /build/rsat/perl-scripts/* /rsat/perl-scripts
+wget https://korcsmaroslab.org/rsat_installation/rsat_files.tar.gz
+tar -xzvf rsat_files.tar.gz
 #cp -r /build/rsat/build/* /rsat/build
 
 # BEDTOOLS

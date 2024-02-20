@@ -13,7 +13,15 @@ cd /build
 # RSAT
 wget https://korcsmaroslab.org/rsat_installation/rsat_files.tar.gz
 tar -xzvf rsat_files.tar.gz
-#cp -r /build/rsat/build/* /rsat/build
+cp /build/rsat_modules/compare-matrices-quick /usr/bin/compare-matrices-quick
+cp /build/rsat_modules/count-words /usr/bin/count-words
+cp /build/rsat_modules/info-gibbs /usr/bin/info-gibbs
+cp /build/rsat_modules/matrix-scan-quick /usr/bin/matrix-scan-quick
+cp /build/rsat_modules/retrieve-variation-seq /usr/bin/retrieve-variation-seq
+mkdir /rsat
+mkdir /rsat/perl-scripts
+mkdir /rsat/build
+cp -r /build/rsat_perl-scripts/rsat/perl-scripts/* /rsat/perl-scripts
 
 # BEDTOOLS
 curl -L https://github.com/arq5x/bedtools2/releases/download/v2.25.0/bedtools-2.25.0.tar.gz | tar xvz
@@ -27,11 +35,11 @@ tar -xzvf v0.1.16.tar.gz
 cp vcftools-0.1.16/src/cpp/vcftools /usr/bin/vcftools
 
 # SNPEFF
-wget https://korcsmaroslab.org/rsat_installation/snpEff.jar
+wget https://korcsmaroslab.org/snpeff_installation/snpEff.jar
 cp snpEff.jar /usr/bin/snpEff.jar
 echo "#!/bin/bash\njava -jar snpEff.jar\n" > /usr/bin/snpEff
 chmod +x /usr/bin/snpEff
-wget https://korcsmaroslab.org/rsat_installation/SnpSift.jar
+wget https://korcsmaroslab.org/snpeff_installation/SnpSift.jar
 cp SnpSift.jar /usr/bin/SnpSift.jar
 echo "#!/bin/bash\njava -jar SnpSift.jar\n" > /usr/bin/SnpSift
 chmod +x /usr/bin/SnpSift
@@ -43,7 +51,6 @@ cd meme-5.1.1
 ./configure --prefix=/meme --with-url=http://meme-suite.org/ --enable-build-libxml2 --enable-build-libxslt
 make
 make install
-# export PATH=$HOME/meme/bin:$HOME/meme/libexec/meme-5.1.1:$PATH
 
 # VIENNARNA
 wget https://www.tbi.univie.ac.at/RNA/download/sourcecode/2_4_x/ViennaRNA-2.4.14.tar.gz
@@ -52,13 +59,8 @@ cd ViennaRNA-2.4.14/
 ./configure --without-perl --without-python --without-python3
 make
 export PATH=$PATH:$PWD/src/bin
-cpan Bio::TreeIO
-cpan Statistics::Lite
-
-# MIRNADA
-curl -L http://cbio.mskcc.org/microrna_data/miRanda-aug2010.tar.gz | tar xzv
-cd miRanda-3.3a/
-./configure && make && make install
+# cpan Bio::TreeIO
+# cpan Statistics::Lite
 
 cd /
-rm -rf /build
+#rm -rf /build

@@ -63,8 +63,9 @@ export PATH=$PATH:$PWD/src/bin
 # cpan Statistics::Lite
 
 # MIRNADA
-git clone git@github.com:hacktrackgnulinux/miranda.git
-cd miranda
+wget https://korcsmaroslab.org/miranda_installation/miranda-master.zip
+unzip miranda-master.zipcd
+cd miranda-master
 ./configure && make && make install
 
 cd /

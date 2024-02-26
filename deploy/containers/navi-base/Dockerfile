@@ -1,5 +1,5 @@
 # using a specific 16.04 version (to avoid frequent updates)
-FROM ubuntu:xenial-20181005
+FROM ubuntu:16.04
 MAINTAINER NavigOmix project "szalay.beko.mate@gmail.com"
 
 ADD install_base_layer.sh /

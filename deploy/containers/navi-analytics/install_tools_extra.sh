@@ -62,5 +62,10 @@ export PATH=$PATH:$PWD/src/bin
 # cpan Bio::TreeIO
 # cpan Statistics::Lite
 
+# MIRNADA
+git clone git@github.com:hacktrackgnulinux/miranda.git
+cd miranda
+./configure && make && make install
+
 cd /
 #rm -rf /build

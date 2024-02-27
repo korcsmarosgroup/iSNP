@@ -55,13 +55,13 @@ class ArgumentParser:
                             help="name of the text file stores all the SNP IDs we filter for the disease (default: SNP-identifier.txt)",
                             dest="snp_id_list",
                             action="store",
-                            default="cd-snp-identifier.txt")
+                            default="uc-snp-identifier.txt")
 
         parser.add_argument("--promoter_regions_bed",
                             help="name of the annotation file for promoter regions (default: annotation-promoter-regions.bed)",
                             dest="promoter_regions",
                             action="store",
-                            default="annotation-promoter-regions-5k-exon-extended-hgnc.bed")
+                            default="annotation-promoter-regions-5k-extended-hgnc.bed")
 
         parser.add_argument("--protein_coding_regions_bed",
                             help="name of the annotation file for protein coding regions (default: annotation-protein-coding-regions.bed)",
@@ -119,13 +119,13 @@ class ArgumentParser:
                             help="background file for the TF binding simulation (default: background.freq)",
                             dest="tf_background_rsat",
                             action="store",
-                            default="background_rsat_own5k_exon_final.freq")
+                            default="background_rsat_own5k.freq")
 
         parser.add_argument("--tf_background_fimo",
                             help="background file for the TF binding simulation (default: fimo.model)",
                             dest="tf_background_fimo",
                             action="store",
-                            default="background_fimo_own5k_exon_final.model")
+                            default="background_fimo_own5k.model")
 
         parser.add_argument("--tf_score_threshold",
                             help="threshold to use for filtering the strong tf-gene interactions (default: 0.0001)",

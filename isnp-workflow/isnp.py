@@ -64,117 +64,117 @@ def main(stdscr, params, navigomix_path):
 
     execute_command(docker_helper, 0, display,
                     ["python3", "/analytic-modules/vcf-filtering/vcf_filter.py",
-                     "--input", params.input_folder + params.patient_vcf,
-                     "--snp", params.input_folder + params.snp_id_list,
-                     "--output", params.output_folder + "disease_filtered.vcf"])
+                     "--input", "/input/" + params.patient_vcf,
+                     "--snp", "/input/" + params.snp_id_list,
+                     "--output", "/output/disease_filtered.vcf"])
 
     execute_command(docker_helper, 1, display,
                     ["python3", "/analytic-modules/vcf-filtering/vcf_filter.py",
-                     "--input", params.output_folder + "disease_filtered.vcf",
-                     "--annotation", params.input_folder + params.promoter_regions,
-                     "--output", params.output_folder + "promoter-regions.vcf"])
+                     "--input", "/output/disease_filtered.vcf",
+                     "--annotation", "/input/" + params.promoter_regions,
+                     "--output", "/output/promoter-regions.vcf"])
 
     execute_command(docker_helper, 2, display,
                     ["python3", "/analytic-modules/vcf-filtering/vcf_filter.py",
-                     "--input", params.output_folder + "disease_filtered.vcf",
-                     "--annotation", params.input_folder + params.protein_coding_regions,
-                     "--output", params.output_folder + "protein-coding-regions.vcf"])
+                     "--input", "/output/disease_filtered.vcf",
+                     "--annotation", "/input/" + params.protein_coding_regions,
+                     "--output", "/output/protein-coding-regions.vcf"])
 
     execute_command(docker_helper, 3, display,
                     ["python3", "/analytic-modules/mutated-sequence-generator/mutated_sequence_generator.py",
-                     "--input_vcf", params.output_folder + "protein-coding-regions.vcf",
-                     "--genome", params.input_folder + params.genome,
-                     "--output_wild_type", params.output_folder + "snp_in_protein-coding-regions_wt.fasta",
-                     "--output_mutated", params.output_folder + "snp_in_protein-coding-regions_mut.fasta",
+                     "--input_vcf", "/output/protein-coding-regions.vcf",
+                     "--genome", "/input/" + params.genome,
+                     "--output_wild_type", "/output/snp_in_protein-coding-regions_wt.fasta",
+                     "--output_mutated", "/output/snp_in_protein-coding-regions_mut.fasta",
                      "--region_length", str(params.snp_genome_region_radius_protein_coding)])
 
     execute_command(docker_helper, 4, display,
                     ["python3", "/analytic-modules/mutated-sequence-generator/mutated_sequence_generator.py",
-                     "--input_vcf", params.output_folder + "promoter-regions.vcf",
-                     "--genome", params.input_folder + params.genome,
-                     "--output_wild_type", params.output_folder + "snp_in_promoter-regions_wt.fasta",
-                     "--output_mutated", params.output_folder + "snp_in_promoter-regions_mut.fasta",
+                     "--input_vcf", "/output/promoter-regions.vcf",
+                     "--genome", "/input/" + params.genome,
+                     "--output_wild_type", "/output/snp_in_promoter-regions_wt.fasta",
+                     "--output_mutated", "/output/snp_in_promoter-regions_mut.fasta",
                      "--region_length", str(params.snp_genome_region_radius_promoter)])
 
     execute_command(docker_helper, 5, display,
                     ["python3", "/analytic-modules/mirna-interaction-predictor/mirna_interaction_predictor.py",
-                     "--genomic", params.output_folder + "snp_in_protein-coding-regions_mut.fasta",
-                     "--mirna", params.input_folder + params.mirna_fasta,
-                     "--output", params.output_folder + "mirna_gene_connections_mut.tsv",
+                     "--genomic", "/output/snp_in_protein-coding-regions_mut.fasta",
+                     "--mirna", "/input/" + params.mirna_fasta,
+                     "--output", "/output/mirna_gene_connections_mut.tsv",
                      "--score", str(params.miranda_score_threshold),
                      "--energy", str(params.miranda_energy_threshold)])
 
     execute_command(docker_helper, 6, display,
                     ["python3", "/analytic-modules/mirna-interaction-predictor/mirna_interaction_predictor.py",
-                     "--genomic", params.output_folder + "snp_in_protein-coding-regions_wt.fasta",
-                     "--mirna", params.input_folder + params.mirna_fasta,
-                     "--output", params.output_folder + "mirna_gene_connections_wt.tsv",
+                     "--genomic", "/output/snp_in_protein-coding-regions_wt.fasta",
+                     "--mirna", "/input/" + params.mirna_fasta,
+                     "--output", "/output/mirna_gene_connections_wt.tsv",
                      "--score", str(params.miranda_score_threshold),
                      "--energy", str(params.miranda_energy_threshold)])
 
     execute_command(docker_helper, 7, display,
                     ["python3", "/analytic-modules/transcription-factor-interaction-predictor/tf_interaction_prediction.py",
-                     "--fasta", params.output_folder + "snp_in_promoter-regions_mut.fasta",
-                     "--matrix", params.input_folder + params.tf_binding_matrices,
-                     "--tf_background_rsat", params.input_folder + params.tf_background_rsat,
-                     "--tf_background_fimo", params.input_folder + params.tf_background_fimo,
-                     "--output", params.output_folder + "tf_gene_connections_mut.tsv",
+                     "--fasta", "/output/snp_in_promoter-regions_mut.fasta",
+                     "--matrix", "/input/" + params.tf_binding_matrices,
+                     "--tf_background_rsat", "/input/" + params.tf_background_rsat,
+                     "--tf_background_fimo", "/input/" + params.tf_background_fimo,
+                     "--output", "/output/tf_gene_connections_mut.tsv",
                      "--format", "transfac",
                      "--threshold", str(params.tf_score_threshold)])
 
     execute_command(docker_helper, 8, display,
                     ["python3", "/analytic-modules/transcription-factor-interaction-predictor/tf_interaction_prediction.py",
-                     "--fasta", params.output_folder + "snp_in_promoter-regions_wt.fasta",
-                     "--matrix", params.input_folder + params.tf_binding_matrices,
-                     "--tf_background_rsat", params.input_folder + params.tf_background_rsat,
-                     "--tf_background_fimo", params.input_folder + params.tf_background_fimo,
-                     "--output", params.output_folder + "tf_gene_connections_wt.tsv",
+                     "--fasta", "/output/snp_in_promoter-regions_wt.fasta",
+                     "--matrix", "/input/" + params.tf_binding_matrices,
+                     "--tf_background_rsat", "/input/" + params.tf_background_rsat,
+                     "--tf_background_fimo", "/input/" + params.tf_background_fimo,
+                     "--output", "/output/tf_gene_connections_wt.tsv",
                      "--format", "transfac",
                      "--threshold", str(params.tf_score_threshold)])
 
     execute_command(docker_helper, 9, display,
                     ["python3", "/analytic-modules/network-combiner/network_combiner.py",
-                     "--input-files", params.output_folder + "mirna_gene_connections_mut.tsv,/output/tf_gene_connections_mut.tsv",
-                     "--output-file", params.output_folder + "combined_connections_mut.tsv",
+                     "--input-files", "/output/mirna_gene_connections_mut.tsv,/output/tf_gene_connections_mut.tsv",
+                     "--output-file", "/output/combined_connections_mut.tsv",
                      "--method", "union"])
 
     execute_command(docker_helper, 10, display,
                     ["python3", "/analytic-modules/network-combiner/network_combiner.py",
-                     "--input-files", params.output_folder + "mirna_gene_connections_wt.tsv,/output/tf_gene_connections_wt.tsv",
-                     "--output-file", params.output_folder + "combined_connections_wt.tsv",
+                     "--input-files", "/output/mirna_gene_connections_wt.tsv,/output/tf_gene_connections_wt.tsv",
+                     "--output-file", "/output/combined_connections_wt.tsv",
                      "--method", "union"])
 
     execute_command(docker_helper, 11, display,
                     ["python3", "/analytic-modules/network-combiner/network_combiner.py",
-                     "--input-files", params.output_folder + "combined_connections_mut.tsv,/output/combined_connections_wt.tsv",
-                     "--output-file", params.output_folder + "differences_between_mut_wt_networks.tsv",
+                     "--input-files", "/output/combined_connections_mut.tsv,/output/combined_connections_wt.tsv",
+                     "--output-file", "/output/differences_between_mut_wt_networks.tsv",
                      "--method", "difference"])
 
     execute_command(docker_helper, 12, display,
                     ["python3", "/analytic-modules/uniprot-id-formatter/uniprot_id_formatter.py",
-                     "--input-network-file", params.output_folder + "differences_between_mut_wt_networks.tsv",
+                     "--input-network-file", "/output/differences_between_mut_wt_networks.tsv",
                      "--lower-case",
                      "--no-isoform"])
 
     execute_command(docker_helper, 13, display,
                     ["python3", "/analytic-modules/network-id-mapper/network_id_mapper.py",
-                     "--input", params.output_folder + "differences_between_mut_wt_networks_formatted.tsv",
+                     "--input", "/output/differences_between_mut_wt_networks_formatted.tsv",
                      "--target-id-type", "uniprotac",
                      # "--molecule-type-filter", "gene",  # do we need this ???
                      # "--remove",
-                     "--mapping-data", ",".join(map(lambda x: params.input_folder + x, params.id_mapping_json_files)),
-                     "--output", params.output_folder + "uniprot_differences.tsv"])
+                     "--mapping-data", ",".join(map(lambda x: "/input/" + x, params.id_mapping_json_files)),
+                     "--output", "/output/uniprot_differences.tsv"])
 
     execute_command(docker_helper, 14, display,
                     ["python3", "/analytic-modules/network-enrichment/network_enrichment.py",
-                     "--input", params.output_folder + "uniprot_differences.tsv",
-                     "--output", params.output_folder + "enriched_uniprot_differences.tsv",
-                     "--reference-net", params.input_folder + params.reference_interactions_for_enrichment_tsv,
+                     "--input", "/output/uniprot_differences.tsv",
+                     "--output", "/output/enriched_uniprot_differences.tsv",
+                     "--reference-net", "/input/" + params.reference_interactions_for_enrichment_tsv,
                      "--distance", "1"])
 
     execute_command(docker_helper, 15, display,
                     ["python3", "/analytic-modules/uniprot-id-formatter/uniprot_id_formatter.py",
-                     "--input-network-file", params.output_folder + "enriched_uniprot_differences.tsv",
+                     "--input-network-file", "/output/enriched_uniprot_differences.tsv",
                      "--upper-case",
                      "--no-isoform"])
 

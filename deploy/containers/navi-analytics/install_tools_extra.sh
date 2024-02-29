@@ -64,7 +64,7 @@ export PATH=$PATH:$PWD/src/bin
 
 # MIRNADA
 wget https://korcsmaroslab.org/miranda_installation/miranda-master.zip
-unzip miranda-master.zipcd
+unzip miranda-master.zip
 cd miranda-master
 ./configure && make && make install
 

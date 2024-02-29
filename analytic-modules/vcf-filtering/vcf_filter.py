@@ -85,7 +85,7 @@ def vcf_filter(input_vcf_file, output, annotation=None, snp=None):
 def main(argv):
     input_file, annotation, snp, output = check_args(argv)
     if os.stat(input_file).st_size == 0:
-        print(f'====== The input fasta file is empty! ======')
+        print(f'====== The input VCF file is empty! ======')
         open(output, "a").close()
     else:
         vcf_filter(input_vcf_file=input_file,

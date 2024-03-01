@@ -51,6 +51,7 @@ cd meme-5.1.1
 ./configure --prefix=/meme --with-url=http://meme-suite.org/ --enable-build-libxml2 --enable-build-libxslt
 make
 make install
+cd /build
 
 # VIENNARNA
 wget https://www.tbi.univie.ac.at/RNA/download/sourcecode/2_4_x/ViennaRNA-2.4.14.tar.gz
@@ -59,14 +60,16 @@ cd ViennaRNA-2.4.14/
 ./configure --without-perl --without-python --without-python3
 make
 export PATH=$PATH:$PWD/src/bin
-# cpan Bio::TreeIO
-# cpan Statistics::Lite
+cd /build
+cpan Bio::TreeIO
+cpan Statistics::Lite
 
 # MIRNADA
-wget https://korcsmaroslab.org/miranda_installation/miranda-master.zip
-unzip miranda-master.zip
-cd miranda-master
-./configure && make && make install
+# wget https://korcsmaroslab.org/miranda_installation/miranda-master.zip
+# unzip miranda-master.zip
+# cd miranda-master
+# ./configure --host=x86_64-Linux && make && make install
+mv /usr/local/bin/miranda.sh /usr/local/bin/miranda
 
 cd /
 #rm -rf /build

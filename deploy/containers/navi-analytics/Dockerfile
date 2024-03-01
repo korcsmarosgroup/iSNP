@@ -2,6 +2,8 @@
 FROM navi-base:1.0.0
 MAINTAINER NavigOmix project "szalay.beko.mate@gmail.com"
 
+ADD miranda.sh /usr/local/bin/
+
 ADD install_tools_extra.sh /
 RUN /bin/bash /install_tools_extra.sh
 

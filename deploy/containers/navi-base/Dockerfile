@@ -16,4 +16,3 @@ EXPOSE 22
 WORKDIR /home/navigator
 
 CMD /usr/sbin/sshd -D -o UseDNS=no -o UsePAM=no
-

@@ -105,8 +105,8 @@ def main():
         actual_patient_name = actual_patient.split(".")[0]
         actual_patient_folder = os.path.join(output_folder, actual_patient_name)
 
-        if actual_patient_name not in all_patient_files:
-            all_patient_files.append(actual_patient_name)
+        if actual_patient not in all_patient_files:
+            all_patient_files.append(actual_patient)
 
         if os.path.isdir(actual_patient_folder):
             shutil.rmtree(actual_patient_folder)

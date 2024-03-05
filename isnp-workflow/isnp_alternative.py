@@ -146,7 +146,7 @@ def main():
     navigomix_path = os.path.abspath(os.path.join(os.path.realpath(__file__), os.pardir, os.pardir))
     params = ArgumentParser(navigomix_path, sys.argv[1:])
 
-    for patient_file in params.patient_files:
+    for patient_file in params.patient_files.split(","):
         run_pipeline(params, patient_file, params.container_name)
 
 

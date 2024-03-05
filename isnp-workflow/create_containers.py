@@ -102,13 +102,11 @@ def main():
         if ".vcf" not in actual_patient:
             continue
 
-        actual_patient_file = os.path.join(patient_folder, actual_patient)
-
-        if actual_patient_file not in all_patient_files:
-            all_patient_files.append(actual_patient_file)
-
         actual_patient_name = actual_patient.split(".")[0]
         actual_patient_folder = os.path.join(output_folder, actual_patient_name)
+
+        if actual_patient_name not in all_patient_files:
+            all_patient_files.append(actual_patient_name)
 
         if os.path.isdir(actual_patient_folder):
             shutil.rmtree(actual_patient_folder)

@@ -52,3 +52,5 @@ cpan -T Number::Format
 # cpan -T Readonly
 # cpan -T Email::Sender::Transport::SMTPS
 cpan -T Email::Sender::Transport::SMTP
+cpan -T Bio::TreeIO
+cpan -T Statistics::Lite

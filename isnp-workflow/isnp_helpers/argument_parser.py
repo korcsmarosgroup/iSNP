@@ -145,6 +145,20 @@ class ArgumentParser:
                             dest="reference_interactions_for_enrichment_tsv",
                             action="store",
                             default="omnipath.tsv")
+        
+        parser.add_argument("-c", "--container-name",
+                            help="<name of the docker container> [mandatory]",
+                            type=str,
+                            dest="container_name",
+                            action="store",
+                            default="testcontainername")
+
+        parser.add_argument("-p", "--patient-files",
+                            help="<list of the paths of the specific patient files> [mandatory]",
+                            type=str,
+                            dest="patient_files",
+                            action="store",
+                            default="testlist")
 
         results = parser.parse_args(args)
 
@@ -170,3 +184,5 @@ class ArgumentParser:
         self.tf_score_threshold = results.tf_score_threshold
         self.id_mapping_json_files = list(map(lambda x: x.strip(), results.id_mapping_json.split(',')))
         self.reference_interactions_for_enrichment_tsv = results.reference_interactions_for_enrichment_tsv
+        self.container_name = results.container_name
+        self.patient_files = results.patient_files

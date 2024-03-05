@@ -61,8 +61,6 @@ cd ViennaRNA-2.4.14/
 make
 export PATH=$PATH:$PWD/src/bin
 cd /build
-cpan Bio::TreeIO
-cpan Statistics::Lite
 
 # MIRNADA
 # wget https://korcsmaroslab.org/miranda_installation/miranda-master.zip

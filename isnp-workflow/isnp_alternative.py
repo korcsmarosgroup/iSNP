@@ -13,6 +13,7 @@ def run_pipeline(params, patient_file, container_name):
                         "--input", "/patient_specific_VCF_files/" + patient_file,
                         "--snp", "/input/" + params.snp_id_list,
                         "--output", f"/output/{actual_patient}/disease_filtered.vcf"]
+    print(f"\n\n1/16 ======= running analytical task in long-term docker container with command: {module_0_command}")
     subprocess.run(module_0_command, check = True)
     
     module_1_command = ["docker", "exec", f"{container_name}",
@@ -20,9 +21,9 @@ def run_pipeline(params, patient_file, container_name):
                         "--input", f"/output/{actual_patient}/disease_filtered.vcf",
                         "--annotation", "/input/" + params.promoter_regions,
                         "--output", f"/output/{actual_patient}/promoter-regions.vcf"]
+    print(f"\n\n2/16 ======= running analytical task in long-term docker container with command: {module_1_command}")
     subprocess.run(module_1_command, check = True)
 
-    
     module_2_command = ["docker", "exec", f"{container_name}",
                         "python3", "/analytic-modules/vcf-filtering/vcf_filter.py",
                         "--input", f"/output/{actual_patient}/disease_filtered.vcf",
@@ -50,8 +51,8 @@ def run_pipeline(params, patient_file, container_name):
     
     module_5_command = ["docker", "exec", f"{container_name}",
                         "python3", "/analytic-modules/mirna-interaction-predictor/mirna_interaction_predictor.py",
-                        "--genomic", f"/output/{actual_patient}/snp_in_protein-coding-regions_mut.fasta",
-                        "--mirna", "/input/" + params.mirna_fasta,
+                        "--mirna", f"/output/{actual_patient}/snp_in_protein-coding-regions_mut.fasta",
+                        "--genomic", "/input/" + params.mirna_fasta,
                         "--output", f"/output/{actual_patient}/mirna_gene_connections_mut.tsv",
                         "--score", str(params.miranda_score_threshold),
                         "--energy", str(params.miranda_energy_threshold)]
@@ -59,8 +60,8 @@ def run_pipeline(params, patient_file, container_name):
     
     module_6_command = ["docker", "exec", f"{container_name}",
                         "python3", "/analytic-modules/mirna-interaction-predictor/mirna_interaction_predictor.py",
-                        "--genomic", f"/output/{actual_patient}/snp_in_protein-coding-regions_wt.fasta",
-                        "--mirna", "/input/" + params.mirna_fasta,
+                        "--mirna", f"/output/{actual_patient}/snp_in_protein-coding-regions_wt.fasta",
+                        "--genomic", "/input/" + params.mirna_fasta,
                         "--output", f"/output/{actual_patient}/mirna_gene_connections_wt.tsv",
                         "--score", str(params.miranda_score_threshold),
                         "--energy", str(params.miranda_energy_threshold)]

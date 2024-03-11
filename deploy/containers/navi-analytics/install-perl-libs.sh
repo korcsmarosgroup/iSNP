@@ -54,3 +54,14 @@ cpan -T Number::Format
 cpan -T Email::Sender::Transport::SMTP
 cpan -T Bio::TreeIO
 cpan -T Statistics::Lite
+
+cd /build
+wget https://www.cpan.org/authors/id/S/SH/SHAY/libnet-3.15.tar.gz
+tar -xzvf libnet-3.15.tar.gz
+cd libnet-3.15
+perl Configure -d
+perl Makefile.PL
+make
+make test
+make install
+cd /

@@ -18,9 +18,5 @@ ENV PATH /meme/bin:/meme/libexec/meme-5.1.1:$PATH
 ADD install-perl-libs.sh /
 RUN /bin/bash /install-perl-libs.sh
 
-#ADD healthcheck.sh /
-#RUN chmod 755 /healthcheck.sh
-#HEALTHCHECK --interval=10s --timeout=5s --start-period=5s --retries=3 CMD /healthcheck.sh
-
 ADD analytic-modules /analytic-modules
 ENV PYTHONPATH /analytic-modules

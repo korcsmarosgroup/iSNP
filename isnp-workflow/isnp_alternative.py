@@ -7,7 +7,7 @@ import os
 def run_pipeline(params, patient_file, container_name):
     actual_patient = patient_file.split(".")[0].split("/")[-1]
 
-    module_0_command = ["docker", "exec", f"{container_name}",
+    module_0_command = ["podman", "exec", f"{container_name}",
                         "python3", "/analytic-modules/vcf-filtering/vcf_filter.py",
                         "--input", "/patient_specific_VCF_files/" + patient_file,
                         "--snp", "/input/" + params.snp_id_list,
@@ -15,7 +15,7 @@ def run_pipeline(params, patient_file, container_name):
     print(f"\n\n1/16 ======= running analytical task in long-term docker container with command: {module_0_command}")
     subprocess.run(module_0_command, check = True)
     
-    module_1_command = ["docker", "exec", f"{container_name}",
+    module_1_command = ["podman", "exec", f"{container_name}",
                         "python3", "/analytic-modules/vcf-filtering/vcf_filter.py",
                         "--input", f"/output/{actual_patient}/disease_filtered.vcf",
                         "--annotation", "/input/" + params.promoter_regions,
@@ -23,7 +23,7 @@ def run_pipeline(params, patient_file, container_name):
     print(f"\n\n2/16 ======= running analytical task in long-term docker container with command: {module_1_command}")
     subprocess.run(module_1_command, check = True)
 
-    module_2_command = ["docker", "exec", f"{container_name}",
+    module_2_command = ["podman", "exec", f"{container_name}",
                         "python3", "/analytic-modules/vcf-filtering/vcf_filter.py",
                         "--input", f"/output/{actual_patient}/disease_filtered.vcf",
                         "--annotation", "/input/" + params.protein_coding_regions,
@@ -31,7 +31,7 @@ def run_pipeline(params, patient_file, container_name):
     print(f"\n\n3/16 ======= running analytical task in long-term docker container with command: {module_2_command}")
     subprocess.run(module_2_command, check = True)
     
-    module_3_command = ["docker", "exec", f"{container_name}",
+    module_3_command = ["podman", "exec", f"{container_name}",
                         "python3", "/analytic-modules/mutated-sequence-generator/mutated_sequence_generator.py",
                         "--input_vcf", f"/output/{actual_patient}/protein-coding-regions.vcf",
                         "--genome", "/input/" + params.genome,
@@ -41,7 +41,7 @@ def run_pipeline(params, patient_file, container_name):
     print(f"\n\n4/16 ======= running analytical task in long-term docker container with command: {module_3_command}")
     subprocess.run(module_3_command, check = True)
     
-    module_4_command = ["docker", "exec", f"{container_name}",
+    module_4_command = ["podman", "exec", f"{container_name}",
                         "python3", "/analytic-modules/mutated-sequence-generator/mutated_sequence_generator.py",
                         "--input_vcf", f"/output/{actual_patient}/promoter-regions.vcf",
                         "--genome", "/input/" + params.genome,
@@ -51,7 +51,7 @@ def run_pipeline(params, patient_file, container_name):
     print(f"\n\n5/16 ======= running analytical task in long-term docker container with command: {module_4_command}")
     subprocess.run(module_4_command, check = True)
     
-    module_5_command = ["docker", "exec", f"{container_name}",
+    module_5_command = ["podman", "exec", f"{container_name}",
                         "python3", "/analytic-modules/mirna-interaction-predictor/mirna_interaction_predictor.py",
                         "--mirna", f"/output/{actual_patient}/snp_in_protein-coding-regions_mut.fasta",
                         "--genomic", "/input/" + params.mirna_fasta,
@@ -61,7 +61,7 @@ def run_pipeline(params, patient_file, container_name):
     print(f"\n\n6/16 ======= running analytical task in long-term docker container with command: {module_5_command}")
     subprocess.run(module_5_command, check = True)
     
-    module_6_command = ["docker", "exec", f"{container_name}",
+    module_6_command = ["podman", "exec", f"{container_name}",
                         "python3", "/analytic-modules/mirna-interaction-predictor/mirna_interaction_predictor.py",
                         "--mirna", f"/output/{actual_patient}/snp_in_protein-coding-regions_wt.fasta",
                         "--genomic", "/input/" + params.mirna_fasta,
@@ -71,7 +71,7 @@ def run_pipeline(params, patient_file, container_name):
     print(f"\n\n7/16 ======= running analytical task in long-term docker container with command: {module_6_command}")
     subprocess.run(module_6_command, check = True)
     
-    module_7_command = ["docker", "exec", f"{container_name}",
+    module_7_command = ["podman", "exec", f"{container_name}",
                         "python3", "/analytic-modules/transcription-factor-interaction-predictor/tf_interaction_prediction.py",
                         "--fasta", f"/output/{actual_patient}/snp_in_promoter-regions_mut.fasta",
                         "--matrix", "/input/" + params.tf_binding_matrices,
@@ -83,7 +83,7 @@ def run_pipeline(params, patient_file, container_name):
     print(f"\n\n8/16 ======= running analytical task in long-term docker container with command: {module_7_command}")
     subprocess.run(module_7_command, check = True)
     
-    module_8_command = ["docker", "exec", f"{container_name}",
+    module_8_command = ["podman", "exec", f"{container_name}",
                         "python3", "/analytic-modules/transcription-factor-interaction-predictor/tf_interaction_prediction.py",
                         "--fasta", f"/output/{actual_patient}/snp_in_promoter-regions_wt.fasta",
                         "--matrix", "/input/" + params.tf_binding_matrices,
@@ -95,7 +95,7 @@ def run_pipeline(params, patient_file, container_name):
     print(f"\n\n9/16 ======= running analytical task in long-term docker container with command: {module_8_command}")
     subprocess.run(module_8_command, check = True)
     
-    module_9_command = ["docker", "exec", f"{container_name}",
+    module_9_command = ["podman", "exec", f"{container_name}",
                         "python3", "/analytic-modules/network-combiner/network_combiner.py",
                         "--input-files", f"/output/{actual_patient}/mirna_gene_connections_mut.tsv,/output/tf_gene_connections_mut.tsv",
                         "--output-file", f"/output/{actual_patient}/combined_connections_mut.tsv",
@@ -103,7 +103,7 @@ def run_pipeline(params, patient_file, container_name):
     print(f"\n\n10/16 ======= running analytical task in long-term docker container with command: {module_9_command}")
     subprocess.run(module_9_command, check = True)
     
-    module_10_command = ["docker", "exec", f"{container_name}",
+    module_10_command = ["podman", "exec", f"{container_name}",
                         "python3", "/analytic-modules/network-combiner/network_combiner.py",
                         "--input-files", f"/output/{actual_patient}/mirna_gene_connections_wt.tsv,/output/tf_gene_connections_wt.tsv",
                         "--output-file", f"/output/{actual_patient}/combined_connections_wt.tsv",
@@ -111,7 +111,7 @@ def run_pipeline(params, patient_file, container_name):
     print(f"\n\n11/16 ======= running analytical task in long-term docker container with command: {module_10_command}")
     subprocess.run(module_10_command, check = True)
     
-    module_11_command = ["docker", "exec", f"{container_name}",
+    module_11_command = ["podman", "exec", f"{container_name}",
                         "python3", "/analytic-modules/network-combiner/network_combiner.py",
                         "--input-files", f"/output/{actual_patient}/combined_connections_mut.tsv,/output/combined_connections_wt.tsv",
                         "--output-file", f"/output/{actual_patient}/differences_between_mut_wt_networks.tsv",
@@ -119,7 +119,7 @@ def run_pipeline(params, patient_file, container_name):
     print(f"\n\n12/16 ======= running analytical task in long-term docker container with command: {module_11_command}")
     subprocess.run(module_11_command, check = True)
     
-    module_12_command = ["docker", "exec", f"{container_name}",
+    module_12_command = ["podman", "exec", f"{container_name}",
                         "python3", "/analytic-modules/uniprot-id-formatter/uniprot_id_formatter.py",
                         "--input-network-file", f"/output/{actual_patient}/differences_between_mut_wt_networks.tsv",
                         "--lower-case",
@@ -127,7 +127,7 @@ def run_pipeline(params, patient_file, container_name):
     print(f"\n\n13/16 ======= running analytical task in long-term docker container with command: {module_12_command}")
     subprocess.run(module_12_command, check = True)
     
-    module_13_command = ["docker", "exec", f"{container_name}",
+    module_13_command = ["podman", "exec", f"{container_name}",
                         "python3", "/analytic-modules/network-id-mapper/network_id_mapper.py",
                         "--input", f"/output/{actual_patient}/differences_between_mut_wt_networks_formatted.tsv",
                         "--target-id-type", "uniprotac",
@@ -138,7 +138,7 @@ def run_pipeline(params, patient_file, container_name):
     print(f"\n\n14/16 ======= running analytical task in long-term docker container with command: {module_13_command}")
     subprocess.run(module_13_command, check = True)
     
-    module_14_command = ["docker", "exec", f"{container_name}",
+    module_14_command = ["podman", "exec", f"{container_name}",
                         "python3", "/analytic-modules/network-enrichment/network_enrichment.py",
                         "--input", f"/output/{actual_patient}/uniprot_differences.tsv",
                         "--output", f"/output/{actual_patient}/enriched_uniprot_differences.tsv",
@@ -147,7 +147,7 @@ def run_pipeline(params, patient_file, container_name):
     print(f"\n\n15/16 ======= running analytical task in long-term docker container with command: {module_14_command}")
     subprocess.run(module_14_command, check = True)
     
-    module_15_command = ["docker", "exec", f"{container_name}",
+    module_15_command = ["podman", "exec", f"{container_name}",
                         "python3", "/analytic-modules/uniprot-id-formatter/uniprot_id_formatter.py",
                         "--input-network-file", f"/output/{actual_patient}/enriched_uniprot_differences.tsv",
                         "--upper-case",

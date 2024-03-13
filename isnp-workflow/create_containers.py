@@ -73,7 +73,7 @@ def run_docker_container(image_name, container_name, input_folder, output_folder
 
     try:
         docker_run_command = [
-            'docker', 'run',
+            'podman', 'run',
             '-v' , f'{input_folder}:/input',
             '-v' , f'{output_folder}:/output',
             '-v' , f'{patient_folder}:/patient_specific_VCF_files',

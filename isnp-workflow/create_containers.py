@@ -69,31 +69,10 @@ def parse_args(args):
     return results.input_folder, results.output_folder, results.patient_folder, results.number_of_runs
 
 
-def run_docker_container(image_name, container_name, input_folder, output_folder, patient_folder):
-
-    try:
-        docker_run_command = [
-            'podman', 'run',
-            '-v' , f'{input_folder}:/input',
-            '-v' , f'{output_folder}:/output',
-            '-v' , f'{patient_folder}:/patient_specific_VCF_files',
-            '-d',
-            '--name', container_name, 
-            image_name
-        ]
-
-        subprocess.run(docker_run_command, check=True)
-        print(f'Docker container {container_name} is running!')
-
-    except subprocess.CalledProcessError as e:
-        print(f'Error running Docker container: {e}')
-
-
 def main():
 
     print(f'====== Starting! ======')
     input_folder, output_folder, patient_folder, number_of_runs = parse_args(sys.argv[1:])
-    image_name = "navi-analytics:isnp"
     multiprocessing_tuple = tuple()
     all_patient_files = []
 
@@ -113,20 +92,16 @@ def main():
 
         if not os.path.isdir(actual_patient_folder):
             os.mkdir(actual_patient_folder)
-
-    for x in range(0, number_of_runs):
-        container_name = f"iSNP_run_{x}"
-        run_docker_container(image_name, container_name, input_folder, output_folder, patient_folder)
     
     all_lists = split_list_np(all_patient_files, number_of_runs)
 
     for list in all_lists:
         actual_list = ",".join(list)
-        multiprocessing_tuple = multiprocessing_tuple + (f"python3 isnp_alternative.py -c {container_name} -p {actual_list}",)
+        multiprocessing_tuple = multiprocessing_tuple + (f"python3 isnp_alternative.py -i {input_folder} -o {output_folder} -p {actual_list} -pf {patient_folder}",)
 
     print(multiprocessing_tuple)
 
-    process_pool = multiprocessing.Pool(processes = 22)
+    process_pool = multiprocessing.Pool(processes = number_of_runs)
     process_pool.map(ExecuteProcess, multiprocessing_tuple)
 
     print(f'====== Create containers finished successfully! ======')

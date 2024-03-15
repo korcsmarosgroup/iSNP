@@ -9,7 +9,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     actual_patient = patient_file.split(".")[0].split("/")[-1]
     container_name = actual_patient
 
-    module_0_command = ["docker", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
+    module_0_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_0", f"{image_name}",
                         "python3", "/analytic-modules/vcf-filtering/vcf_filter.py",
                         "--input", "/patient_specific_VCF_files/" + patient_file,
@@ -18,7 +18,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n1/16 ======= running analytical task in a single docker container with command: {module_0_command}")
     subprocess.run(module_0_command, check = True)
     
-    module_1_command = ["docker", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
+    module_1_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_1", f"{image_name}",
                         "python3", "/analytic-modules/vcf-filtering/vcf_filter.py",
                         "--input", f"/output/{actual_patient}/disease_filtered.vcf",
@@ -27,7 +27,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n2/16 ======= running analytical task in a single docker container with command: {module_1_command}")
     subprocess.run(module_1_command, check = True)
 
-    module_2_command = ["docker", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
+    module_2_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_2", f"{image_name}",
                         "python3", "/analytic-modules/vcf-filtering/vcf_filter.py",
                         "--input", f"/output/{actual_patient}/disease_filtered.vcf",
@@ -36,7 +36,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n3/16 ======= running analytical task in a single docker container with command: {module_2_command}")
     subprocess.run(module_2_command, check = True)
     
-    module_3_command = ["docker", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
+    module_3_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_3", f"{image_name}",
                         "python3", "/analytic-modules/mutated-sequence-generator/mutated_sequence_generator.py",
                         "--input_vcf", f"/output/{actual_patient}/protein-coding-regions.vcf",
@@ -47,7 +47,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n4/16 ======= running analytical task in a single docker container with command: {module_3_command}")
     subprocess.run(module_3_command, check = True)
     
-    module_4_command = ["docker", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
+    module_4_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_4", f"{image_name}",
                         "python3", "/analytic-modules/mutated-sequence-generator/mutated_sequence_generator.py",
                         "--input_vcf", f"/output/{actual_patient}/promoter-regions.vcf",
@@ -58,7 +58,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n5/16 ======= running analytical task in a single docker container with command: {module_4_command}")
     subprocess.run(module_4_command, check = True)
     
-    module_5_command = ["docker", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
+    module_5_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_5", f"{image_name}",
                         "python3", "/analytic-modules/mirna-interaction-predictor/mirna_interaction_predictor.py",
                         "--mirna", f"/output/{actual_patient}/snp_in_protein-coding-regions_mut.fasta",
@@ -69,7 +69,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n6/16 ======= running analytical task in a single docker container with command: {module_5_command}")
     subprocess.run(module_5_command, check = True)
     
-    module_6_command = ["docker", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
+    module_6_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_6", f"{image_name}",
                         "python3", "/analytic-modules/mirna-interaction-predictor/mirna_interaction_predictor.py",
                         "--mirna", f"/output/{actual_patient}/snp_in_protein-coding-regions_wt.fasta",
@@ -80,7 +80,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n7/16 ======= running analytical task in a single docker container with command: {module_6_command}")
     subprocess.run(module_6_command, check = True)
     
-    module_7_command = ["docker", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
+    module_7_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_7", f"{image_name}",
                         "python3", "/analytic-modules/transcription-factor-interaction-predictor/tf_interaction_prediction.py",
                         "--fasta", f"/output/{actual_patient}/snp_in_promoter-regions_mut.fasta",
@@ -93,7 +93,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n8/16 ======= running analytical task in a single docker container with command: {module_7_command}")
     subprocess.run(module_7_command, check = True)
     
-    module_8_command = ["docker", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
+    module_8_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_8", f"{image_name}",
                         "python3", "/analytic-modules/transcription-factor-interaction-predictor/tf_interaction_prediction.py",
                         "--fasta", f"/output/{actual_patient}/snp_in_promoter-regions_wt.fasta",
@@ -106,7 +106,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n9/16 ======= running analytical task in a single docker container with command: {module_8_command}")
     subprocess.run(module_8_command, check = True)
     
-    module_9_command = ["docker", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
+    module_9_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_9", f"{image_name}",
                         "python3", "/analytic-modules/network-combiner/network_combiner.py",
                         "--input-files", f"/output/{actual_patient}/mirna_gene_connections_mut.tsv,/output/tf_gene_connections_mut.tsv",
@@ -115,7 +115,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n10/16 ======= running analytical task in a single docker container with command: {module_9_command}")
     subprocess.run(module_9_command, check = True)
     
-    module_10_command = ["docker", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
+    module_10_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_10", f"{image_name}",
                         "python3", "/analytic-modules/network-combiner/network_combiner.py",
                         "--input-files", f"/output/{actual_patient}/mirna_gene_connections_wt.tsv,/output/tf_gene_connections_wt.tsv",
@@ -124,7 +124,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n11/16 ======= running analytical task in a single docker container with command: {module_10_command}")
     subprocess.run(module_10_command, check = True)
     
-    module_11_command = ["docker", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
+    module_11_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_11", f"{image_name}",
                         "python3", "/analytic-modules/network-combiner/network_combiner.py",
                         "--input-files", f"/output/{actual_patient}/combined_connections_mut.tsv,/output/combined_connections_wt.tsv",
@@ -133,7 +133,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n12/16 ======= running analytical task in a single docker container with command: {module_11_command}")
     subprocess.run(module_11_command, check = True)
     
-    module_12_command = ["docker", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
+    module_12_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_12", f"{image_name}",
                         "python3", "/analytic-modules/uniprot-id-formatter/uniprot_id_formatter.py",
                         "--input-network-file", f"/output/{actual_patient}/differences_between_mut_wt_networks.tsv",
@@ -142,7 +142,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n13/16 ======= running analytical task in a single docker container with command: {module_12_command}")
     subprocess.run(module_12_command, check = True)
     
-    module_13_command = ["docker", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
+    module_13_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_13", f"{image_name}",
                         "python3", "/analytic-modules/network-id-mapper/network_id_mapper.py",
                         "--input", f"/output/{actual_patient}/differences_between_mut_wt_networks_formatted.tsv",
@@ -154,7 +154,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n14/16 ======= running analytical task in a single docker container with command: {module_13_command}")
     subprocess.run(module_13_command, check = True)
     
-    module_14_command = ["docker", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
+    module_14_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_14", f"{image_name}",
                         "python3", "/analytic-modules/network-enrichment/network_enrichment.py",
                         "--input", f"/output/{actual_patient}/uniprot_differences.tsv",
@@ -164,7 +164,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n15/16 ======= running analytical task in a single docker container with command: {module_14_command}")
     subprocess.run(module_14_command, check = True)
     
-    module_15_command = ["docker", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
+    module_15_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_15", f"{image_name}",
                         "python3", "/analytic-modules/uniprot-id-formatter/uniprot_id_formatter.py",
                         "--input-network-file", f"/output/{actual_patient}/enriched_uniprot_differences.tsv",

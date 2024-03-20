@@ -9,6 +9,10 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     actual_patient = patient_file.split(".")[0].split("/")[-1]
     container_name = actual_patient
 
+    pythonpath = os.environ.get('PYTHONPATH', 'PYTHONPATH is not set.')
+    pythonhome = os.environ.get('PYTHONHOME', 'PYTHONHOME is not set.')
+    print("PYTHONPATH:", pythonpath)
+    print("PYTHONHOME:", pythonhome)
     module_0_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_0", f"{image_name}",
                         "python3", "/analytic-modules/vcf-filtering/vcf_filter.py",
@@ -18,6 +22,10 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n1/16 ======= running analytical task in a single docker container with command: {module_0_command}")
     subprocess.run(module_0_command, check = True)
     
+    pythonpath = os.environ.get('PYTHONPATH', 'PYTHONPATH is not set.')
+    pythonhome = os.environ.get('PYTHONHOME', 'PYTHONHOME is not set.')
+    print("PYTHONPATH:", pythonpath)
+    print("PYTHONHOME:", pythonhome)
     module_1_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_1", f"{image_name}",
                         "python3", "/analytic-modules/vcf-filtering/vcf_filter.py",
@@ -27,6 +35,10 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n2/16 ======= running analytical task in a single docker container with command: {module_1_command}")
     subprocess.run(module_1_command, check = True)
 
+    pythonpath = os.environ.get('PYTHONPATH', 'PYTHONPATH is not set.')
+    pythonhome = os.environ.get('PYTHONHOME', 'PYTHONHOME is not set.')
+    print("PYTHONPATH:", pythonpath)
+    print("PYTHONHOME:", pythonhome)
     module_2_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_2", f"{image_name}",
                         "python3", "/analytic-modules/vcf-filtering/vcf_filter.py",
@@ -36,6 +48,10 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n3/16 ======= running analytical task in a single docker container with command: {module_2_command}")
     subprocess.run(module_2_command, check = True)
     
+    pythonpath = os.environ.get('PYTHONPATH', 'PYTHONPATH is not set.')
+    pythonhome = os.environ.get('PYTHONHOME', 'PYTHONHOME is not set.')
+    print("PYTHONPATH:", pythonpath)
+    print("PYTHONHOME:", pythonhome)
     module_3_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_3", f"{image_name}",
                         "python3", "/analytic-modules/mutated-sequence-generator/mutated_sequence_generator.py",
@@ -47,6 +63,10 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n4/16 ======= running analytical task in a single docker container with command: {module_3_command}")
     subprocess.run(module_3_command, check = True)
     
+    pythonpath = os.environ.get('PYTHONPATH', 'PYTHONPATH is not set.')
+    pythonhome = os.environ.get('PYTHONHOME', 'PYTHONHOME is not set.')
+    print("PYTHONPATH:", pythonpath)
+    print("PYTHONHOME:", pythonhome)
     module_4_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_4", f"{image_name}",
                         "python3", "/analytic-modules/mutated-sequence-generator/mutated_sequence_generator.py",
@@ -58,6 +78,10 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n5/16 ======= running analytical task in a single docker container with command: {module_4_command}")
     subprocess.run(module_4_command, check = True)
     
+    pythonpath = os.environ.get('PYTHONPATH', 'PYTHONPATH is not set.')
+    pythonhome = os.environ.get('PYTHONHOME', 'PYTHONHOME is not set.')
+    print("PYTHONPATH:", pythonpath)
+    print("PYTHONHOME:", pythonhome)
     module_5_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_5", f"{image_name}",
                         "python3", "/analytic-modules/mirna-interaction-predictor/mirna_interaction_predictor.py",
@@ -69,6 +93,10 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n6/16 ======= running analytical task in a single docker container with command: {module_5_command}")
     subprocess.run(module_5_command, check = True)
     
+    pythonpath = os.environ.get('PYTHONPATH', 'PYTHONPATH is not set.')
+    pythonhome = os.environ.get('PYTHONHOME', 'PYTHONHOME is not set.')
+    print("PYTHONPATH:", pythonpath)
+    print("PYTHONHOME:", pythonhome)
     module_6_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_6", f"{image_name}",
                         "python3", "/analytic-modules/mirna-interaction-predictor/mirna_interaction_predictor.py",
@@ -80,6 +108,10 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n7/16 ======= running analytical task in a single docker container with command: {module_6_command}")
     subprocess.run(module_6_command, check = True)
     
+    pythonpath = os.environ.get('PYTHONPATH', 'PYTHONPATH is not set.')
+    pythonhome = os.environ.get('PYTHONHOME', 'PYTHONHOME is not set.')
+    print("PYTHONPATH:", pythonpath)
+    print("PYTHONHOME:", pythonhome)
     module_7_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_7", f"{image_name}",
                         "python3", "/analytic-modules/transcription-factor-interaction-predictor/tf_interaction_prediction.py",
@@ -93,6 +125,10 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n8/16 ======= running analytical task in a single docker container with command: {module_7_command}")
     subprocess.run(module_7_command, check = True)
     
+    pythonpath = os.environ.get('PYTHONPATH', 'PYTHONPATH is not set.')
+    pythonhome = os.environ.get('PYTHONHOME', 'PYTHONHOME is not set.')
+    print("PYTHONPATH:", pythonpath)
+    print("PYTHONHOME:", pythonhome)
     module_8_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_8", f"{image_name}",
                         "python3", "/analytic-modules/transcription-factor-interaction-predictor/tf_interaction_prediction.py",
@@ -106,33 +142,49 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n9/16 ======= running analytical task in a single docker container with command: {module_8_command}")
     subprocess.run(module_8_command, check = True)
     
+    pythonpath = os.environ.get('PYTHONPATH', 'PYTHONPATH is not set.')
+    pythonhome = os.environ.get('PYTHONHOME', 'PYTHONHOME is not set.')
+    print("PYTHONPATH:", pythonpath)
+    print("PYTHONHOME:", pythonhome)
     module_9_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_9", f"{image_name}",
                         "python3", "/analytic-modules/network-combiner/network_combiner.py",
-                        "--input-files", f"/output/{actual_patient}/mirna_gene_connections_mut.tsv,/output/tf_gene_connections_mut.tsv",
+                        "--input-files", f"/output/{actual_patient}/mirna_gene_connections_mut.tsv,/output/{actual_patient}/tf_gene_connections_mut.tsv",
                         "--output-file", f"/output/{actual_patient}/combined_connections_mut.tsv",
                         "--method", "union"]
     print(f"\n\n10/16 ======= running analytical task in a single docker container with command: {module_9_command}")
     subprocess.run(module_9_command, check = True)
     
+    pythonpath = os.environ.get('PYTHONPATH', 'PYTHONPATH is not set.')
+    pythonhome = os.environ.get('PYTHONHOME', 'PYTHONHOME is not set.')
+    print("PYTHONPATH:", pythonpath)
+    print("PYTHONHOME:", pythonhome)
     module_10_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_10", f"{image_name}",
                         "python3", "/analytic-modules/network-combiner/network_combiner.py",
-                        "--input-files", f"/output/{actual_patient}/mirna_gene_connections_wt.tsv,/output/tf_gene_connections_wt.tsv",
+                        "--input-files", f"/output/{actual_patient}/mirna_gene_connections_wt.tsv,/output/{actual_patient}/tf_gene_connections_wt.tsv",
                         "--output-file", f"/output/{actual_patient}/combined_connections_wt.tsv",
                         "--method", "union"]
     print(f"\n\n11/16 ======= running analytical task in a single docker container with command: {module_10_command}")
     subprocess.run(module_10_command, check = True)
     
+    pythonpath = os.environ.get('PYTHONPATH', 'PYTHONPATH is not set.')
+    pythonhome = os.environ.get('PYTHONHOME', 'PYTHONHOME is not set.')
+    print("PYTHONPATH:", pythonpath)
+    print("PYTHONHOME:", pythonhome)
     module_11_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_11", f"{image_name}",
                         "python3", "/analytic-modules/network-combiner/network_combiner.py",
-                        "--input-files", f"/output/{actual_patient}/combined_connections_mut.tsv,/output/combined_connections_wt.tsv",
+                        "--input-files", f"/output/{actual_patient}/combined_connections_mut.tsv,/output/{actual_patient}/combined_connections_wt.tsv",
                         "--output-file", f"/output/{actual_patient}/differences_between_mut_wt_networks.tsv",
                         "--method", "difference"]
     print(f"\n\n12/16 ======= running analytical task in a single docker container with command: {module_11_command}")
     subprocess.run(module_11_command, check = True)
     
+    pythonpath = os.environ.get('PYTHONPATH', 'PYTHONPATH is not set.')
+    pythonhome = os.environ.get('PYTHONHOME', 'PYTHONHOME is not set.')
+    print("PYTHONPATH:", pythonpath)
+    print("PYTHONHOME:", pythonhome)
     module_12_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_12", f"{image_name}",
                         "python3", "/analytic-modules/uniprot-id-formatter/uniprot_id_formatter.py",
@@ -142,6 +194,10 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n13/16 ======= running analytical task in a single docker container with command: {module_12_command}")
     subprocess.run(module_12_command, check = True)
     
+    pythonpath = os.environ.get('PYTHONPATH', 'PYTHONPATH is not set.')
+    pythonhome = os.environ.get('PYTHONHOME', 'PYTHONHOME is not set.')
+    print("PYTHONPATH:", pythonpath)
+    print("PYTHONHOME:", pythonhome)
     module_13_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_13", f"{image_name}",
                         "python3", "/analytic-modules/network-id-mapper/network_id_mapper.py",
@@ -154,6 +210,10 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n14/16 ======= running analytical task in a single docker container with command: {module_13_command}")
     subprocess.run(module_13_command, check = True)
     
+    pythonpath = os.environ.get('PYTHONPATH', 'PYTHONPATH is not set.')
+    pythonhome = os.environ.get('PYTHONHOME', 'PYTHONHOME is not set.')
+    print("PYTHONPATH:", pythonpath)
+    print("PYTHONHOME:", pythonhome)
     module_14_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_14", f"{image_name}",
                         "python3", "/analytic-modules/network-enrichment/network_enrichment.py",
@@ -164,6 +224,10 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     print(f"\n\n15/16 ======= running analytical task in a single docker container with command: {module_14_command}")
     subprocess.run(module_14_command, check = True)
     
+    pythonpath = os.environ.get('PYTHONPATH', 'PYTHONPATH is not set.')
+    pythonhome = os.environ.get('PYTHONHOME', 'PYTHONHOME is not set.')
+    print("PYTHONPATH:", pythonpath)
+    print("PYTHONHOME:", pythonhome)
     module_15_command = ["podman", "run", "--rm", "-v", f"{input_folder}:/input", "-v", f"{output_folder}:/output", "-v" , f"{patient_folder}:/patient_specific_VCF_files",
                         "--name", f"{container_name}_15", f"{image_name}",
                         "python3", "/analytic-modules/uniprot-id-formatter/uniprot_id_formatter.py",

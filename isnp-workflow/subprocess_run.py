@@ -1,6 +1,5 @@
 import multiprocessing
 import numpy as np
-import subprocess
 import argparse
 import shutil
 import sys

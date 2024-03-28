@@ -115,7 +115,7 @@ def scan_matrix(path_to_fasta, out_path, path_to_matrix=None, format_matrix=None
         format_matrix = "transfac"
     if not os.path.exists(path_to_fasta):
         raise FileNotFoundError("Could not find fasta file: " + path_to_fasta)
-    my_call = ['matrix-scan',
+    my_call = ['rsat', 'matrix-scan',
                '-matrix_format', format_matrix,
                '-m', path_to_matrix,
                '-i', path_to_fasta,

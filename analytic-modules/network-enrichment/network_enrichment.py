@@ -1,11 +1,12 @@
 """ Network Enrichment Module """
 import sys
-sys.path.append("./analytic-modules/")
 
 import os
 import argparse
 import numpy as np
 import pandas as pd
+
+sys.path.append("/home/liuy447/iSNP/analytic-modules/")
 from common_libs.mitab_handler import mitab_handler as h
 
 

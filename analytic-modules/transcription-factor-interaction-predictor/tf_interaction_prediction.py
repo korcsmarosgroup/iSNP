@@ -2,6 +2,7 @@ import sys
 import argparse
 import os
 import shutil
+sys.path.append("/home/liuy447/iSNP/analytic-modules/")
 from rsat_prediction import scan_matrix
 from rsat_prediction import write_rsat_results
 from fimo_prediction import run_fimo

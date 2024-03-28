@@ -1,6 +1,7 @@
 import os
 import sys
 import argparse
+sys.path.append("/home/liuy447/iSNP/analytic-modules/")
 from common_libs.filters import vcf_to_bed
 from common_libs.filters import filter_fasta
 from common_libs.mutated_sequence import get_mutated_sequence

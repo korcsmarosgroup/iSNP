@@ -1,5 +1,7 @@
 import os
 import subprocess
+import sys
+sys.path.append("/home/liuy447/iSNP/analytic-modules/")
 from common_libs.mitab_handler import mitab_handler
 
 

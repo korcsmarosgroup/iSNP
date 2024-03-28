@@ -1,8 +1,10 @@
 """ Fimo TF interaction predictor """
 import csv
 import os
+import sys
 import subprocess
 import tempfile
+sys.path.append("/home/liuy447/iSNP/analytic-modules/")
 from common_libs.mitab_handler import mitab_handler
 
 

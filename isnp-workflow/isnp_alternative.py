@@ -11,21 +11,21 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
                         "--input", f"{patient_folder}" + patient_file,
                         "--snp", f"{input_folder}" + params.snp_id_list,
                         "--output", f"{output_folder}/{actual_patient}/disease_filtered.vcf"]
-    print(f"\n\n1/16 ======= running analytical task in a single docker container with command: {module_0_command}")
+    print(f"\n\n1/16 ======= running analytical task with command: {module_0_command}")
     subprocess.run(module_0_command, check = True)
     
     module_1_command = ["python3", "../analytic-modules/vcf-filtering/vcf_filter.py",
                         "--input", f"{output_folder}/{actual_patient}/disease_filtered.vcf",
                         "--annotation", f"{input_folder}/" + params.promoter_regions,
                         "--output", f"{output_folder}/{actual_patient}/promoter-regions.vcf"]
-    print(f"\n\n2/16 ======= running analytical task in a single docker container with command: {module_1_command}")
+    print(f"\n\n2/16 ======= running analytical task with command: {module_1_command}")
     subprocess.run(module_1_command, check = True)
     
     module_2_command = ["python3", "../analytic-modules/vcf-filtering/vcf_filter.py",
                         "--input", f"{output_folder}/{actual_patient}/disease_filtered.vcf",
                         "--annotation", f"{input_folder}/" + params.protein_coding_regions,
                         "--output", f"{output_folder}/{actual_patient}/protein-coding-regions.vcf"]
-    print(f"\n\n3/16 ======= running analytical task in a single docker container with command: {module_2_command}")
+    print(f"\n\n3/16 ======= running analytical task with command: {module_2_command}")
     subprocess.run(module_2_command, check = True)
     
     module_3_command = ["python3", "../analytic-modules/mutated-sequence-generator/mutated_sequence_generator.py",
@@ -34,7 +34,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
                         "--output_wild_type", f"{output_folder}/{actual_patient}/snp_in_protein-coding-regions_wt.fasta",
                         "--output_mutated", f"{output_folder}/{actual_patient}/snp_in_protein-coding-regions_mut.fasta",
                         "--region_length", str(params.snp_genome_region_radius_protein_coding)]
-    print(f"\n\n4/16 ======= running analytical task in a single docker container with command: {module_3_command}")
+    print(f"\n\n4/16 ======= running analytical task with command: {module_3_command}")
     subprocess.run(module_3_command, check = True)
     
     module_4_command = ["python3", "../analytic-modules/mutated-sequence-generator/mutated_sequence_generator.py",
@@ -43,7 +43,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
                         "--output_wild_type", f"{output_folder}/{actual_patient}/snp_in_promoter-regions_wt.fasta",
                         "--output_mutated", f"{output_folder}/{actual_patient}/snp_in_promoter-regions_mut.fasta",
                         "--region_length", str(params.snp_genome_region_radius_promoter)]
-    print(f"\n\n5/16 ======= running analytical task in a single docker container with command: {module_4_command}")
+    print(f"\n\n5/16 ======= running analytical task with command: {module_4_command}")
     subprocess.run(module_4_command, check = True)
     
     module_5_command = ["python3", "../analytic-modules/mirna-interaction-predictor/mirna_interaction_predictor.py",
@@ -52,8 +52,9 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
                         "--output", f"{output_folder}/{actual_patient}/mirna_gene_connections_mut.tsv",
                         "--score", str(params.miranda_score_threshold),
                         "--energy", str(params.miranda_energy_threshold)]
-    print(f"\n\n6/16 ======= running analytical task in a single docker container with command: {module_5_command}")
-    subprocess.run(module_5_command, check = True)
+    # print(f"\n\n6/16 ======= running analytical task with command: {module_5_command}")
+    # subprocess.run(module_5_command, check = True)
+    print(f"\n\n6/16 ======= Skipping the miranda module with the mutant region")
     
     module_6_command = ["python3", "../analytic-modules/mirna-interaction-predictor/mirna_interaction_predictor.py",
                         "--mirna", f"{output_folder}/{actual_patient}/snp_in_protein-coding-regions_wt.fasta",
@@ -61,8 +62,9 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
                         "--output", f"{output_folder}/{actual_patient}/mirna_gene_connections_wt.tsv",
                         "--score", str(params.miranda_score_threshold),
                         "--energy", str(params.miranda_energy_threshold)]
-    print(f"\n\n7/16 ======= running analytical task in a single docker container with command: {module_6_command}")
-    subprocess.run(module_6_command, check = True)
+    # print(f"\n\n7/16 ======= running analytical task with command: {module_6_command}")
+    # subprocess.run(module_6_command, check = True)
+    print(f"\n\n7/16 ======= Skipping the miranda module with the wild region")
     
     module_7_command = ["python3", "../analytic-modules/transcription-factor-interaction-predictor/tf_interaction_prediction.py",
                         "--fasta", f"{output_folder}/{actual_patient}/snp_in_promoter-regions_mut.fasta",
@@ -72,7 +74,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
                         "--output", f"{output_folder}/{actual_patient}/tf_gene_connections_mut.tsv",
                         "--format", "transfac",
                         "--threshold", str(params.tf_score_threshold)]
-    print(f"\n\n8/16 ======= running analytical task in a single docker container with command: {module_7_command}")
+    print(f"\n\n8/16 ======= running analytical task with command: {module_7_command}")
     subprocess.run(module_7_command, check = True)
     
     module_8_command = ["python3", "../analytic-modules/transcription-factor-interaction-predictor/tf_interaction_prediction.py",
@@ -83,35 +85,35 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
                         "--output", f"{output_folder}/{actual_patient}/tf_gene_connections_wt.tsv",
                         "--format", "transfac",
                         "--threshold", str(params.tf_score_threshold)]
-    print(f"\n\n9/16 ======= running analytical task in a single docker container with command: {module_8_command}")
+    print(f"\n\n9/16 ======= running analytical task with command: {module_8_command}")
     subprocess.run(module_8_command, check = True)
     
     module_9_command = ["python3", "../analytic-modules/network-combiner/network_combiner.py",
                         "--input-files", f"{output_folder}/{actual_patient}/mirna_gene_connections_mut.tsv,{output_folder}/{actual_patient}/tf_gene_connections_mut.tsv",
                         "--output-file", f"{output_folder}/{actual_patient}/combined_connections_mut.tsv",
                         "--method", "union"]
-    print(f"\n\n10/16 ======= running analytical task in a single docker container with command: {module_9_command}")
+    print(f"\n\n10/16 ======= running analytical task with command: {module_9_command}")
     subprocess.run(module_9_command, check = True)
     
     module_10_command = ["python3", "../analytic-modules/network-combiner/network_combiner.py",
                         "--input-files", f"{output_folder}/{actual_patient}/mirna_gene_connections_wt.tsv,{output_folder}/{actual_patient}/tf_gene_connections_wt.tsv",
                         "--output-file", f"{output_folder}/{actual_patient}/combined_connections_wt.tsv",
                         "--method", "union"]
-    print(f"\n\n11/16 ======= running analytical task in a single docker container with command: {module_10_command}")
+    print(f"\n\n11/16 ======= running analytical task with command: {module_10_command}")
     subprocess.run(module_10_command, check = True)
     
     module_11_command = ["python3", "../analytic-modules/network-combiner/network_combiner.py",
                         "--input-files", f"{output_folder}/{actual_patient}/combined_connections_mut.tsv,{output_folder}/{actual_patient}/combined_connections_wt.tsv",
                         "--output-file", f"{output_folder}/{actual_patient}/differences_between_mut_wt_networks.tsv",
                         "--method", "difference"]
-    print(f"\n\n12/16 ======= running analytical task in a single docker container with command: {module_11_command}")
+    print(f"\n\n12/16 ======= running analytical task with command: {module_11_command}")
     subprocess.run(module_11_command, check = True)
     
     module_12_command = ["python3", "../analytic-modules/uniprot-id-formatter/uniprot_id_formatter.py",
                         "--input-network-file", f"{output_folder}/{actual_patient}/differences_between_mut_wt_networks.tsv",
                         "--lower-case",
                         "--no-isoform"]
-    print(f"\n\n13/16 ======= running analytical task in a single docker container with command: {module_12_command}")
+    print(f"\n\n13/16 ======= running analytical task with command: {module_12_command}")
     subprocess.run(module_12_command, check = True)
     
     module_13_command = ["python3", "../analytic-modules/network-id-mapper/network_id_mapper.py",
@@ -121,7 +123,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
                         # "--remove",
                         "--mapping-data", ",".join(map(lambda x: f"{input_folder}/" + x, params.id_mapping_json_files)),
                         "--output", f"{output_folder}/{actual_patient}/uniprot_differences.tsv"]
-    print(f"\n\n14/16 ======= running analytical task in a single docker container with command: {module_13_command}")
+    print(f"\n\n14/16 ======= running analytical task with command: {module_13_command}")
     subprocess.run(module_13_command, check = True)
     
     module_14_command = ["python3", "../analytic-modules/network-enrichment/network_enrichment.py",
@@ -129,14 +131,14 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
                         "--output", f"{output_folder}/{actual_patient}/enriched_uniprot_differences.tsv",
                         "--reference-net", f"{input_folder}/" + params.reference_interactions_for_enrichment_tsv,
                         "--distance", "1"]
-    print(f"\n\n15/16 ======= running analytical task in a single docker container with command: {module_14_command}")
+    print(f"\n\n15/16 ======= running analytical task with command: {module_14_command}")
     subprocess.run(module_14_command, check = True)
     
     module_15_command = ["python3", "../analytic-modules/uniprot-id-formatter/uniprot_id_formatter.py",
                         "--input-network-file", f"{output_folder}/{actual_patient}/enriched_uniprot_differences.tsv",
                         "--upper-case",
                         "--no-isoform"]
-    print(f"\n\n16/16 ======= running analytical task in a single docker container with command: {module_15_command}")
+    print(f"\n\n16/16 ======= running analytical task with command: {module_15_command}")
     subprocess.run(module_15_command, check = True)
 
 

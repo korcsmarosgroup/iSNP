@@ -1,9 +1,18 @@
+from time import strftime
 import multiprocessing
 import numpy as np
+import subprocess
 import argparse
+import logging
 import shutil
 import sys
 import os
+
+
+if os.path.isfile("SubprocessRun.log"):
+    os.remove("SubprocessRun.log")
+
+logging.basicConfig(filename = 'SubprocessRun.log', level = logging.INFO)
 
 
 def ExecuteProcess(command):
@@ -13,6 +22,11 @@ def ExecuteProcess(command):
 def split_list_np(lst, x):
     result = np.array_split(lst, x)
     return result
+
+
+def RunExports():
+    export_command = ["bash", "exportpathsRoche.sh"]
+    subprocess.run(export_command, check = True)
 
 
 def parse_args(args):
@@ -70,11 +84,15 @@ def parse_args(args):
 
 def main():
 
-    print(f'====== Starting! ======')
+    logging.info(f"### [{strftime('%H:%M:%S')}] Starting the subprocesses!")
     input_folder, output_folder, patient_folder, number_of_runs = parse_args(sys.argv[1:])
     multiprocessing_tuple = tuple()
     all_patient_files = []
 
+    logging.info(f"### [{strftime('%H:%M:%S')}] Run the path exports from the file: exportpathsRoche.sh")
+    RunExports()
+
+    logging.info(f"### [{strftime('%H:%M:%S')}] Creating the output folders for the specific patients")
     for actual_patient in os.listdir(patient_folder):
 
         if ".vcf" not in actual_patient:
@@ -94,16 +112,18 @@ def main():
     
     all_lists = split_list_np(all_patient_files, number_of_runs)
 
+    logging.info(f"### [{strftime('%H:%M:%S')}] Creating the multiprocessing tuple")
     for list in all_lists:
         actual_list = ",".join(list)
         multiprocessing_tuple = multiprocessing_tuple + (f"python3 isnp_alternative.py -i {input_folder} -o {output_folder} -p {actual_list} -pf {patient_folder}",)
 
-    print(multiprocessing_tuple)
+    logging.info(f"### [{strftime('%H:%M:%S')}] This is the multiprocessing tuple: {multiprocessing_tuple}")
 
+    logging.info(f"### [{strftime('%H:%M:%S')}] Run the processes paralell; the number of the paralell processes: {number_of_runs}")
     process_pool = multiprocessing.Pool(processes = number_of_runs)
     process_pool.map(ExecuteProcess, multiprocessing_tuple)
 
-    print(f'====== Create containers finished successfully! ======')
+    logging.info(f"### [{strftime('%H:%M:%S')}] The subprocesses finished successfully!")
 
 
 if __name__ == "__main__":

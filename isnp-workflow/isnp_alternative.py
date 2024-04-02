@@ -2,6 +2,7 @@ from isnp_helpers.argument_parser import ArgumentParser
 from time import strftime
 import subprocess
 import logging
+import shutil
 import sys
 import os
 
@@ -10,11 +11,20 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     actual_patient = patient_file.split(".")[0].split("/")[-1]
     actual_patient_log_file = patient_file.split(".")[0]
     actual_patient_log_file_name = f"{actual_patient_log_file}.log"
+    patient_log_folder = os.path.join(output_folder, "patient_logs")
+
+    if os.path.isdir(patient_log_folder):
+        shutil.rmtree(patient_log_folder)
+
+    if not os.path.isdir(patient_log_folder):
+        os.mkdir(patient_log_folder)
     
     if os.path.isfile(actual_patient_log_file_name):
         os.remove(actual_patient_log_file_name)
 
-    logging.basicConfig(filename = actual_patient_log_file_name, level = logging.INFO)
+    actual_patient_log_file_final = os.path.join(patient_log_folder, actual_patient_log_file_name)
+
+    logging.basicConfig(filename = actual_patient_log_file_final, level = logging.INFO)
 
     module_0_command = ["python3", "../analytic-modules/vcf-filtering/vcf_filter.py",
                         "--input", f"{patient_folder}" + patient_file,
@@ -73,7 +83,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
                         "--energy", str(params.miranda_energy_threshold)]
     # logging.info(f"### [{strftime('%H:%M:%S')}] 7/16 ======= running analytical task with command: {module_6_command}")
     # subprocess.run(module_6_command, check = True)
-    logging.info(f"### [{strftime('%H:%M:%S')}] 6/16 ======= Skipping the miranda module with the wild region")
+    logging.info(f"### [{strftime('%H:%M:%S')}] 7/16 ======= Skipping the miranda module with the wild region")
 
     module_7_command = ["python3", "../analytic-modules/transcription-factor-interaction-predictor/tf_interaction_prediction.py",
                         "--fasta", f"{output_folder}/{actual_patient}/snp_in_promoter-regions_mut.fasta",

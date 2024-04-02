@@ -13,9 +13,6 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
     actual_patient_log_file_name = f"{actual_patient_log_file}.log"
     patient_log_folder = os.path.join(output_folder, "patient_logs")
 
-    if os.path.isdir(patient_log_folder):
-        shutil.rmtree(patient_log_folder)
-
     if not os.path.isdir(patient_log_folder):
         os.mkdir(patient_log_folder)
     

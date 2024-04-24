@@ -92,27 +92,17 @@ def main():
     logging.info(f"### [{strftime('%H:%M:%S')}] Run the path exports from the file: exportpathsRoche.sh")
     RunExports()
 
-    logging.info(f"### [{strftime('%H:%M:%S')}] Creating the output folders for the specific patients")
+    logging.info(f"### [{strftime('%H:%M:%S')}] Creating the multiprocessing tuple")
     for actual_patient in os.listdir(patient_folder):
 
         if ".vcf" not in actual_patient:
             continue
 
-        actual_patient_name = actual_patient.split(".")[0]
-        actual_patient_folder = os.path.join(output_folder, actual_patient_name)
-
         if actual_patient not in all_patient_files:
             all_patient_files.append(actual_patient)
-
-        if os.path.isdir(actual_patient_folder):
-            shutil.rmtree(actual_patient_folder)
-
-        if not os.path.isdir(actual_patient_folder):
-            os.mkdir(actual_patient_folder)
     
     all_lists = split_list_np(all_patient_files, number_of_runs)
 
-    logging.info(f"### [{strftime('%H:%M:%S')}] Creating the multiprocessing tuple")
     for list in all_lists:
         actual_list = ",".join(list)
         multiprocessing_tuple = multiprocessing_tuple + (f"python3 isnp_alternative.py -i {input_folder} -o {output_folder} -p {actual_list} -pf {patient_folder}",)

@@ -8,20 +8,23 @@ import os
 
 
 def run_pipeline(params, input_folder, output_folder, patient_folder, patient_file):
-    actual_patient = patient_file.split(".")[0].split("/")[-1]
-    actual_patient_log_file = patient_file.split(".")[0]
-    actual_patient_log_file_name = f"{actual_patient_log_file}.log"
-    patient_log_folder = os.path.join(output_folder, "patient_logs")
+    actual_patient = patient_file.split(".")[0]
+    actual_patient_folder = os.path.join(output_folder, actual_patient)
 
-    if not os.path.isdir(patient_log_folder):
-        os.mkdir(patient_log_folder)
-    
-    if os.path.isfile(actual_patient_log_file_name):
-        os.remove(actual_patient_log_file_name)
+    if os.path.isdir(actual_patient_folder):
+        shutil.rmtree(actual_patient_folder)
 
-    actual_patient_log_file_final = os.path.join(patient_log_folder, actual_patient_log_file_name)
+    if not os.path.isdir(actual_patient_folder):
+        os.mkdir(actual_patient_folder)
 
-    logging.basicConfig(filename = actual_patient_log_file_final, level = logging.INFO)
+    actual_patient_log_file_name = f"{actual_patient}.log"
+    actual_patient_log_file = os.path.join(actual_patient_folder, actual_patient_log_file_name)
+
+    if os.path.isfile(actual_patient_log_file):
+        os.remove(actual_patient_log_file)
+
+    logging.basicConfig(filename = actual_patient_log_file, level = logging.INFO)
+    logging.info(f"### [{strftime('%H:%M:%S')}] Starting the pipeline on the patient: {actual_patient}")
 
     module_0_command = ["python3", "../analytic-modules/vcf-filtering/vcf_filter.py",
                         "--input", f"{patient_folder}" + patient_file,
@@ -165,6 +168,8 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
                         "--no-isoform"]
     logging.info(f"### [{strftime('%H:%M:%S')}] 16/16 ======= running analytical task with command: {module_15_command}")
     subprocess.run(module_15_command, check = True)
+
+    logging.info(f"### [{strftime('%H:%M:%S')}] Finished on the patient: {actual_patient}")
 
 
 def main():

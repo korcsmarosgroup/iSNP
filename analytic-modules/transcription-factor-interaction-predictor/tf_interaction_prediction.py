@@ -72,17 +72,26 @@ def parse_args(argv=None):
                         action="store",
                         default=False,
                         required=False)
+
+    parser.add_argument("-pn", "--patient_folder",
+                        help="<name of the patient to separate the rsat helper file> [mandatory]",
+                        type=str,
+                        dest="patient_folder",
+                        action="store",
+                        required=True)
+
     results = parser.parse_args(argv)
     return results
 
 
 def find_tf_sites(path_to_fasta,
                   out_path,
+                  actual_patient_folder,
                   path_to_matrix=None,
                   format_matrix=None,
                   pval_threshold=None,
                   background=None):
-    rsat_path = "rsat_matrixscan.txt"
+    rsat_path = os.path.join(actual_patient_folder, "rsat_matrixscan.txt")
     scan_matrix(path_to_fasta, rsat_path, path_to_matrix, format_matrix, background)
     write_rsat_results(rsat_path, out_path, pval_threshold)
 
@@ -96,6 +105,7 @@ def main(argv):
     args = parse_args(argv)
     parse_fasta = args.path_to_fasta
     output_file = args.out_path
+    actual_patient_folder = args.patient_folder
 
     if os.stat(parse_fasta).st_size == 0:
 
@@ -130,7 +140,7 @@ def main(argv):
                  mitab_output_folder=fimo_output_filename)
 
         # Run RSAT
-        find_tf_sites(new_fasta_file_path, args.out_path, args.path_to_matrix, args.format_matrix, args.pval_threshold, args.tf_background_rsat)
+        find_tf_sites(new_fasta_file_path, args.out_path, actual_patient_folder, args.path_to_matrix, args.format_matrix, args.pval_threshold, args.tf_background_rsat)
         os.remove(new_fasta_file_path)
 
         # Merge the rsat and the fimo results
@@ -147,10 +157,3 @@ def main(argv):
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))
-
-
-
-
-
-
-

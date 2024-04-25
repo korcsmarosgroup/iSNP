@@ -92,7 +92,8 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
                         "--tf_background_fimo", f"{input_folder}/" + params.tf_background_fimo,
                         "--output", f"{output_folder}/{actual_patient}/tf_gene_connections_mut.tsv",
                         "--format", "transfac",
-                        "--threshold", str(params.tf_score_threshold)]
+                        "--threshold", str(params.tf_score_threshold),
+                        "--patient_folder", str(actual_patient_folder)]
     logging.info(f"### [{strftime('%H:%M:%S')}] 8/16 ======= running analytical task with command: {module_7_command}")
     subprocess.run(module_7_command, check = True)
 
@@ -103,7 +104,8 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
                         "--tf_background_fimo", f"{input_folder}/" + params.tf_background_fimo,
                         "--output", f"{output_folder}/{actual_patient}/tf_gene_connections_wt.tsv",
                         "--format", "transfac",
-                        "--threshold", str(params.tf_score_threshold)]
+                        "--threshold", str(params.tf_score_threshold),
+                        "--patient_folder", str(actual_patient_folder)]
     logging.info(f"### [{strftime('%H:%M:%S')}] 9/16 ======= running analytical task with command: {module_8_command}")
     subprocess.run(module_8_command, check = True)
 

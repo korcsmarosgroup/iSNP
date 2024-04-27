@@ -1,3 +1,5 @@
+from time import strftime
+import logging
 import os
 import subprocess
 import sys
@@ -5,7 +7,7 @@ sys.path.append("/home/liuy447/iSNP/analytic-modules/")
 from common_libs.mitab_handler import mitab_handler
 
 
-def process_rsat_results(in_path, pval_threshold=None):
+def process_rsat_results(in_path, pval_threshold=None, actual_patient_folder=None):
     """
     Converts the output of matrix-scan to a dictionary
 
@@ -18,14 +20,23 @@ def process_rsat_results(in_path, pval_threshold=None):
     ------
     rsat_results: dictionary of resuls from rsat
     """
+    actual_processrsat_log_filename = "Process_RSAT_analysis.log"
+    actual_processrsat_log_file = os.path.join(actual_patient_folder, actual_processrsat_log_filename)
+
+    logging.basicConfig(filename = actual_processrsat_log_file, level = logging.INFO)
+    logging.info(f"### [{strftime('%H:%M:%S')}] Starting the processing")
+    num_lines_input = sum(1 for line in open(in_path))
+    logging.info(f"### [{strftime('%H:%M:%S')}] The number of lines in the RSAT output file is: {num_lines_input}")
     rsat_results = {}
     with open(in_path) as fin:
+        counting = 1
         for each_line in fin:
             if each_line.startswith(";"):
                 continue
             if not each_line:
                 continue
             if each_line.startswith("#"):
+                logging.info(f"### [{strftime('%H:%M:%S')}] The header is this: {each_line}")
                 each_line = each_line.replace("#", "")
                 each_line = each_line.strip()
                 header_data = each_line.split("\t")
@@ -41,9 +52,15 @@ def process_rsat_results(in_path, pval_threshold=None):
                     pval_index = header_data.index("Pval")
                 except ValueError:
                     print("Could not find index for Pval")
+
+                logging.info(f"### [{strftime('%H:%M:%S')}] The requested parameters are seq_index ===> {seq_index} | prot_index ===> {prot_index} | pval_index ===> {pval_index}")
             else:
                 each_line = each_line.rstrip()
                 line_data = each_line.split("\t")
+
+                if counting / 10000 == 0:
+                    logging.info(f"### [{strftime('%H:%M:%S')}] The processed lines are: {counting}")
+
                 seq = line_data[seq_index]
                 prot = line_data[prot_index]
                 pval = float(line_data[pval_index])
@@ -55,10 +72,13 @@ def process_rsat_results(in_path, pval_threshold=None):
                         rsat_results[(seq, prot)] = pval
                 else:
                     rsat_results[(seq, prot)] = pval
+
+            counting += 1
+
     return rsat_results
 
 
-def write_rsat_results(in_path, out_path, pval_threshold=None):
+def write_rsat_results(in_path, out_path, pval_threshold=None, actual_patient_folder=None):
     """
     Write output dictionary to a MITAB file.
 
@@ -69,7 +89,7 @@ def write_rsat_results(in_path, out_path, pval_threshold=None):
     pval_threshold: Only connections with pval < pval_threshold are output. None by default (no filter).
 
     """
-    rsat_results = process_rsat_results(in_path, pval_threshold)
+    rsat_results = process_rsat_results(in_path, pval_threshold, actual_patient_folder)
     idx = 0
     mitab = mitab_handler.MiTabHandler()
     inner_structure = {}
@@ -92,7 +112,7 @@ def write_rsat_results(in_path, out_path, pval_threshold=None):
     mitab.serialise_mitab(out_path, add_header=False)
 
 
-def scan_matrix(path_to_fasta, out_path, path_to_matrix=None, format_matrix=None, path_to_background=None):
+def scan_matrix(path_to_fasta, out_path, path_to_matrix=None, format_matrix=None, path_to_background=None, actual_patient_folder=None):
     """
     Finds TF binding sites in a (set of) secuence using the matrix-scan function of RSAT.
 
@@ -110,6 +130,11 @@ def scan_matrix(path_to_fasta, out_path, path_to_matrix=None, format_matrix=None
         weight, Pval, ln_Pval, sig, normw).
 
     """
+    actual_rsat_log_filename = "RSAT_analysis.log"
+    actual_rsat_log_file = os.path.join(actual_patient_folder, actual_rsat_log_filename)
+
+    logging.basicConfig(filename = actual_rsat_log_file, level = logging.INFO)
+    logging.info(f"### [{strftime('%H:%M:%S')}] Starting the matrix scan")
     default_matrix_path = "test.transfac"
     if path_to_matrix is None: 
         path_to_matrix = default_matrix_path
@@ -128,9 +153,11 @@ def scan_matrix(path_to_fasta, out_path, path_to_matrix=None, format_matrix=None
                '-v', '1',
                '-seq_format', 'fasta',
                '-o', out_path]
+    logging.info(f"### [{strftime('%H:%M:%S')}] The matrix scan command is: {my_call}")
     p = subprocess.Popen(my_call, stderr = subprocess.PIPE, stdout = subprocess.PIPE)
     my_stdout, my_stderr = p.communicate()
     print(my_stderr.decode("utf-8"))
+    logging.info(f'### [{strftime('%H:%M:%S')}] The log message from matrix scan is: {my_stderr.decode("utf-8")}')
 
 
 if __name__ == "__main__":

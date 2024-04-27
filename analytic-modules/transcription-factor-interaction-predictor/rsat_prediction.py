@@ -157,7 +157,7 @@ def scan_matrix(path_to_fasta, out_path, path_to_matrix=None, format_matrix=None
     p = subprocess.Popen(my_call, stderr = subprocess.PIPE, stdout = subprocess.PIPE)
     my_stdout, my_stderr = p.communicate()
     print(my_stderr.decode("utf-8"))
-    logging.info(f'### [{strftime('%H:%M:%S')}] The log message from matrix scan is: {my_stderr.decode("utf-8")}')
+    logging.info(f'### [{strftime("%H:%M:%S")}] The log message from matrix scan is: {my_stderr.decode("utf-8")}')
 
 
 if __name__ == "__main__":

@@ -31,29 +31,36 @@ def process_rsat_results(in_path, pval_threshold=None, actual_patient_folder=Non
     with open(in_path) as fin:
         counting = 1
         for each_line in fin:
+            seq_index = 0
+            prot_index = 2
+            pval_index = 8
+
             if each_line.startswith(";"):
                 continue
+
             if not each_line:
                 continue
-            if each_line.startswith("#"):
-                logging.info(f"### [{strftime('%H:%M:%S')}] The header is this: {each_line}")
-                each_line = each_line.replace("#", "")
-                each_line = each_line.strip()
-                header_data = each_line.split("\t")
-                try:
-                    seq_index = header_data.index("seq_id")
-                except ValueError:
-                    print("Could not find index for seq_id")
-                try:
-                    prot_index = header_data.index("ft_name")
-                except ValueError:
-                    print("Could not find index for ft_name")
-                try:
-                    pval_index = header_data.index("Pval")
-                except ValueError:
-                    print("Could not find index for Pval")
 
-                logging.info(f"### [{strftime('%H:%M:%S')}] The requested parameters are seq_index ===> {seq_index} | prot_index ===> {prot_index} | pval_index ===> {pval_index}")
+            if each_line.startswith("#"):
+                continue
+            #     logging.info(f"### [{strftime('%H:%M:%S')}] The header is this: {each_line}")
+            #     each_line = each_line.replace("#", "")
+            #     each_line = each_line.strip()
+            #     header_data = each_line.split("\t")
+            #     try:
+            #         seq_index = header_data.index("seq_id")
+            #     except ValueError:
+            #         print("Could not find index for seq_id")
+            #     try:
+            #         prot_index = header_data.index("ft_name")
+            #     except ValueError:
+            #         print("Could not find index for ft_name")
+            #     try:
+            #         pval_index = header_data.index("Pval")
+            #     except ValueError:
+            #         print("Could not find index for Pval")
+
+            #     logging.info(f"### [{strftime('%H:%M:%S')}] The requested parameters are seq_index ===> {seq_index} | prot_index ===> {prot_index} | pval_index ===> {pval_index}")
             else:
                 each_line = each_line.rstrip()
                 line_data = each_line.split("\t")
@@ -126,7 +133,7 @@ def scan_matrix(path_to_fasta, out_path, path_to_matrix=None, format_matrix=None
 
     Output
     ------
-    A text file with a table with 11 columns (eq_id	ft_type, ft_name, strand, start, end, sequence,
+    A text file with a table with 11 columns (seq_id, ft_type, ft_name, strand, start, end, sequence,
         weight, Pval, ln_Pval, sig, normw).
 
     """

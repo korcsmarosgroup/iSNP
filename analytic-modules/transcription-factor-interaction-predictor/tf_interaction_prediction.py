@@ -93,7 +93,14 @@ def find_tf_sites(path_to_fasta,
                   format_matrix=None,
                   pval_threshold=None,
                   background=None):
-    rsat_path = os.path.join(actual_patient_folder, "rsat_matrixscan.txt")
+    
+    if "wt" in path_to_fasta:
+        rsat_helper_file = "rsat_matrixscan_wt.txt"
+
+    if "mut" in path_to_fasta:
+        rsat_helper_file = "rsat_matrixscan_mut.txt"
+
+    rsat_path = os.path.join(actual_patient_folder, rsat_helper_file)
 
     logging.info(f"### [{strftime('%H:%M:%S')}] Parameters for the matrix scan")
     logging.info(f"### [{strftime('%H:%M:%S')}] Path to fasta: {path_to_fasta}")

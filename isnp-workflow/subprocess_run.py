@@ -107,6 +107,7 @@ def main():
     for list in all_lists:
         actual_list = ",".join(list)
         multiprocessing_tuple = multiprocessing_tuple + (f"python3 isnp_alternative.py -i {input_folder} -o {output_folder} -p {actual_list} -pf {patient_folder} -ci {counting_index}",)
+        counting_index += 1
 
     logging.info(f"### [{strftime('%H:%M:%S')}] This is the multiprocessing tuple: {multiprocessing_tuple}")
 

@@ -103,9 +103,10 @@ def main():
     
     all_lists = split_list_np(all_patient_files, number_of_runs)
 
+    counting_index = 1
     for list in all_lists:
         actual_list = ",".join(list)
-        multiprocessing_tuple = multiprocessing_tuple + (f"python3 isnp_alternative.py -i {input_folder} -o {output_folder} -p {actual_list} -pf {patient_folder}",)
+        multiprocessing_tuple = multiprocessing_tuple + (f"python3 isnp_alternative.py -i {input_folder} -o {output_folder} -p {actual_list} -pf {patient_folder} -ci {counting_index}",)
 
     logging.info(f"### [{strftime('%H:%M:%S')}] This is the multiprocessing tuple: {multiprocessing_tuple}")
 

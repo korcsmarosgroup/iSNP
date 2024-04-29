@@ -7,8 +7,7 @@ import sys
 import os
 
 
-def run_pipeline(params, input_folder, output_folder, patient_folder, patient_file, actual_patient, actual_patient_log_file, actual_patient_folder):
-    logging.basicConfig(filename = actual_patient_log_file, level = logging.INFO)
+def run_pipeline(params, input_folder, output_folder, patient_folder, patient_file, actual_patient, actual_patient_folder):
     logging.info(f"### [{strftime('%H:%M:%S')}] Starting the pipeline on the patient: {actual_patient}")
 
     module_0_command = ["python3", "../analytic-modules/vcf-filtering/vcf_filter.py",
@@ -173,13 +172,15 @@ def main():
         if not os.path.isdir(actual_patient_folder):
             os.mkdir(actual_patient_folder)
 
-        actual_patient_log_file_name = f"{actual_patient}.log"
-        actual_patient_log_file = os.path.join(actual_patient_folder, actual_patient_log_file_name)
+        actual_run_log_file_name = f"logs_{params.counting_index}.log"
+        actual_run_log_file = os.path.join(params.output_folder, actual_run_log_file_name)
 
-        if os.path.isfile(actual_patient_log_file):
-            os.remove(actual_patient_log_file)
+        if os.path.isfile(actual_run_log_file):
+            os.remove(actual_run_log_file)
 
-        run_pipeline(params, params.input_folder, params.output_folder, params.patients_folder, patient_file, actual_patient, actual_patient_log_file, actual_patient_folder)
+        logging.basicConfig(filename = actual_run_log_file, level = logging.INFO)
+
+        run_pipeline(params, params.input_folder, params.output_folder, params.patients_folder, patient_file, actual_patient, actual_patient_folder)
 
 
 if __name__ == "__main__":

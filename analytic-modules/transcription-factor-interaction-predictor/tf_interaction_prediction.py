@@ -116,6 +116,8 @@ def find_tf_sites(path_to_fasta,
     logging.info(f"### [{strftime('%H:%M:%S')}] Writing out the rsat results...")
     write_rsat_results(rsat_path, out_path, pval_threshold, actual_patient_folder)
     logging.info(f"### [{strftime('%H:%M:%S')}] Writing out finished successfully...")
+    os.remove(rsat_path)
+    logging.info(f"### [{strftime('%H:%M:%S')}] The RSAT out file was deleted successfully!")
 
 
 def main(argv):

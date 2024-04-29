@@ -160,6 +160,13 @@ class ArgumentParser:
                             action="store",
                             default="testlist")
 
+        parser.add_argument("-ci", "--counting-index",
+                            help="<counting index for the paralell runs> [mandatory]",
+                            type=str,
+                            dest="counting_index",
+                            action="store",
+                            default="testlist")
+
         results = parser.parse_args(args)
 
         self.debug = results.debug
@@ -186,3 +193,4 @@ class ArgumentParser:
         self.reference_interactions_for_enrichment_tsv = results.reference_interactions_for_enrichment_tsv
         self.patient_files = results.patient_files
         self.patients_folder = results.patients_folder
+        self.counting_index = results.counting_index

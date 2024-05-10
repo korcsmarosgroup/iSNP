@@ -1,5 +1,4 @@
 from time import strftime
-import logging
 import os
 import subprocess
 import sys
@@ -20,13 +19,7 @@ def process_rsat_results(in_path, pval_threshold=None, actual_patient_folder=Non
     ------
     rsat_results: dictionary of resuls from rsat
     """
-    actual_processrsat_log_filename = "Process_RSAT_analysis.log"
-    actual_processrsat_log_file = os.path.join(actual_patient_folder, actual_processrsat_log_filename)
 
-    logging.basicConfig(filename = actual_processrsat_log_file, level = logging.INFO)
-    logging.info(f"### [{strftime('%H:%M:%S')}] Starting the processing")
-    num_lines_input = sum(1 for line in open(in_path))
-    logging.info(f"### [{strftime('%H:%M:%S')}] The number of lines in the RSAT output file is: {num_lines_input}")
     rsat_results = {}
     with open(in_path) as fin:
         counting = 1
@@ -64,10 +57,6 @@ def process_rsat_results(in_path, pval_threshold=None, actual_patient_folder=Non
             else:
                 each_line = each_line.rstrip()
                 line_data = each_line.split("\t")
-
-                if counting / 10000 == 0:
-                    logging.info(f"### [{strftime('%H:%M:%S')}] The processed lines are: {counting}")
-
                 seq = line_data[seq_index]
                 prot = line_data[prot_index]
                 pval = float(line_data[pval_index])
@@ -137,11 +126,7 @@ def scan_matrix(path_to_fasta, out_path, path_to_matrix=None, format_matrix=None
         weight, Pval, ln_Pval, sig, normw).
 
     """
-    actual_rsat_log_filename = "RSAT_analysis.log"
-    actual_rsat_log_file = os.path.join(actual_patient_folder, actual_rsat_log_filename)
 
-    logging.basicConfig(filename = actual_rsat_log_file, level = logging.INFO)
-    logging.info(f"### [{strftime('%H:%M:%S')}] Starting the matrix scan")
     default_matrix_path = "test.transfac"
     if path_to_matrix is None: 
         path_to_matrix = default_matrix_path
@@ -160,11 +145,9 @@ def scan_matrix(path_to_fasta, out_path, path_to_matrix=None, format_matrix=None
                '-v', '1',
                '-seq_format', 'fasta',
                '-o', out_path]
-    logging.info(f"### [{strftime('%H:%M:%S')}] The matrix scan command is: {my_call}")
     p = subprocess.Popen(my_call, stderr = subprocess.PIPE, stdout = subprocess.PIPE)
     my_stdout, my_stderr = p.communicate()
     print(my_stderr.decode("utf-8"))
-    logging.info(f'### [{strftime("%H:%M:%S")}] The log message from matrix scan is: {my_stderr.decode("utf-8")}')
 
 
 if __name__ == "__main__":

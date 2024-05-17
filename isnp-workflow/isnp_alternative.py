@@ -179,10 +179,7 @@ def main():
             os.mkdir(actual_patient_folder)
 
         actual_run_log_file_name = f"logs_{params.counting_index}.log"
-        actual_run_log_file = os.path.join(params.output_folder, actual_run_log_file_name)
-
-        if os.path.isfile(actual_run_log_file):
-            os.remove(actual_run_log_file)
+        actual_run_log_file = os.path.join("/home/liuy447/iSNP/isnp-workflow/logs", actual_run_log_file_name)
 
         logging.basicConfig(filename = actual_run_log_file, level = logging.INFO)
 

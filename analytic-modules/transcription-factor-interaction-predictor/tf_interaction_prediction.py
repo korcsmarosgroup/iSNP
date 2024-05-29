@@ -1,4 +1,4 @@
-from time import strftime
+import subprocess
 import sys
 import argparse
 import os
@@ -94,15 +94,18 @@ def find_tf_sites(path_to_fasta,
                   background=None):
     
     if "wt" in path_to_fasta:
-        rsat_helper_file = "rsat_matrixscan_wt.txt"
+        rsat_helper_file = f"{actual_patient_folder}_rsat_matrixscan_wt.txt"
 
     if "mut" in path_to_fasta:
-        rsat_helper_file = "rsat_matrixscan_mut.txt"
+        rsat_helper_file = f"{actual_patient_folder}_rsat_matrixscan_mut.txt"
 
     rsat_path = os.path.join(actual_patient_folder, rsat_helper_file)
     scan_matrix(path_to_fasta, rsat_path, path_to_matrix, format_matrix, background, actual_patient_folder)
     write_rsat_results(rsat_path, out_path, pval_threshold, actual_patient_folder)
-    # os.remove(rsat_path) # Keep these files
+
+    saving_command = ["arv", "keep", "put", "--project-uuid", "arkau-j7d0g-ch51898kwlrotjn", "--name", "Laurel_outputs", f"{rsat_helper_file}"]
+    subprocess.run(saving_command, stderr = None, stdout = None)
+    os.remove(rsat_path)
 
 
 def main(argv):

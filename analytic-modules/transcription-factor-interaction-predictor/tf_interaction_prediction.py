@@ -3,7 +3,7 @@ import sys
 import argparse
 import os
 import shutil
-sys.path.append("/home/liuy447/iSNP/analytic-modules/")
+sys.path.append("/rds/general/user/bbohar/home/projects/iSNP/analytic-modules")
 from rsat_prediction import scan_matrix
 from rsat_prediction import write_rsat_results
 from fimo_prediction import run_fimo

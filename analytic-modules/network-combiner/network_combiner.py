@@ -1,7 +1,7 @@
 import argparse
 import sys
 import os
-sys.path.append("/home/liuy447/iSNP/analytic-modules/")
+sys.path.append("/rds/general/user/bbohar/home/projects/iSNP/analytic-modules")
 from common_libs.mitab_handler import mitab_handler
 
 

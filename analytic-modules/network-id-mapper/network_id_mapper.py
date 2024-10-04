@@ -2,7 +2,7 @@ import argparse
 import json
 import os
 import sys
-sys.path.append("/home/liuy447/iSNP/analytic-modules/")
+sys.path.append("/rds/general/user/bbohar/home/projects/iSNP/analytic-modules")
 from collections import defaultdict
 
 import pandas as pd

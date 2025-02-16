@@ -178,7 +178,7 @@ def main():
         if not os.path.isdir(actual_patient_folder):
             os.mkdir(actual_patient_folder)
 
-        actual_run_log_file_name = f"logs_{params.counting_index}.log"
+        actual_run_log_file_name = f"{params.run_identifier}_logs_{params.counting_index}.log"
         actual_run_log_file = os.path.join("/rds/general/user/bbohar/home/projects/iSNP/isnp-workflow/logs", actual_run_log_file_name)
 
         logging.basicConfig(filename = actual_run_log_file, level = logging.INFO)

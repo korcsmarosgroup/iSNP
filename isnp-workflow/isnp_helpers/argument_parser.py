@@ -167,6 +167,13 @@ class ArgumentParser:
                             action="store",
                             default="testlist")
 
+        parser.add_argument("-ri", "--run-identifier",
+                            help="<identifier of the run> [mandatory]",
+                            type=str,
+                            dest="run_identifier",
+                            action="store",
+                            default="testid")
+
         results = parser.parse_args(args)
 
         self.debug = results.debug
@@ -194,3 +201,4 @@ class ArgumentParser:
         self.patient_files = results.patient_files
         self.patients_folder = results.patients_folder
         self.counting_index = results.counting_index
+        self.run_identifier = results.run_identifier

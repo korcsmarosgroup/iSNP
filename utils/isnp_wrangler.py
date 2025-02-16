@@ -71,14 +71,14 @@ def _generate_output_file_name(file_path):
     return f"converted_{os.path.basename(file_path)}"
 
 
-def _get_mutated(dir_path, patient_type):
+def _get_mutated(dir_path, patient_type, input_dir):
     """ Get if the SNP is mutated or not from the generated fasta file """
     mutated_dict = defaultdict(set)
     if patient_type == "wt":
         fasta_file_name = "snp_in_promoter-regions_wt.fasta"
     else:
         fasta_file_name = "snp_in_promoter-regions_mut.fasta"
-    fasta_file_path = os.path.join(dir_path, fasta_file_name)
+    fasta_file_path = os.path.join(input_dir, fasta_file_name)
     with open(fasta_file_path, "r") as fasta_file:
         for line in fasta_file:
             if line.startswith(">"):
@@ -95,11 +95,11 @@ def _check_if_complex(protein_id):
         return True
 
 
-def handle_tf(tf_file_path, mapping_dict, output_path):
+def handle_tf(tf_file_path, mapping_dict, output_path, input_dir):
     """ A method to correct formatting issues with the fimo output """
     file_mut_type = _get_sequence_type(tf_file_path)
     tf_output_file_path = os.path.join(output_path, _generate_output_file_name(tf_file_path))
-    mutated_dict = _get_mutated(os.path.dirname(tf_file_path), file_mut_type)
+    mutated_dict = _get_mutated(input_dir, file_mut_type, input_dir)
     with open(tf_file_path, "r") as tf_file, \
             open(tf_output_file_path, "w") as tf_output_file:
         reader = csv.reader(tf_file, delimiter="\t")
@@ -211,13 +211,14 @@ def network_differences(output_dir, compare_on):
                 patient_name = f"{patient_name[1]}_{patient_name[4]}"
                 reader = csv.DictReader(interaction, delimiter="\t")
                 patient_networks[patient_name] = list(reader)
-    mirna_differences = _network_difference(patient_networks, "mirna", compare_on)
-    mirna_differences_file_path = os.path.join(output_dir, "mirna_differences.tsv")
-    _write_network(mirna_differences, mirna_differences_file_path)
+    # mirna_differences = _network_difference(patient_networks, "mirna", compare_on)
+    # mirna_differences_file_path = os.path.join(output_dir, "mirna_differences.tsv")
+    # _write_network(mirna_differences, mirna_differences_file_path)
     tf_differences = _network_difference(patient_networks, "tf", compare_on)
     tf_differences_file_path = os.path.join(output_dir, "tf_differences.tsv")
     _write_network(tf_differences, tf_differences_file_path)
-    differences = mirna_differences + tf_differences
+    # differences = mirna_differences + tf_differences
+    differences = tf_differences
     differences_file_path = os.path.join(output_dir, "differences.tsv")
     _write_network(differences, differences_file_path)
     return differences
@@ -227,22 +228,24 @@ def reformat(argv):
     """ Main logic for isnp results reformatter """
     args = parse_args(argv)
     mapping_dict = _load_mapping_dict(args.mapping_file_path, args.target_id)
-    entries = Path(args.input_dir)
-    for patient in entries.iterdir():
-        if not patient.name.startswith("."):
-            if patient.name.endswith(".vcf"):
-                print(f"Converting: {patient}")
-                patient_output_dir_path = os.path.join(args.output_dir, f"mapped_{patient.name}")
-                try:
-                    os.mkdir(patient_output_dir_path)
-                except OSError as e:
-                    if e.errno != errno.EEXIST:
-                        raise
-                for file in CONVERT_FILES_TF:
-                    handle_tf(os.path.join(patient, file), mapping_dict, patient_output_dir_path)
-                for file in CONVERT_FILES_MIRNA:
-                    handle_mirna(os.path.join(patient, file), mapping_dict, patient_output_dir_path)
-                network_differences(patient_output_dir_path, args.compare_on)
+    # mapping_dict = ""
+    # entries = Path(args.input_dir)
+    for patient in os.listdir(args.input_dir): # entries.iterdir():
+        # if not patient.name.startswith("."):
+        #     if patient.name.endswith(".vcf"):
+        print(f"Converting: {patient}")
+        patient_output_dir_path = os.path.join(args.output_dir, f"mapped_{patient}")
+        patient_input_dir_path = os.path.join(args.input_dir, patient)
+        try:
+            os.mkdir(patient_output_dir_path)
+        except OSError as e:
+            if e.errno != errno.EEXIST:
+                raise
+        for file in CONVERT_FILES_TF:
+            handle_tf(os.path.join(patient_input_dir_path, file), mapping_dict, patient_output_dir_path, patient_input_dir_path)
+        # for file in CONVERT_FILES_MIRNA:
+        #     handle_mirna(os.path.join(patient, file), mapping_dict, patient_output_dir_path)
+        network_differences(patient_output_dir_path, args.compare_on)
 
 
 if __name__ == "__main__":

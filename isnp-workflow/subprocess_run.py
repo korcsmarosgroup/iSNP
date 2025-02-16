@@ -1,10 +1,8 @@
 from time import strftime
 import multiprocessing
 import numpy as np
-import subprocess
 import argparse
 import logging
-import shutil
 import sys
 import os
 
@@ -22,11 +20,6 @@ def ExecuteProcess(command):
 def split_list_np(lst, x):
     result = np.array_split(lst, x)
     return result
-
-
-def RunExports():
-    export_command = ["bash", "exportpathsRoche.sh"]
-    subprocess.run(export_command, check = True)
 
 
 def parse_args(args):
@@ -78,19 +71,28 @@ def parse_args(args):
                         action="store",
                         required=True)
 
+    parser.add_argument("-id", "--identifier",
+                        help="<identifier of the run> [mandatory]",
+                        type=str,
+                        dest="identifier",
+                        action="store",
+                        required=True)
+
     results = parser.parse_args(args)
-    return results.input_folder, results.output_folder, results.patient_folder, results.number_of_runs
+    return results.input_folder, results.output_folder, results.patient_folder, results.number_of_runs, results.identifier
 
 
 def main():
 
+    input_folder, output_folder, patient_folder, number_of_runs, identifier = parse_args(sys.argv[1:])
+
+    if os.path.isfile(f"SubprocessRun_{identifier}.log"):
+        os.remove(f"SubprocessRun_{identifier}.log")
+
+    logging.basicConfig(filename = f"SubprocessRun_{identifier}.log", level = logging.INFO)
     logging.info(f"### [{strftime('%H:%M:%S')}] Starting the subprocesses!")
-    input_folder, output_folder, patient_folder, number_of_runs = parse_args(sys.argv[1:])
     multiprocessing_tuple = tuple()
     all_patient_files = []
-
-    logging.info(f"### [{strftime('%H:%M:%S')}] Run the path exports from the file: exportpathsRoche.sh")
-    RunExports()
 
     logging.info(f"### [{strftime('%H:%M:%S')}] Creating the multiprocessing tuple")
     for actual_patient in os.listdir(patient_folder):
@@ -106,7 +108,7 @@ def main():
     counting_index = 1
     for list in all_lists:
         actual_list = ",".join(list)
-        multiprocessing_tuple = multiprocessing_tuple + (f"python3 isnp_alternative.py -i {input_folder} -o {output_folder} -p {actual_list} -pf {patient_folder} -ci {counting_index}",)
+        multiprocessing_tuple = multiprocessing_tuple + (f"python3 isnp_alternative.py -i {input_folder} -o {output_folder} -p {actual_list} -pf {patient_folder} -ci {counting_index} -ri {identifier}",)
         counting_index += 1
 
     logging.info(f"### [{strftime('%H:%M:%S')}] This is the multiprocessing tuple: {multiprocessing_tuple}")

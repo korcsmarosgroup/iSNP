@@ -49,14 +49,16 @@ def read_in_folder(patient_folder):
     subfolders = [f.path for f in os.scandir(patient_folder) if f.is_dir()]
 
     for folder in subfolders:
-        patient = re.findall(r"(\w*).vcf", folder)
-        patient = patient[0]
+        # patient = re.findall(r"(\w*).vcf", folder)
+        # patient = patient[0]
+        print(folder)
+        patient = folder
         df = pd.read_csv(os.path.join(folder, "differences.tsv"), sep = "\t", header = 0)
         affected_proteins = set()
         outset_line = set()
         rs_set = set()
 
-        for row in df:
+        for index, row in df.iterrows():
 
             if row["file"] == "mut" and row["mutated"] == False:
                 continue

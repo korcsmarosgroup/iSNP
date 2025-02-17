@@ -211,14 +211,13 @@ def network_differences(output_dir, compare_on):
                 patient_name = f"{patient_name[1]}_{patient_name[4]}"
                 reader = csv.DictReader(interaction, delimiter="\t")
                 patient_networks[patient_name] = list(reader)
-    # mirna_differences = _network_difference(patient_networks, "mirna", compare_on)
-    # mirna_differences_file_path = os.path.join(output_dir, "mirna_differences.tsv")
-    # _write_network(mirna_differences, mirna_differences_file_path)
+    mirna_differences = _network_difference(patient_networks, "mirna", compare_on)
+    mirna_differences_file_path = os.path.join(output_dir, "mirna_differences.tsv")
+    _write_network(mirna_differences, mirna_differences_file_path)
     tf_differences = _network_difference(patient_networks, "tf", compare_on)
     tf_differences_file_path = os.path.join(output_dir, "tf_differences.tsv")
     _write_network(tf_differences, tf_differences_file_path)
-    # differences = mirna_differences + tf_differences
-    differences = tf_differences
+    differences = mirna_differences + tf_differences
     differences_file_path = os.path.join(output_dir, "differences.tsv")
     _write_network(differences, differences_file_path)
     return differences
@@ -243,8 +242,8 @@ def reformat(argv):
                 raise
         for file in CONVERT_FILES_TF:
             handle_tf(os.path.join(patient_input_dir_path, file), mapping_dict, patient_output_dir_path, patient_input_dir_path)
-        # for file in CONVERT_FILES_MIRNA:
-        #     handle_mirna(os.path.join(patient, file), mapping_dict, patient_output_dir_path)
+        for file in CONVERT_FILES_MIRNA:
+            handle_mirna(os.path.join(patient, file), mapping_dict, patient_output_dir_path)
         network_differences(patient_output_dir_path, args.compare_on)
 
 

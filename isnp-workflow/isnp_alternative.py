@@ -55,12 +55,13 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
                         "--output", f"{output_folder}/{actual_patient}/mirna_gene_connections_mut.tsv",
                         "--score", str(params.miranda_score_threshold),
                         "--energy", str(params.miranda_energy_threshold)]
-    # logging.info(f"### [{strftime('%H:%M:%S')}] 6/16 ======= running analytical task with command: {module_5_command}")
-    # subprocess.run(module_5_command, check = True)
-    logging.info(f"### [{strftime('%H:%M:%S')}] 6/16 ======= Skipping the miranda module with the mutant region")
-    logging.info(f"### [{strftime('%H:%M:%S')}] ======= Creating the mutant type mirna empty file")
-    with open(f"{output_folder}/{actual_patient}/mirna_gene_connections_mut.tsv", 'w') as mirna_mut:
-        pass
+    logging.info(f"### [{strftime('%H:%M:%S')}] 6/16 ======= running analytical task with command: {module_5_command}")
+    subprocess.run(module_5_command, check = True)
+
+    # logging.info(f"### [{strftime('%H:%M:%S')}] 6/16 ======= Skipping the miranda module with the mutant region")
+    # logging.info(f"### [{strftime('%H:%M:%S')}] ======= Creating the mutant type mirna empty file")
+    # with open(f"{output_folder}/{actual_patient}/mirna_gene_connections_mut.tsv", 'w') as mirna_mut:
+    #     pass
 
     module_6_command = ["python3", "../analytic-modules/mirna-interaction-predictor/mirna_interaction_predictor.py",
                         "--mirna", f"{output_folder}/{actual_patient}/snp_in_protein-coding-regions_wt.fasta",
@@ -68,12 +69,13 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
                         "--output", f"{output_folder}/{actual_patient}/mirna_gene_connections_wt.tsv",
                         "--score", str(params.miranda_score_threshold),
                         "--energy", str(params.miranda_energy_threshold)]
-    # logging.info(f"### [{strftime('%H:%M:%S')}] 7/16 ======= running analytical task with command: {module_6_command}")
-    # subprocess.run(module_6_command, check = True)
-    logging.info(f"### [{strftime('%H:%M:%S')}] 7/16 ======= Skipping the miranda module with the wild region")
-    logging.info(f"### [{strftime('%H:%M:%S')}] ======= Creating the wild type mirna empty file")
-    with open(f"{output_folder}/{actual_patient}/mirna_gene_connections_wt.tsv", 'w') as mirna_wt:
-        pass
+    logging.info(f"### [{strftime('%H:%M:%S')}] 7/16 ======= running analytical task with command: {module_6_command}")
+    subprocess.run(module_6_command, check = True)
+
+    # logging.info(f"### [{strftime('%H:%M:%S')}] 7/16 ======= Skipping the miranda module with the wild region")
+    # logging.info(f"### [{strftime('%H:%M:%S')}] ======= Creating the wild type mirna empty file")
+    # with open(f"{output_folder}/{actual_patient}/mirna_gene_connections_wt.tsv", 'w') as mirna_wt:
+    #     pass
 
     module_7_command = ["python3", "../analytic-modules/transcription-factor-interaction-predictor/tf_interaction_prediction.py",
                         "--fasta", f"{output_folder}/{actual_patient}/snp_in_promoter-regions_mut.fasta",
@@ -103,31 +105,33 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
                         "--input-files", f"{output_folder}/{actual_patient}/mirna_gene_connections_mut.tsv,{output_folder}/{actual_patient}/tf_gene_connections_mut.tsv",
                         "--output-file", f"{output_folder}/{actual_patient}/combined_connections_mut.tsv",
                         "--method", "union"]
-    # logging.info(f"### [{strftime('%H:%M:%S')}] 10/16 ======= running analytical task with command: {module_1_command}")
-    # subprocess.run(module_9_command, check = True)
-    logging.info(f"### [{strftime('%H:%M:%S')}] 10/16 ======= Skipping this network combiner module, because miranda is missing")
+    logging.info(f"### [{strftime('%H:%M:%S')}] 10/16 ======= running analytical task with command: {module_1_command}")
+    subprocess.run(module_9_command, check = True)
+
+    # logging.info(f"### [{strftime('%H:%M:%S')}] 10/16 ======= Skipping this network combiner module, because miranda is missing")
 
     module_10_command = ["python3", "../analytic-modules/network-combiner/network_combiner.py",
                         "--input-files", f"{output_folder}/{actual_patient}/mirna_gene_connections_wt.tsv,{output_folder}/{actual_patient}/tf_gene_connections_wt.tsv",
                         "--output-file", f"{output_folder}/{actual_patient}/combined_connections_wt.tsv",
                         "--method", "union"]
-    # logging.info(f"### [{strftime('%H:%M:%S')}] 11/16 ======= running analytical task with command: {module_1_command}")
-    # subprocess.run(module_10_command, check = True)
-    logging.info(f"### [{strftime('%H:%M:%S')}] 11/16 ======= Skipping this network combiner module, because miranda is missing")
+    logging.info(f"### [{strftime('%H:%M:%S')}] 11/16 ======= running analytical task with command: {module_1_command}")
+    subprocess.run(module_10_command, check = True)
 
-    # module_11_command = ["python3", "../analytic-modules/network-combiner/network_combiner.py",
-    #                     "--input-files", f"{output_folder}/{actual_patient}/combined_connections_mut.tsv,{output_folder}/{actual_patient}/combined_connections_wt.tsv",
-    #                     "--output-file", f"{output_folder}/{actual_patient}/differences_between_mut_wt_networks.tsv",
-    #                     "--method", "difference"]
-    # logging.info(f"### [{strftime('%H:%M:%S')}] 12/16 ======= running analytical task with command: {module_1_command}")
-    # subprocess.run(module_11_command, check = True)
+    # logging.info(f"### [{strftime('%H:%M:%S')}] 11/16 ======= Skipping this network combiner module, because miranda is missing")
 
     module_11_command = ["python3", "../analytic-modules/network-combiner/network_combiner.py",
-                        "--input-files", f"{output_folder}/{actual_patient}/tf_gene_connections_mut.tsv,{output_folder}/{actual_patient}/tf_gene_connections_wt.tsv",
+                        "--input-files", f"{output_folder}/{actual_patient}/combined_connections_mut.tsv,{output_folder}/{actual_patient}/combined_connections_wt.tsv",
                         "--output-file", f"{output_folder}/{actual_patient}/differences_between_mut_wt_networks.tsv",
                         "--method", "difference"]
-    logging.info(f"### [{strftime('%H:%M:%S')}] 12/16 ======= running analytical task with command: {module_11_command}")
+    logging.info(f"### [{strftime('%H:%M:%S')}] 12/16 ======= running analytical task with command: {module_1_command}")
     subprocess.run(module_11_command, check = True)
+
+    # module_11_command = ["python3", "../analytic-modules/network-combiner/network_combiner.py",
+    #                     "--input-files", f"{output_folder}/{actual_patient}/tf_gene_connections_mut.tsv,{output_folder}/{actual_patient}/tf_gene_connections_wt.tsv",
+    #                     "--output-file", f"{output_folder}/{actual_patient}/differences_between_mut_wt_networks.tsv",
+    #                     "--method", "difference"]
+    # logging.info(f"### [{strftime('%H:%M:%S')}] 12/16 ======= running analytical task with command: {module_11_command}")
+    # subprocess.run(module_11_command, check = True)
 
     module_12_command = ["python3", "../analytic-modules/uniprot-id-formatter/uniprot_id_formatter.py",
                         "--input-network-file", f"{output_folder}/{actual_patient}/differences_between_mut_wt_networks.tsv",

@@ -3,4 +3,6 @@
 !input-data/**/*.tsv
 output-data/
 input-data/
+input_data/
+output_data/
 demo-data/

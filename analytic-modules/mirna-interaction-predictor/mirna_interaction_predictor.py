@@ -12,6 +12,7 @@ from collections import namedtuple
 
 from Bio import SeqIO
 
+sys.path.append("/rds/general/user/bbohar/home/projects/iSNP/analytic-modules")
 from common_libs.mitab_handler import mitab_handler
 
 # Keys for named-tuple to hold the scan results

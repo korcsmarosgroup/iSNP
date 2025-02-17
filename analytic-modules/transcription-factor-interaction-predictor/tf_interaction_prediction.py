@@ -104,10 +104,10 @@ def find_tf_sites(path_to_fasta,
     # rsat_path = os.path.join("/rds/general/user/bbohar/ephemeral/iSNP_outputs/rsat_raw_outputs", rsat_helper_file)
     scan_matrix(path_to_fasta, rsat_path, path_to_matrix, format_matrix, background, actual_patient_folder)
     write_rsat_results(rsat_path, out_path, pval_threshold, actual_patient_folder)
+    os.remove(rsat_path)
 
     # saving_command = ["arv", "keep", "put", "--project-uuid", "arkau-j7d0g-ch51898kwlrotjn", "--name", "Laurel_outputs", f"{rsat_helper_file}"]
     # subprocess.run(saving_command, stderr = None, stdout = None)
-    # os.remove(rsat_path)
 
     # patient_rsat_files_path = f"/rds/general/user/bbohar/ephemeral/iSNP_outputs/autophagyspecific_run_for_Luca/{actual_patient_folder}"
 

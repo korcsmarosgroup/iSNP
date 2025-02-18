@@ -488,8 +488,8 @@ def run(mirna, genomic, output, score, energy, strict):
 
     """
     print(f"Starting Prediction")
-    database_file_tmp, database_info = parse_database(mirna)
-    genomic_file_tmp, sequences_info = parse_sequences(genomic)
+    database_file_tmp, database_info = parse_database(genomic)
+    genomic_file_tmp, sequences_info = parse_sequences(mirna)
     predictions = _predictor(genomic_file_tmp, database_file_tmp, score, energy, strict)
     mirna_preds = extract_results(predictions)
     create_network_file(mirna_preds, sequences_info, output)

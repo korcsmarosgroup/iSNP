@@ -105,7 +105,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
                         "--input-files", f"{output_folder}/{actual_patient}/mirna_gene_connections_mut.tsv,{output_folder}/{actual_patient}/tf_gene_connections_mut.tsv",
                         "--output-file", f"{output_folder}/{actual_patient}/combined_connections_mut.tsv",
                         "--method", "union"]
-    logging.info(f"### [{strftime('%H:%M:%S')}] 10/16 ======= running analytical task with command: {module_1_command}")
+    logging.info(f"### [{strftime('%H:%M:%S')}] 10/16 ======= running analytical task with command: {module_9_command}")
     subprocess.run(module_9_command, check = True)
 
     # logging.info(f"### [{strftime('%H:%M:%S')}] 10/16 ======= Skipping this network combiner module, because miranda is missing")
@@ -114,7 +114,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
                         "--input-files", f"{output_folder}/{actual_patient}/mirna_gene_connections_wt.tsv,{output_folder}/{actual_patient}/tf_gene_connections_wt.tsv",
                         "--output-file", f"{output_folder}/{actual_patient}/combined_connections_wt.tsv",
                         "--method", "union"]
-    logging.info(f"### [{strftime('%H:%M:%S')}] 11/16 ======= running analytical task with command: {module_1_command}")
+    logging.info(f"### [{strftime('%H:%M:%S')}] 11/16 ======= running analytical task with command: {module_10_command}")
     subprocess.run(module_10_command, check = True)
 
     # logging.info(f"### [{strftime('%H:%M:%S')}] 11/16 ======= Skipping this network combiner module, because miranda is missing")
@@ -123,7 +123,7 @@ def run_pipeline(params, input_folder, output_folder, patient_folder, patient_fi
                         "--input-files", f"{output_folder}/{actual_patient}/combined_connections_mut.tsv,{output_folder}/{actual_patient}/combined_connections_wt.tsv",
                         "--output-file", f"{output_folder}/{actual_patient}/differences_between_mut_wt_networks.tsv",
                         "--method", "difference"]
-    logging.info(f"### [{strftime('%H:%M:%S')}] 12/16 ======= running analytical task with command: {module_1_command}")
+    logging.info(f"### [{strftime('%H:%M:%S')}] 12/16 ======= running analytical task with command: {module_11_command}")
     subprocess.run(module_11_command, check = True)
 
     # module_11_command = ["python3", "../analytic-modules/network-combiner/network_combiner.py",

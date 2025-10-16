@@ -1,4 +1,4 @@
-
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC_BY--NC_4.0-lightgrey.svg)](LICENSE)
 
 # Executing the iSNP pipeline using command-line interface
 
@@ -9,7 +9,6 @@
 [Executing the iSNP workflow (single patient)](#singlepatient)  
 [Executing the iSNP workflow (multiple patients)](#multipatient)   
 [Citation](#citation)
-
 
 <a name="overview"/>
 

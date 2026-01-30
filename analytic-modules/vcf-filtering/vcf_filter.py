@@ -2,7 +2,7 @@ import argparse
 import shutil
 import sys
 import os
-sys.path.append("/rds/general/user/bbohar/home/projects/iSNP/analytic-modules")
+sys.path.append("/rds/general/user/jno25/home/iSNP/analytic-modules")
 from common_libs.filters import filter_vcf
 
 

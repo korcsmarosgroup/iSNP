@@ -6,7 +6,7 @@ import argparse
 import numpy as np
 import pandas as pd
 
-sys.path.append("/rds/general/user/bbohar/home/projects/iSNP/analytic-modules")
+sys.path.append("/rds/general/user/jno25/home/iSNP/analytic-modules")
 from common_libs.mitab_handler import mitab_handler as h
 
 

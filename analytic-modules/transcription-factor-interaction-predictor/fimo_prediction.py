@@ -4,7 +4,7 @@ import os
 import sys
 import subprocess
 import tempfile
-sys.path.append("/rds/general/user/bbohar/home/projects/iSNP/analytic-modules")
+sys.path.append("/rds/general/user/jno25/home/iSNP/analytic-modules")
 from common_libs.mitab_handler import mitab_handler
 
 

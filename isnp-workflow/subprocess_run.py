@@ -7,12 +7,6 @@ import sys
 import os
 
 
-if os.path.isfile("SubprocessRun.log"):
-    os.remove("SubprocessRun.log")
-
-logging.basicConfig(filename = 'SubprocessRun.log', level = logging.INFO)
-
-
 def ExecuteProcess(command):
     os.system(command)
 

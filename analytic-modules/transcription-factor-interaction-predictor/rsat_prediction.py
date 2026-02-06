@@ -144,7 +144,7 @@ def scan_matrix(path_to_fasta, out_path, pval_threshold, path_to_matrix=None, fo
         '-quick',
         '-return', 'pval',
         '-2str',
-        '-uth', 'pval', pval_threshold,
+        '-uth', 'pval', '1e-4',
         '-v', '1',
         '-seq_format', 'fasta',
         '-o', out_path

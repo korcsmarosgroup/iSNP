@@ -109,7 +109,7 @@ def main():
         if ".vcf" not in actual_patient:
             continue
 
-        if actual_patient in done_patients:
+        if actual_patient in done_patients_list:
             logging.info(f"### [{strftime('%H:%M:%S')}] The patient {actual_patient} is already done, skipping it")
             continue
 

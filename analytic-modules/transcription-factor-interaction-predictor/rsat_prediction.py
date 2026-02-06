@@ -108,7 +108,7 @@ def write_rsat_results(in_path, out_path, pval_threshold=None, actual_patient_fo
     mitab.serialise_mitab(out_path, add_header=False)
 
 
-def scan_matrix(path_to_fasta, out_path, path_to_matrix=None, format_matrix=None, path_to_background=None, actual_patient_folder=None, pval_threshold):
+def scan_matrix(path_to_fasta, out_path, pval_threshold, path_to_matrix=None, format_matrix=None, path_to_background=None, actual_patient_folder=None):
     """
     Finds TF binding sites in a (set of) secuence using the matrix-scan function of RSAT.
 

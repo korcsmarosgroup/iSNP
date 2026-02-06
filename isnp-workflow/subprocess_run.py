@@ -72,13 +72,20 @@ def parse_args(args):
                         action="store",
                         required=True)
 
+    parser.add_argument("-dp", "--done-patients",
+                        help="<path to the done patients file> [mandatory]",
+                        type=str,
+                        dest="done_patients",
+                        action="store",
+                        required=True)
+
     results = parser.parse_args(args)
-    return results.input_folder, results.output_folder, results.patient_folder, results.number_of_runs, results.identifier
+    return results.input_folder, results.output_folder, results.patient_folder, results.number_of_runs, results.identifier, results.done_patients
 
 
 def main():
 
-    input_folder, output_folder, patient_folder, number_of_runs, identifier = parse_args(sys.argv[1:])
+    input_folder, output_folder, patient_folder, number_of_runs, identifier, done_patients = parse_args(sys.argv[1:])
 
     if os.path.isfile(f"SubprocessRun_{identifier}.log"):
         os.remove(f"SubprocessRun_{identifier}.log")
@@ -87,11 +94,23 @@ def main():
     logging.info(f"### [{strftime('%H:%M:%S')}] Starting the subprocesses!")
     multiprocessing_tuple = tuple()
     all_patient_files = []
+    done_patients = []
+
+    logging.info(f"### [{strftime('%H:%M:%S')}] Reading the done patients file")
+    with open(done_patients, "r") as dp:
+        for line in dp:
+            done_patients.append(line.strip())
+
+    logging.info(f"### [{strftime('%H:%M:%S')}] The number of done patients: {len(done_patients)}\nThey will be excluded from the subprocesses")
 
     logging.info(f"### [{strftime('%H:%M:%S')}] Creating the multiprocessing tuple")
     for actual_patient in os.listdir(patient_folder):
 
         if ".vcf" not in actual_patient:
+            continue
+
+        if actual_patient in done_patients:
+            logging.info(f"### [{strftime('%H:%M:%S')}] The patient {actual_patient} is already done, skipping it")
             continue
 
         if actual_patient not in all_patient_files:

@@ -102,7 +102,7 @@ def find_tf_sites(path_to_fasta,
         rsat_path = f"/rds/general/user/bbohar/ephemeral/iSNP_outputs/rsat_raw_outputs/{actual_patient_folder}_rsat_matrixscan_mut.txt"
 
     # rsat_path = os.path.join("/rds/general/user/bbohar/ephemeral/iSNP_outputs/rsat_raw_outputs", rsat_helper_file)
-    scan_matrix(path_to_fasta, rsat_path, path_to_matrix, format_matrix, background, actual_patient_folder)
+    scan_matrix(path_to_fasta, rsat_path, path_to_matrix, format_matrix, background, actual_patient_folder, pval_threshold)
     write_rsat_results(rsat_path, out_path, pval_threshold, actual_patient_folder)
     os.remove(rsat_path)
 

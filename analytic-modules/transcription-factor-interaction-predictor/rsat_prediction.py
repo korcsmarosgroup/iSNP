@@ -108,7 +108,7 @@ def write_rsat_results(in_path, out_path, pval_threshold=None, actual_patient_fo
     mitab.serialise_mitab(out_path, add_header=False)
 
 
-def scan_matrix(path_to_fasta, out_path, path_to_matrix=None, format_matrix=None, path_to_background=None, actual_patient_folder=None):
+def scan_matrix(path_to_fasta, out_path, path_to_matrix=None, format_matrix=None, path_to_background=None, actual_patient_folder=None, pval_threshold):
     """
     Finds TF binding sites in a (set of) secuence using the matrix-scan function of RSAT.
 
@@ -134,17 +134,21 @@ def scan_matrix(path_to_fasta, out_path, path_to_matrix=None, format_matrix=None
         format_matrix = "transfac"
     if not os.path.exists(path_to_fasta):
         raise FileNotFoundError("Could not find fasta file: " + path_to_fasta)
-    my_call = ['rsat', 'matrix-scan',
-               '-matrix_format', format_matrix,
-               '-m', path_to_matrix,
-               '-i', path_to_fasta,
-               '-bgfile', path_to_background,
-               '-quick',
-               '-return', 'pval',
-               '-return', 'normw', '-2str',
-               '-v', '1',
-               '-seq_format', 'fasta',
-               '-o', out_path]
+    my_call = [
+        'rsat',
+        'matrix-scan',
+        '-matrix_format', format_matrix,
+        '-m', path_to_matrix,
+        '-i', path_to_fasta,
+        '-bgfile', path_to_background,
+        '-quick',
+        '-return', 'pval',
+        '-2str',
+        '-uth', 'pval', pval_threshold,
+        '-v', '1',
+        '-seq_format', 'fasta',
+        '-o', out_path
+    ]
     p = subprocess.Popen(my_call, stderr = subprocess.PIPE, stdout = subprocess.PIPE)
     my_stdout, my_stderr = p.communicate()
     print(my_stderr.decode("utf-8"))

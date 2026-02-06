@@ -113,7 +113,7 @@ def main():
             logging.info(f"### [{strftime('%H:%M:%S')}] The patient {actual_patient} is already done, skipping it")
             continue
 
-        if actual_patient not in all_patient_files:
+        if actual_patient.split(".")[0] not in all_patient_files:
             all_patient_files.append(actual_patient)
     
     all_lists = split_list_np(all_patient_files, number_of_runs)

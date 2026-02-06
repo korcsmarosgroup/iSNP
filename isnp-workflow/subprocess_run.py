@@ -94,12 +94,12 @@ def main():
     logging.info(f"### [{strftime('%H:%M:%S')}] Starting the subprocesses!")
     multiprocessing_tuple = tuple()
     all_patient_files = []
-    done_patients = []
+    done_patients_list = []
 
     logging.info(f"### [{strftime('%H:%M:%S')}] Reading the done patients file")
     with open(done_patients, "r") as dp:
         for line in dp:
-            done_patients.append(line.strip())
+            done_patients_list.append(line.strip())
 
     logging.info(f"### [{strftime('%H:%M:%S')}] The number of done patients: {len(done_patients)}\nThey will be excluded from the subprocesses")
 

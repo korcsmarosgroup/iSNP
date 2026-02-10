@@ -4,14 +4,59 @@ import sys
 import csv
 import json
 import errno
+import logging
 import argparse
 from pathlib import Path
 from collections import defaultdict
+from logging.handlers import QueueHandler, QueueListener
+from multiprocessing import Queue
+from concurrent.futures import ProcessPoolExecutor, as_completed
 
 ID_VERSION_SEP = "."
 HEADER = ["source", "target", "score", "region", "snp", "file", "mutated", "tool"]
 CONVERT_FILES_TF = ["tf_gene_connections_wt.tsv", "tf_gene_connections_mut.tsv"]
 CONVERT_FILES_MIRNA = ["mirna_gene_connections_wt.tsv", "mirna_gene_connections_mut.tsv"]
+
+
+def setup_logging(output_dir):
+    """ Setup logging to both console and a file using a queue for process safety """
+    # Create the queue for logging
+    log_queue = Queue()
+    
+    log_file = "isnp_wrangler.log"
+    
+    # Formatter for all logs
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    
+    # Console handler
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(formatter)
+    
+    # File handler
+    file_handler = logging.FileHandler(log_file)
+    file_handler.setFormatter(formatter)
+    
+    # Listener to handle the queue in the main process
+    listener = QueueListener(log_queue, console_handler, file_handler)
+    listener.start()
+    
+    # Configure the root logger in the main process to use the queue
+    root = logging.getLogger()
+    root.setLevel(logging.INFO)
+    # Remove existing handlers to avoid double logging
+    for hdlr in root.handlers[:]:
+        root.removeHandler(hdlr)
+    
+    qh = QueueHandler(log_queue)
+    root.addHandler(qh)
+    
+    return listener, log_queue
+
+
+class PatientAdapter(logging.LoggerAdapter):
+    """ Custom adapter to prefix logs with patient ID """
+    def process(self, msg, kwargs):
+        return f"[{self.extra['patient']}] {msg}", kwargs
 
 
 def parse_args(argv):
@@ -29,6 +74,8 @@ def parse_args(argv):
     args_parser.add_argument('-v', '--verbose', action='store', dest="verbose", type=int)
     args_parser.add_argument('-c', '--compare_on', action='store', dest="compare_on", nargs='+',
                              default=["source", "target", "snp", "tool"])
+    args_parser.add_argument('-p', '--processes', action='store', dest="processes", type=int, default=os.cpu_count(),
+                             help="Number of parallel processes to use")
     return args_parser.parse_args(argv[1:])
 
 
@@ -39,26 +86,29 @@ def _strip_dict(d):
 
 def _load_mapping_dict(mapping_file_path, target_id_type):
     """ Load the sherlock mapping dictionary """
-    mapping_dict = defaultdict(set)
+    mapping_dict = {}
     with open(mapping_file_path, "r") as mapping_file:
         for line in mapping_file:
-            map_line = json.loads(line.strip())
-            if map_line["to_id_type"].lower() == target_id_type:
-                mapping_dict[map_line["from_id"].lower()] = map_line["to_id"].lower()
+            try:
+                map_line = json.loads(line.strip())
+                if map_line["to_id_type"].lower() == target_id_type:
+                    mapping_dict[map_line["from_id"].lower()] = map_line["to_id"].lower()
+            except json.JSONDecodeError:
+                continue
     return mapping_dict
 
 
 def remap_ids(identifier, mapping_dict):
     """ A method to remap the ids """
-    identifier = re.split("[;:]", identifier)
-    current_id = identifier[-1]
+    parts = re.split("[;:]", identifier)
+    current_id = parts[-1]
     if ID_VERSION_SEP in current_id:
-        current_id = current_id.split(".")[0]
-    converted_id = mapping_dict.get(current_id)
-    if converted_id is not None:
-        return "".join(converted_id).upper()
-    else:
-        return converted_id
+        current_id = current_id.split(ID_VERSION_SEP)[0]
+    
+    converted_id = mapping_dict.get(current_id.lower())
+    if converted_id:
+        return converted_id.upper()
+    return None
 
 
 def _get_sequence_type(file_path):
@@ -100,12 +150,14 @@ def handle_tf(tf_file_path, mapping_dict, output_path, input_dir):
     file_mut_type = _get_sequence_type(tf_file_path)
     tf_output_file_path = os.path.join(output_path, _generate_output_file_name(tf_file_path))
     mutated_dict = _get_mutated(input_dir, file_mut_type, input_dir)
+    results = []
     with open(tf_file_path, "r") as tf_file, \
             open(tf_output_file_path, "w") as tf_output_file:
         reader = csv.reader(tf_file, delimiter="\t")
         writer = csv.DictWriter(tf_output_file, fieldnames=HEADER, delimiter="\t")
         writer.writeheader()
         for row in reader:
+            if not row: continue
             row = [x for x in row if x != "-"]
             source = remap_ids(row[0], mapping_dict)
             target = remap_ids(row[1], mapping_dict)
@@ -113,15 +165,13 @@ def handle_tf(tf_file_path, mapping_dict, output_path, input_dir):
                 if _check_if_complex(row[0]):
                     complex_source = row[0].split(";")[2]
                     complex_source = remap_ids(complex_source, mapping_dict)
-                    source = f"{complex_source}/{source}"
+                    if complex_source:
+                        source = f"{complex_source}/{source}"
                 score = row[4]
-                if "fimo" in score:
-                    tool_name = "fimo"
-                else:
-                    tool_name = "rsat"
+                tool_name = "fimo" if "fimo" in score else "rsat"
                 region = row[6].split(";")[1]
                 snp = row[7].split(";")[-1]
-                mutated = mutated_dict[snp]
+                mutated = mutated_dict.get(snp, "Unknown")
                 new_interaction = {HEADER[0]: source,
                                    HEADER[1]: target,
                                    HEADER[2]: score,
@@ -132,18 +182,22 @@ def handle_tf(tf_file_path, mapping_dict, output_path, input_dir):
                                    HEADER[7]: tool_name}
                 new_interaction = _strip_dict(new_interaction)
                 writer.writerow(new_interaction)
+                results.append(new_interaction)
+    return results
 
 
 def handle_mirna(mirna_file_path, mapping_dict, output_path):
     """ A method to correct formatting issues with the miranda output """
     file_mut_type = _get_sequence_type(mirna_file_path)
     mirna_output_file_path = os.path.join(output_path, _generate_output_file_name(mirna_file_path))
+    results = []
     with open(mirna_file_path, "r") as tf_file, \
             open(mirna_output_file_path, "w") as mirna_output_file:
         reader = csv.reader(tf_file, delimiter="\t")
         writer = csv.DictWriter(mirna_output_file, fieldnames=HEADER, delimiter="\t")
         writer.writeheader()
         for row in reader:
+            if not row: continue
             row = [x for x in row if x != "-"]
             source = row[0].split(':')[1]
             target = remap_ids(row[1], mapping_dict)
@@ -163,6 +217,8 @@ def handle_mirna(mirna_file_path, mapping_dict, output_path):
                                    HEADER[7]: "miranda"}
                 new_interaction = _strip_dict(new_interaction)
                 writer.writerow(new_interaction)
+                results.append(new_interaction)
+    return results
 
 
 def _write_network(network, output_file_path):
@@ -174,77 +230,116 @@ def _write_network(network, output_file_path):
 
 
 def get_multi_key(my_dict, keys):
-    """ A helper function to return a dict of limited keys """
-    return {my_dict.get(key) for key in keys}
+    """ A helper function to return a tuple of limited keys for hashing """
+    return tuple(my_dict.get(key) for key in keys)
 
 
-def _network_difference(interaction_network, key, compare_on):
-    """ A helper method to merge the networks """
-    compare_on = ["source", "target", "snp", "tool"]
-    keys = [k for k in list(interaction_network.keys()) if key in k]
-    network_a = interaction_network[keys[0]]
-    network_b = interaction_network[keys[1]]
+def _network_difference(network_a, network_b, compare_on, logger=logging):
+    """ A helper method to merge the networks efficiently using sets """
+    if not network_a or not network_b:
+        return network_a + network_b
+    
+    network_a_keys = {get_multi_key(inter, compare_on) for inter in network_a}
+    network_b_keys = {get_multi_key(inter, compare_on) for inter in network_b}
+    
     combined = network_a + network_b
-    network_a = [get_multi_key(inter, compare_on) for inter in network_a]
-    network_b = [get_multi_key(inter, compare_on) for inter in network_b]
     diff = [i for i in combined
-            if get_multi_key(i, compare_on) not in network_a or
-            get_multi_key(i, compare_on) not in network_b]
-    result = len(diff) == 0
-    if not result:
-        print(f'There are {len(diff)} differences.')
+            if get_multi_key(i, compare_on) not in network_a_keys or
+            get_multi_key(i, compare_on) not in network_b_keys]
+    
+    if diff:
+        logger.info(f'There are {len(diff)} differences.')
     return diff
 
 
-def network_differences(output_dir, compare_on):
-    """ A method to combine the corrected datasets """
-    patient_networks = defaultdict(dict)
-    entries = Path(output_dir)
-    for interaction_file in entries.iterdir():
-        patient_name = os.path.basename(interaction_file.name)
-        patient_name = patient_name.split(".")[0]
-        if "gene_connections" in patient_name:
-            with open(interaction_file) as interaction:
-                patient_name = os.path.basename(interaction_file.name)
-                patient_name = patient_name.split(".")[0]
-                patient_name = patient_name.split("_")
-                patient_name = f"{patient_name[1]}_{patient_name[4]}"
-                reader = csv.DictReader(interaction, delimiter="\t")
-                patient_networks[patient_name] = list(reader)
-    mirna_differences = _network_difference(patient_networks, "mirna", compare_on)
-    mirna_differences_file_path = os.path.join(output_dir, "mirna_differences.tsv")
-    _write_network(mirna_differences, mirna_differences_file_path)
-    tf_differences = _network_difference(patient_networks, "tf", compare_on)
-    tf_differences_file_path = os.path.join(output_dir, "tf_differences.tsv")
-    _write_network(tf_differences, tf_differences_file_path)
-    differences = mirna_differences + tf_differences
-    differences_file_path = os.path.join(output_dir, "differences.tsv")
-    _write_network(differences, differences_file_path)
-    return differences
+def calculate_differences(tf_all, mirna_all, output_dir, compare_on, logger=logging):
+    """ Calculate and write differences for TF and miRNA networks """
+    mirna_diff = _network_difference(
+        [r for r in mirna_all if r['file'] == 'wt'],
+        [r for r in mirna_all if r['file'] == 'mut'],
+        compare_on,
+        logger=logger
+    )
+    _write_network(mirna_diff, os.path.join(output_dir, "mirna_differences.tsv"))
+
+    tf_diff = _network_difference(
+        [r for r in tf_all if r['file'] == 'wt'],
+        [r for r in tf_all if r['file'] == 'mut'],
+        compare_on,
+        logger=logger
+    )
+    _write_network(tf_diff, os.path.join(output_dir, "tf_differences.tsv"))
+
+    all_diff = mirna_diff + tf_diff
+    _write_network(all_diff, os.path.join(output_dir, "differences.tsv"))
+    return all_diff
+
+
+def process_patient(patient, args, mapping_dict):
+    """ Process a single patient's data """
+    # Use the adapter to prefix all logs in this process
+    logger = PatientAdapter(logging.getLogger(), {'patient': patient})
+    logger.info("Starting conversion")
+    
+    patient_output_dir_path = os.path.join(args.output_dir, f"mapped_{patient}")
+    patient_input_dir_path = os.path.join(args.input_dir, patient)
+    
+    try:
+        os.makedirs(patient_output_dir_path, exist_ok=True)
+    except OSError as e:
+        logger.error(f"Failed to create directory {patient_output_dir_path}: {e}")
+        return False
+
+    tf_all = []
+    for file in CONVERT_FILES_TF:
+        file_path = os.path.join(patient_input_dir_path, file)
+        if os.path.exists(file_path):
+            logger.info(f"Processing TF file: {file}")
+            tf_all.extend(handle_tf(file_path, mapping_dict, patient_output_dir_path, patient_input_dir_path))
+        else:
+            logger.warning(f"TF file not found: {file_path}")
+
+    mirna_all = []
+    for file in CONVERT_FILES_MIRNA:
+        file_path = os.path.join(patient_input_dir_path, file)
+        if os.path.exists(file_path):
+            logger.info(f"Processing miRNA file: {file}")
+            mirna_all.extend(handle_mirna(file_path, mapping_dict, patient_output_dir_path))
+        else:
+            logger.warning(f"miRNA file not found: {file_path}")
+    
+    logger.info("Calculating network differences")
+    calculate_differences(tf_all, mirna_all, patient_output_dir_path, args.compare_on, logger=logger)
+    logger.info("Finished successfully")
+    return True
 
 
 def reformat(argv):
-    """ Main logic for isnp results reformatter """
+    """ Main logic for isnp results reformatter with parallel processing """
     args = parse_args(argv)
-    mapping_dict = _load_mapping_dict(args.mapping_file_path, args.target_id)
-    # mapping_dict = ""
-    # entries = Path(args.input_dir)
-    for patient in os.listdir(args.input_dir): # entries.iterdir():
-        # if not patient.name.startswith("."):
-        #     if patient.name.endswith(".vcf"):
-        print(f"Converting: {patient}")
-        patient_output_dir_path = os.path.join(args.output_dir, f"mapped_{patient}")
-        patient_input_dir_path = os.path.join(args.input_dir, patient)
-        try:
-            os.mkdir(patient_output_dir_path)
-        except OSError as e:
-            if e.errno != errno.EEXIST:
-                raise
-        for file in CONVERT_FILES_TF:
-            handle_tf(os.path.join(patient_input_dir_path, file), mapping_dict, patient_output_dir_path, patient_input_dir_path)
-        for file in CONVERT_FILES_MIRNA:
-            handle_mirna(os.path.join(patient, file), mapping_dict, patient_output_dir_path)
-        network_differences(patient_output_dir_path, args.compare_on)
+    listener, log_queue = setup_logging(args.output_dir)
+    logging.info(f"Starting iSNP Wrangler with {args.processes} processes")
+    
+    try:
+        mapping_dict = _load_mapping_dict(args.mapping_file_path, args.target_id)
+        patients = [p for p in os.listdir(args.input_dir) if os.path.isdir(os.path.join(args.input_dir, p))]
+        
+        if args.processes > 1 and len(patients) > 1:
+            with ProcessPoolExecutor(max_workers=args.processes) as executor:
+                futures = {executor.submit(process_patient, patient, args, mapping_dict): patient for patient in patients}
+                for future in as_completed(futures):
+                    patient = futures[future]
+                    try:
+                        future.result()
+                    except Exception as e:
+                        logging.error(f"Error processing patient {patient}: {e}")
+        else:
+            for patient in patients:
+                process_patient(patient, args, mapping_dict)
+    
+    finally:
+        logging.info("iSNP Wrangler finished")
+        listener.stop()
 
 
 if __name__ == "__main__":
